@@ -4,5 +4,5 @@ import org.uqbar.commons.model.annotations.Observable
 
 
 @Observable
-class SeriesAppModel {
+class SerieAppModel {
 }
