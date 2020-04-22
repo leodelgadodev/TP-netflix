@@ -1,11 +1,13 @@
-package ui.unq.edu.ar
+package ui.unq.edu.ar.window
 
 import org.uqbar.arena.kotlin.extensions.*
+import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.lacar.ui.model.Action
 import ui.unq.edu.ar.appModel.SerieAppModel
 import ui.unq.edu.ar.appModel.UNQFlixAppModel
 
@@ -33,20 +35,41 @@ class WindowUNQFlix (owner : WindowOwner, UNQFlixAppModel: UNQFlixAppModel) : Si
         table<SerieAppModel>(mainPanel) with {
             title = "Series"
             column {
-
+                title = "#"
+                width = 50
+                bindContentsTo("id")
             }
 
             column {
-
+                title = "Title"
+                bindContentsTo("title")
             }
 
             column {
-
+                title = "#Season"
+                bindContentsTo("cantSeason")
             }
 
             column {
-
+                title = "State"
+                bindContentsTo("state")
             }
+        }
+        Button(mainPanel) with {
+            text = "New Serie"
+            onClick(Action{ AddNewSerieDialog(this@WindowUNQFlix, modelObject).open()})
+        }
+
+        Button(mainPanel) with {
+            text = "Delete Serie"
+        }
+
+        Button(mainPanel) with {
+            text = "Modified Serie"
+        }
+
+        Button(mainPanel) with {
+            text = "Show Serie"
         }
 
     }
