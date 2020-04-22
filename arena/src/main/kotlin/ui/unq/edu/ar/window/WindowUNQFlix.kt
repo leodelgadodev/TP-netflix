@@ -5,6 +5,7 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
+import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.lacar.ui.model.Action
@@ -18,7 +19,6 @@ class WindowUNQFlix (owner : WindowOwner, UNQFlixAppModel: UNQFlixAppModel) : Si
 
     override fun createFormPanel(mainPanel: Panel) {
         title = "UNQFlix"
-
         Panel(mainPanel) with {
             asHorizontal()
             Label(it) with {
@@ -33,43 +33,52 @@ class WindowUNQFlix (owner : WindowOwner, UNQFlixAppModel: UNQFlixAppModel) : Si
         }
 
         table<SerieAppModel>(mainPanel) with {
-            title = "Series"
+            bindItemsTo("series")
+            bindSelectionTo("selectSerie")
+            visibleRows = 10
+
             column {
                 title = "#"
-                width = 50
+                weight = 50
                 bindContentsTo("id")
             }
 
             column {
                 title = "Title"
+                weight = 200
                 bindContentsTo("title")
             }
 
             column {
                 title = "#Season"
+                weight = 75
                 bindContentsTo("cantSeason")
             }
 
             column {
                 title = "State"
+                weight = 50
                 bindContentsTo("state")
             }
         }
-        Button(mainPanel) with {
-            text = "New Serie"
-            onClick(Action{ AddNewSerieDialog(this@WindowUNQFlix, modelObject).open()})
-        }
 
-        Button(mainPanel) with {
-            text = "Delete Serie"
-        }
+        val model = modelObject
 
-        Button(mainPanel) with {
-            text = "Modified Serie"
-        }
-
-        Button(mainPanel) with {
-            text = "Show Serie"
+        Panel(mainPanel) with{
+            asHorizontal()
+            Button(it) with {
+                text = "New Serie"
+                onClick(Action{ AddNewSerieDialog(this@WindowUNQFlix, model).open()})
+            }
+            Button(it) with {
+                text = "Delete Serie"
+            }
+            Button(it) with {
+                text = "Modified Serie"
+            }
+            Button(it) with {
+                text = "Show Serie"
+            }
         }
 
     }
