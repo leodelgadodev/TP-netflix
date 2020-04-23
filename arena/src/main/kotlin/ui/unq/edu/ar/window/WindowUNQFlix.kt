@@ -72,12 +72,14 @@ class WindowUNQFlix (owner : WindowOwner, UNQFlixAppModel: UNQFlixAppModel) : Si
             }
             Button(it) with {
                 text = "Delete Serie"
+                onClick(Action { ConfirmDeleteSerieDialog(this@WindowUNQFlix, model).open()})
             }
             Button(it) with {
-                text = "Modified Serie"
+                text = "Modify Serie"
             }
             Button(it) with {
                 text = "Show Serie"
+
             }
         }
 

@@ -1,23 +1,13 @@
 package ui.unq.edu.ar.window
 
 import domain.Category
-import domain.Content
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
-import org.uqbar.arena.widgets.List
 import org.uqbar.arena.windows.Dialog
 import org.uqbar.lacar.ui.model.Action
 import ui.unq.edu.ar.appModel.UNQFlixAppModel
-import ui.unq.edu.ar.main
 
-class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<UNQFlixAppModel>(owner, model){
-    var stitle : String = ""
-    var sposter : String = ""
-    var sdescription : String = ""
-    var state : Boolean = false
-    var categories : MutableList<Category> = mutableListOf<Category>()
-    var relatedContent : MutableList<Content> = mutableListOf<Content>()
-
+class ModificarSerieDialog(owner : WindowUNQFlix, model : UNQFlixAppModel) : Dialog<UNQFlixAppModel>(owner, model){
     override fun createFormPanel(mainPanel: Panel) {
         Panel(mainPanel) with {
             width = 400
@@ -52,10 +42,10 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
                 width = 200
                 height = 75
             }
-            Label(it)with {
+            Label(it) with {
                 text = "  State: "
             }
-            CheckBox(it)with{}
+            CheckBox(it) with{}
         }
         Label(mainPanel) with{
             text = "Categories"
@@ -80,7 +70,7 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
             List<Category>(it) with{
                 width = 150
                 height = 180
-                bindItemsTo("categories")
+
             }
         }
         Label(mainPanel) with{
@@ -89,7 +79,7 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
         }
         Panel(mainPanel) with {
             asHorizontal()
-            List<Content>(it) with{
+            List<Category>(it) with{
                 width = 280
                 height = 180
             }
@@ -102,10 +92,9 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
                     text= ">"
                 }
             }
-            List<Content>(it) with{
+            List<Category>(it) with{
                 width = 280
                 height = 180
-                bindItemsTo("contents")
             }
         }
         Panel(mainPanel) with {
@@ -124,7 +113,7 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
                 })
             }
         }
-        fun nuevaSerie(){
+        fun modificarSerie(){
             //modelObject.newSerie()
         }
     }
