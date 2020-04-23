@@ -1,20 +1,21 @@
 package ui.unq.edu.ar.appModel
 
+import data.idGenerator
 import domain.*
 import org.uqbar.commons.model.annotations.Observable
 
 
+
 @Observable
 class UNQFlixAppModel {
-
     var system : UNQFlix = UNQFlix()
-    var series : MutableList<SerieAppModel> = mutableListOf()
+    var series : MutableList<SerieAppModel> = initSeries()
     var selectSerie : SerieAppModel? = null
     var allAategories = initCategories()
     var allContents = initContents()
-    var curId = 0
 
     fun initSeries() : MutableList<SerieAppModel>{
+
         return system.series.map{SerieAppModel(it)}.toMutableList()
     }
     fun initCategories() : MutableList<Category> {
@@ -30,12 +31,13 @@ class UNQFlixAppModel {
         description: String,
         state: ContentState,
         categories: MutableList<Category>,
-        relateContent: MutableList<Content>
+        relateContent: MutableList<Content>,
+        seasons : MutableList<Season> = mutableListOf()
     ) {
-        var serie = Serie("serie#"+ curId, title, description, poster, state, categories, mutableListOf(), relateContent)
+        val serie = Serie(idGenerator.nextSerieId(), title, description, poster, state, categories, seasons, relateContent)
         system.addSerie(serie)
         this.series.add(SerieAppModel(serie))
-        curId++
+
     }
     fun eliminarSerie(serie: SerieAppModel?){
         system.deleteSerie(serie?.id!!)
