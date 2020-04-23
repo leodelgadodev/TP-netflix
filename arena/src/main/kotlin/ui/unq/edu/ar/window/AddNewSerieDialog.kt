@@ -7,10 +7,9 @@ import org.uqbar.arena.widgets.*
 import org.uqbar.arena.widgets.List
 import org.uqbar.arena.windows.Dialog
 import org.uqbar.lacar.ui.model.Action
-import ui.unq.edu.ar.appModel.UNQFlixAppModel
-import ui.unq.edu.ar.main
+import ui.unq.edu.ar.appModel.NewSerieAppModel
 
-class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<UNQFlixAppModel>(owner, model){
+class AddNewSerieDialog(owner: WindowUNQFlix, model: NewSerieAppModel) : Dialog<NewSerieAppModel>(owner, model){
 
     override fun createFormPanel(mainPanel: Panel) {
         Panel(mainPanel) with {
@@ -31,9 +30,11 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
             asHorizontal()
             TextBox(it) with {
                 width = 200
+                bindTo("title")
             }
             TextBox(it) with {
                 width = 200
+                bindTo("poster")
             }
         }
         Label(mainPanel) with {
@@ -45,11 +46,14 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
             KeyWordTextArea(it) with {
                 width = 200
                 height = 75
+                bindTo("description")
             }
             Label(it)with {
                 text = "  State: "
             }
-            CheckBox(it)with{}
+            CheckBox(it)with{
+                bindTo("state")
+            }
         }
         Label(mainPanel) with{
             text = "Categories"
@@ -60,7 +64,7 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
             List<Category>(it) with{
                 width = 150
                 height = 180
-
+                bindItemsTo("categories")
             }
             Panel(it) with{
                 asVertical()
@@ -74,7 +78,6 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
             List<Category>(it) with{
                 width = 150
                 height = 180
-                bindItemsTo("categories")
             }
         }
         Label(mainPanel) with{
@@ -86,6 +89,7 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
             List<Content>(it) with{
                 width = 280
                 height = 180
+                bindItemsTo("relatedContent")
             }
             Panel(it) with{
                 asVertical()
@@ -99,7 +103,6 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
             List<Content>(it) with{
                 width = 280
                 height = 180
-                bindItemsTo("contents")
             }
         }
         Panel(mainPanel) with {
@@ -107,7 +110,7 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
             Button(it) with {
                 caption = "aceptar"
                 onClick(Action {
-                    //nuevaSerie()
+                    nuevaSerie()
                     close()
                 })
             }
@@ -118,8 +121,8 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<U
                 })
             }
         }
-        fun nuevaSerie(){
-            //modelObject.newSerie()
-        }
+    }
+    fun nuevaSerie(){
+        modelObject.newSerie()
     }
 }

@@ -5,7 +5,6 @@ import org.uqbar.arena.windows.Window
 import ui.unq.edu.ar.appModel.UNQFlixAppModel
 import ui.unq.edu.ar.window.WindowUNQFlix
 
-//import domain.UNQFlix
 
 class ApplicationUNQFlix : Application(){
 

@@ -5,14 +5,14 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
-import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.lacar.ui.model.Action
+import ui.unq.edu.ar.appModel.NewSerieAppModel
 import ui.unq.edu.ar.appModel.SerieAppModel
 import ui.unq.edu.ar.appModel.UNQFlixAppModel
 
-class WindowUNQFlix (owner : WindowOwner, UNQFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, UNQFlixAppModel){
+class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, unqFlixAppModel){
     override fun addActions(p0: Panel?) {
 
     }
@@ -68,7 +68,7 @@ class WindowUNQFlix (owner : WindowOwner, UNQFlixAppModel: UNQFlixAppModel) : Si
             asHorizontal()
             Button(it) with {
                 text = "New Serie"
-                onClick(Action{ AddNewSerieDialog(this@WindowUNQFlix, model).open()})
+                onClick(Action{ AddNewSerieDialog(this@WindowUNQFlix, NewSerieAppModel(model)).open()})
             }
             Button(it) with {
                 text = "Delete Serie"
@@ -76,6 +76,7 @@ class WindowUNQFlix (owner : WindowOwner, UNQFlixAppModel: UNQFlixAppModel) : Si
             }
             Button(it) with {
                 text = "Modify Serie"
+                onClick(Action { ModificarSerieDialog(this@WindowUNQFlix, NewSerieAppModel(model)).open() })
             }
             Button(it) with {
                 text = "Show Serie"

@@ -1,22 +1,32 @@
 package ui.unq.edu.ar.appModel
 
-import domain.Category
-import domain.ContentState
-import domain.Serie
-import domain.Unavailable
+import domain.*
 import org.uqbar.commons.model.annotations.Observable
 
 
 @Observable
-class SerieAppModel () {
+class SerieAppModel (var serie : Serie) {
 
     var id : String = ""
     var title : String = ""
-    var cantSeason : Int = 0
-    var state : ContentState = Unavailable()
-    var description : String = ""
     var poster : String = ""
-    var categories = mutableListOf<Category>()
+    var description : String = ""
+    var contentState : ContentState = Unavailable()
+    var state : Boolean = contentState != Unavailable()
+    var categories : MutableList<Category> = mutableListOf()
+    var seasons : MutableList<Season> = mutableListOf()
+    var relatedContent : MutableList<Content> = mutableListOf()
+    var model : Serie = serie
+    var cantSeason = seasons.size
+    init {
+        this.id = serie.id
+        this.title = serie.title
+        this.poster = serie.poster
+        this.description = serie.description
+        this.contentState = serie.state
+        this.categories = serie.categories
+        this.seasons = serie.seasons
+        this.relatedContent = serie.relatedContent
 
-
+    }
 }

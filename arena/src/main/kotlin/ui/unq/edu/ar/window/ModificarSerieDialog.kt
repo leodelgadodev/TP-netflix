@@ -1,14 +1,17 @@
 package ui.unq.edu.ar.window
 
 import domain.Category
+import domain.Content
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.windows.Dialog
 import org.uqbar.lacar.ui.model.Action
-import ui.unq.edu.ar.appModel.UNQFlixAppModel
+import ui.unq.edu.ar.appModel.NewSerieAppModel
+import ui.unq.edu.ar.appModel.SerieAppModel
 
-class ModificarSerieDialog(owner : WindowUNQFlix, model : UNQFlixAppModel) : Dialog<UNQFlixAppModel>(owner, model){
+class ModificarSerieDialog(owner: WindowUNQFlix, model: NewSerieAppModel) : Dialog<NewSerieAppModel>(owner, model){
     override fun createFormPanel(mainPanel: Panel) {
+
         Panel(mainPanel) with {
             width = 400
             asHorizontal()
@@ -45,7 +48,8 @@ class ModificarSerieDialog(owner : WindowUNQFlix, model : UNQFlixAppModel) : Dia
             Label(it) with {
                 text = "  State: "
             }
-            CheckBox(it) with{}
+            CheckBox(it) with{
+            }
         }
         Label(mainPanel) with{
             text = "Categories"
@@ -56,7 +60,6 @@ class ModificarSerieDialog(owner : WindowUNQFlix, model : UNQFlixAppModel) : Dia
             List<Category>(it) with{
                 width = 150
                 height = 180
-
             }
             Panel(it) with{
                 asVertical()
@@ -70,7 +73,6 @@ class ModificarSerieDialog(owner : WindowUNQFlix, model : UNQFlixAppModel) : Dia
             List<Category>(it) with{
                 width = 150
                 height = 180
-
             }
         }
         Label(mainPanel) with{
@@ -79,9 +81,10 @@ class ModificarSerieDialog(owner : WindowUNQFlix, model : UNQFlixAppModel) : Dia
         }
         Panel(mainPanel) with {
             asHorizontal()
-            List<Category>(it) with{
+            List<Content>(it) with{
                 width = 280
                 height = 180
+                bindContentsToProperty("")
             }
             Panel(it) with{
                 asVertical()
@@ -92,7 +95,7 @@ class ModificarSerieDialog(owner : WindowUNQFlix, model : UNQFlixAppModel) : Dia
                     caption= ">"
                 }
             }
-            List<Category>(it) with{
+            List<Content>(it) with{
                 width = 280
                 height = 180
             }
