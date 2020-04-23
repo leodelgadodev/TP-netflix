@@ -11,13 +11,17 @@ import org.uqbar.commons.model.annotations.Observable
 class UNQFlixAppModel {
 
     var system : UNQFlix = UNQFlix()
-    var series = mutableListOf<SerieAppModel>()
+    var series = initSeries()
     var selectSerie : SerieAppModel? = null
     var categories = initCategories()
     var contents = initContents()
 
     private fun initCategories() : MutableList<Category> {
         return system.categories.toMutableList()
+    }
+
+    private fun initSeries() : MutableList<SerieAppModel>{
+        return system.series.map { SerieAppModel() }.toMutableList()
     }
 
     private fun initContents() : MutableList<Content>{

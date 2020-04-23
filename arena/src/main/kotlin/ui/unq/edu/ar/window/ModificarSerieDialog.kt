@@ -61,10 +61,10 @@ class ModificarSerieDialog(owner : WindowUNQFlix, model : UNQFlixAppModel) : Dia
             Panel(it) with{
                 asVertical()
                 Button(it) with {
-                    text = "<"
+                    caption = "<"
                 }
                 Button(it) with {
-                    text = ">"
+                    caption = ">"
                 }
             }
             List<Category>(it) with{
@@ -86,10 +86,10 @@ class ModificarSerieDialog(owner : WindowUNQFlix, model : UNQFlixAppModel) : Dia
             Panel(it) with{
                 asVertical()
                 Button(it) with {
-                    text= "<"
+                    caption= "<"
                 }
                 Button(it) with {
-                    text= ">"
+                    caption= ">"
                 }
             }
             List<Category>(it) with{

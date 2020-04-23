@@ -11,12 +11,6 @@ import ui.unq.edu.ar.appModel.UNQFlixAppModel
 import ui.unq.edu.ar.main
 
 class AddNewSerieDialog(owner: WindowUNQFlix, model: UNQFlixAppModel) : Dialog<UNQFlixAppModel>(owner, model){
-    var stitle : String = ""
-    var sposter : String = ""
-    var sdescription : String = ""
-    var state : Boolean = false
-    var categories : MutableList<Category> = mutableListOf<Category>()
-    var relatedContent : MutableList<Content> = mutableListOf<Content>()
 
     override fun createFormPanel(mainPanel: Panel) {
         Panel(mainPanel) with {
