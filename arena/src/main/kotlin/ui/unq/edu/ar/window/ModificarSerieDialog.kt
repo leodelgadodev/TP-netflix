@@ -8,125 +8,19 @@ import org.uqbar.arena.windows.Dialog
 import org.uqbar.lacar.ui.model.Action
 import ui.unq.edu.ar.appModel.SerieAppModel
 
-class ModificarSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
+class ModificarSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : AddNewSerieDialog(owner, model){
     val oldState = model.contentState // no se me ocurre otra forma de guardar este estado
-    override fun createFormPanel(mainPanel: Panel) {
 
-        Panel(mainPanel) with {
-            width = 400
-            asHorizontal()
-            Label(it) with {
-                text = "Title"
-                align = "left"
-                width = 210
-            }
-            Label(it) with {
-                text = "Poster"
-                width = 200
-                align = "left"
-            }
-        }
-        Panel(mainPanel) with {
-            asHorizontal()
-            TextBox(it) with {
-                width = 200
-                bindTo("title")
-            }
-            TextBox(it) with {
-                width = 200
-                bindTo("poster")
-            }
-        }
-        Label(mainPanel) with {
-            text = "Description:"
-            alignLeft()
-        }
-        Panel(mainPanel) with {
-            asHorizontal()
-            KeyWordTextArea(it) with {
-                width = 200
-                height = 75
-                bindTo("description")
-            }
-            Label(it) with {
-                text = "  State: "
-            }
-            CheckBox(it) with{
-                var x = bindTo("contentState")
-            }
-        }
-        Label(mainPanel) with{
-            text = "Categories"
-            alignLeft()
-        }
-        Panel(mainPanel) with {
-            asHorizontal()
-            List<Category>(it) with{
-                width = 150
-                height = 180
-                bindTo("categories")
-            }
-            Panel(it) with{
-                asVertical()
-                Button(it) with {
-                    caption = "<"
-                }
-                Button(it) with {
-                    caption = ">"
-                }
-            }
-            List<Category>(it) with{
-                width = 150
-                height = 180
-            }
-        }
-        Label(mainPanel) with{
-            text = "Related Content: "
-            alignLeft()
-        }
-        Panel(mainPanel) with {
-            asHorizontal()
-            List<Content>(it) with{
-                width = 280
-                height = 180
-                bindTo("relatedContent")
-            }
-            Panel(it) with{
-                asVertical()
-                Button(it) with {
-                    caption= "<"
-                }
-                Button(it) with {
-                    caption= ">"
-                }
-            }
-            List<Content>(it) with{
-                width = 280
-                height = 180
-            }
-        }
-        Panel(mainPanel) with {
-            asHorizontal()
-            Button(it) with {
-                caption = "aceptar"
-                onClick(Action {
-                    modificarSerie()
-                    close()
-                })
-            }
-            Button(it) with {
-                caption = "cancelar"
-                onClick(Action {
-                    cancelar()
-                    close()
-                })
-            }
-        }
-    }
     fun modificarSerie(){
         modelObject.modificarSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.contentState, modelObject.categories, modelObject.relatedContent)
     }
-    fun cancelar(){
-        modelObject.cancelar(oldState)
+    override fun cancelar(){
+        onCancel { modelObject.cancelar(oldState) }
+        cancel()
+    }
+
+    override fun aceptar() {
+        onAccept{ Action { modificarSerie() }}
+        accept()
     }
 }

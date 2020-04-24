@@ -9,7 +9,7 @@ import org.uqbar.arena.windows.Dialog
 import org.uqbar.lacar.ui.model.Action
 import ui.unq.edu.ar.appModel.SerieAppModel
 
-class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
+open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
 
     override fun createFormPanel(mainPanel: Panel) {
         Panel(mainPanel) with {
@@ -110,20 +110,26 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<Ser
             Button(it) with {
                 caption = "aceptar"
                 onClick(Action {
-                    nuevaSerie()
-                    close()
+                    aceptar()
                 })
             }
             Button(it) with {
                 caption = "cancelar"
                 onClick(Action {
-                    close()
+                    cancelar()
                 })
             }
 
         }
     }
 
+    open fun aceptar(){
+        onAccept(Action { nuevaSerie() })
+        accept()
+    }
+    open fun cancelar(){
+        cancel()
+    }
     private fun nuevaSerie(){
         modelObject.nuevaSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.contentState, modelObject.categories, modelObject.relatedContent)
     }

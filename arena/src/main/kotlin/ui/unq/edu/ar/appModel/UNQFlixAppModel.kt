@@ -2,7 +2,7 @@ package ui.unq.edu.ar.appModel
 
 import domain.*
 import org.uqbar.commons.model.annotations.Observable
-
+import org.uqbar.commons.model.exceptions.UserException
 
 
 @Observable
@@ -30,7 +30,11 @@ class UNQFlixAppModel {
     }
 
     fun newSerie(serieAppModel: SerieAppModel) {
-        system.addSerie(serieAppModel.model!!)
+        try{
+            system.addSerie(serieAppModel.model!!)
+        } catch (e : ExistsException){
+            throw UserException(e.message)
+        }
         this.series.add(serieAppModel)
 
     }
