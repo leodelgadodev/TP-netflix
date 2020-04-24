@@ -7,9 +7,9 @@ import org.uqbar.arena.widgets.*
 import org.uqbar.arena.widgets.List
 import org.uqbar.arena.windows.Dialog
 import org.uqbar.lacar.ui.model.Action
-import ui.unq.edu.ar.appModel.NewSerieAppModel
+import ui.unq.edu.ar.appModel.SerieAppModel
 
-class AddNewSerieDialog(owner: WindowUNQFlix, model: NewSerieAppModel) : Dialog<NewSerieAppModel>(owner, model){
+class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
 
     override fun createFormPanel(mainPanel: Panel) {
         Panel(mainPanel) with {
@@ -52,7 +52,7 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: NewSerieAppModel) : Dialog<
                 text = "  State: "
             }
             CheckBox(it)with{
-                bindTo("state")
+                bindTo("contentState")
             }
         }
         Label(mainPanel) with{
@@ -120,9 +120,10 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: NewSerieAppModel) : Dialog<
                     close()
                 })
             }
+
         }
     }
     fun nuevaSerie(){
-        modelObject.newSerie()
+        modelObject.nuevaSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.contentState, modelObject.categories, modelObject.relatedContent)
     }
 }

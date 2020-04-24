@@ -8,7 +8,6 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.lacar.ui.model.Action
-import ui.unq.edu.ar.appModel.NewSerieAppModel
 import ui.unq.edu.ar.appModel.SerieAppModel
 import ui.unq.edu.ar.appModel.UNQFlixAppModel
 
@@ -35,6 +34,7 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
         table<SerieAppModel>(mainPanel) with {
             bindItemsTo("series")
             bindSelectionTo("selectSerie")
+
             visibleRows = 10
 
             column {
@@ -58,7 +58,7 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             column {
                 title = "State"
                 weight = 50
-                bindContentsTo("state")
+                bindContentsTo("contentState")
             }
         }
 
@@ -68,15 +68,21 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             asHorizontal()
             Button(it) with {
                 text = "New Serie"
-                onClick(Action{ AddNewSerieDialog(this@WindowUNQFlix, NewSerieAppModel(model)).open()})
+                onClick(Action{AddNewSerieDialog(this@WindowUNQFlix, SerieAppModel(unqFlixAppModel = model)).open()})
             }
             Button(it) with {
                 text = "Delete Serie"
-                onClick(Action { ConfirmDeleteSerieDialog(this@WindowUNQFlix, model).open()})
+                onClick(Action {
+                    if(model.selectSerie != null)
+                        ConfirmDeleteSerieDialog(this@WindowUNQFlix, model).open()
+                })
             }
             Button(it) with {
                 text = "Modify Serie"
-                onClick(Action { ModificarSerieDialog(this@WindowUNQFlix, NewSerieAppModel(model)).open() })
+                onClick(Action {
+                    if(model.selectSerie != null)
+                        ModificarSerieDialog(this@WindowUNQFlix, model.selectSerie!!).open()
+                })
             }
             Button(it) with {
                 text = "Show Serie"

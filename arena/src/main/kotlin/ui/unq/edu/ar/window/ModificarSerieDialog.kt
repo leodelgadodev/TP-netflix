@@ -6,10 +6,9 @@ import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.windows.Dialog
 import org.uqbar.lacar.ui.model.Action
-import ui.unq.edu.ar.appModel.NewSerieAppModel
 import ui.unq.edu.ar.appModel.SerieAppModel
 
-class ModificarSerieDialog(owner: WindowUNQFlix, model: NewSerieAppModel) : Dialog<NewSerieAppModel>(owner, model){
+class ModificarSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
     override fun createFormPanel(mainPanel: Panel) {
 
         Panel(mainPanel) with {
@@ -30,9 +29,11 @@ class ModificarSerieDialog(owner: WindowUNQFlix, model: NewSerieAppModel) : Dial
             asHorizontal()
             TextBox(it) with {
                 width = 200
+                bindTo("title")
             }
             TextBox(it) with {
                 width = 200
+                bindTo("poster")
             }
         }
         Label(mainPanel) with {
@@ -44,11 +45,13 @@ class ModificarSerieDialog(owner: WindowUNQFlix, model: NewSerieAppModel) : Dial
             KeyWordTextArea(it) with {
                 width = 200
                 height = 75
+                bindTo("description")
             }
             Label(it) with {
                 text = "  State: "
             }
             CheckBox(it) with{
+                bindTo("contentState")
             }
         }
         Label(mainPanel) with{
@@ -60,6 +63,7 @@ class ModificarSerieDialog(owner: WindowUNQFlix, model: NewSerieAppModel) : Dial
             List<Category>(it) with{
                 width = 150
                 height = 180
+                bindTo("categories")
             }
             Panel(it) with{
                 asVertical()
@@ -84,7 +88,7 @@ class ModificarSerieDialog(owner: WindowUNQFlix, model: NewSerieAppModel) : Dial
             List<Content>(it) with{
                 width = 280
                 height = 180
-                bindContentsToProperty("")
+                bindTo("relatedContent")
             }
             Panel(it) with{
                 asVertical()
@@ -105,19 +109,23 @@ class ModificarSerieDialog(owner: WindowUNQFlix, model: NewSerieAppModel) : Dial
             Button(it) with {
                 caption = "aceptar"
                 onClick(Action {
-                    //nuevaSerie()
+                    modificarSerie()
                     close()
                 })
             }
             Button(it) with {
                 caption = "cancelar"
                 onClick(Action {
+                    cancelar()
                     close()
                 })
             }
         }
-        fun modificarSerie(){
-            //modelObject.newSerie()
-        }
+    }
+    fun modificarSerie(){
+        modelObject.modificarSerie()
+    }
+    fun cancelar(){
+        modelObject.cancelar()
     }
 }
