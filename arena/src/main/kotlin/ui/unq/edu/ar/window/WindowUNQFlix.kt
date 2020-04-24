@@ -68,7 +68,7 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             asHorizontal()
             Button(it) with {
                 text = "New Serie"
-                onClick(Action{AddNewSerieDialog(this@WindowUNQFlix, SerieAppModel(unqFlixAppModel = model)).open()})
+                onClick(Action{ AddNewSerieDialog(this@WindowUNQFlix, SerieAppModel(unqFlixAppModel = model)).open()})
             }
             Button(it) with {
                 text = "Delete Serie"

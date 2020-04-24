@@ -123,7 +123,8 @@ class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<Ser
 
         }
     }
-    fun nuevaSerie(){
+
+    private fun nuevaSerie(){
         modelObject.nuevaSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.contentState, modelObject.categories, modelObject.relatedContent)
     }
 }

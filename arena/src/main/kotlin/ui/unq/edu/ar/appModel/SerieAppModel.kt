@@ -49,10 +49,24 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
 
         unqFlix!!.newSerie(this)
     }
-    fun modificarSerie() {
-
+    fun modificarSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<Category>, relatedContent: MutableList<Content>) {
+        model!!.title = title
+        model!!.poster = poster
+        model!!.description = description
+        model!!.state = if (state){Available()} else {Unavailable()}
+        model!!.categories = categories
+        model!!.relatedContent = relatedContent
     }
-    fun cancelar(){
+    fun cancelar(oldState : Boolean){
+        if (model != null){
+            this.title = model!!.title
+            this.poster = model!!.poster
+            this.description = model!!.description
+            this.state = model!!.state
+            this.contentState = oldState
+            this.categories = model!!.categories
+            this.relatedContent = model!!.relatedContent
+        }
 
     }
 }

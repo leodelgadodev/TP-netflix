@@ -9,6 +9,7 @@ import org.uqbar.lacar.ui.model.Action
 import ui.unq.edu.ar.appModel.SerieAppModel
 
 class ModificarSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
+    val oldState = model.contentState // no se me ocurre otra forma de guardar este estado
     override fun createFormPanel(mainPanel: Panel) {
 
         Panel(mainPanel) with {
@@ -51,7 +52,7 @@ class ModificarSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<
                 text = "  State: "
             }
             CheckBox(it) with{
-                bindTo("contentState")
+                var x = bindTo("contentState")
             }
         }
         Label(mainPanel) with{
@@ -123,9 +124,9 @@ class ModificarSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<
         }
     }
     fun modificarSerie(){
-        modelObject.modificarSerie()
+        modelObject.modificarSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.contentState, modelObject.categories, modelObject.relatedContent)
     }
     fun cancelar(){
-        modelObject.cancelar()
+        modelObject.cancelar(oldState)
     }
 }
