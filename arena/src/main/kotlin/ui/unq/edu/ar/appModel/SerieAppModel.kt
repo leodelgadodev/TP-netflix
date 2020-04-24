@@ -1,7 +1,6 @@
 package ui.unq.edu.ar.appModel
 
 import domain.*
-import org.uqbar.arena.bindings.ValueTransformer
 import org.uqbar.commons.model.annotations.Observable
 
 
@@ -15,13 +14,13 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
     var description : String = ""
     var state : ContentState = Unavailable()
     var contentState : Boolean = false
-    var categories : MutableList<Category> = mutableListOf()
+    var categories : MutableList<String> = mutableListOf()
     var seasons : MutableList<Season> = mutableListOf()
     var relatedContent : MutableList<Content> = mutableListOf()
     var model : Serie? = null
-    var nonSelectedCategories : MutableList<Category> = mutableListOf()
+    var nonSelectedCategories : MutableList<String> = mutableListOf()
     var cantSeason = seasons.size
-    var selectedCategory = null
+    var selectedCategory : String? = null
     var selectedContent = null
 
     init{
@@ -32,19 +31,19 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
             this.poster = serie.poster
             this.description = serie.description
             this.state = serie.state
-            this.categories = serie.categories
+            this.categories = serie.categories.map { it.name }.toMutableList()
             this.seasons = serie.seasons
             this.relatedContent = serie.relatedContent
             this.model = serie
         }
         if (unqFlixAppModel != null) {
-            this.nonSelectedCategories = unqFlixAppModel.allAategories.filter { category -> !categories.contains(category) }.toMutableList()
+            this.nonSelectedCategories = unqFlixAppModel.allCategories.filter{!this.categories.contains(it.name)}.map{it.name}.toMutableList()
         }
 
 
     }
 
-    fun nuevaSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<Category>, relatedContent: MutableList<Content>){
+    fun nuevaSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<String>, relatedContent: MutableList<Content>){
         this.id = unqFlix?.idGenerator!!.nextSerieId()
         this.title = title
         this.poster = poster
@@ -53,16 +52,17 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
         this.contentState = state
         this.categories = categories
         this.relatedContent = relatedContent
-        this.model = Serie(id, title, description, poster, if (state){Available()} else {Unavailable()}, categories, seasons, relatedContent)
+        this.model = Serie(id, title, description, poster, if (state){Available()} else {Unavailable()}, unqFlix!!.toCategories(categories), seasons, relatedContent)
 
         unqFlix!!.newSerie(this)
     }
-    fun modificarSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<Category>, relatedContent: MutableList<Content>) {
+
+    fun modificarSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<String>, relatedContent: MutableList<Content>) {
         model!!.title = title
         model!!.poster = poster
         model!!.description = description
         model!!.state = if (state){Available()} else {Unavailable()}
-        model!!.categories = categories
+        model!!.categories = unqFlix!!.toCategories(categories)
         model!!.relatedContent = relatedContent
     }
     fun cancelar(oldState : Boolean){
@@ -72,9 +72,24 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
             this.description = model!!.description
             this.state = model!!.state
             this.contentState = oldState
-            this.categories = model!!.categories
+            this.categories = toCategoryName(model!!.categories)
             this.relatedContent = model!!.relatedContent
         }
 
+    }
+    private fun toCategoryName(categories: MutableList<Category>): MutableList<String> {
+        return categories.map{it.name}.toMutableList()
+    }
+    fun addCategory(selectedCategory: String?) {
+        if(selectedCategory != null && !categories.contains(selectedCategory)){
+            categories.add(selectedCategory)
+            nonSelectedCategories.remove(selectedCategory)
+        }
+    }
+    fun deleteCategory(selectedCategory: String?) {
+        if(selectedCategory != null && !nonSelectedCategories.contains(selectedCategory)){
+            categories.remove(selectedCategory)
+            nonSelectedCategories.add(selectedCategory)
+        }
     }
 }

@@ -2,7 +2,6 @@ package ui.unq.edu.ar.window
 
 import domain.Category
 import domain.Content
-import org.uqbar.arena.bindings.ValueTransformer
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.widgets.List
@@ -63,6 +62,7 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
         Panel(mainPanel) with {
             asHorizontal()
             List<Category>(it) with{
+                bindSelectedTo("selectedCategory")
                 width = 150
                 height = 180
                 bindItemsTo("categories")
@@ -71,15 +71,21 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
                 asVertical()
                 Button(it) with {
                     text = "<"
-
+                    onClick{
+                        addCategory()
+                    }
                 }
                 Button(it) with {
                     text = ">"
+                    onClick{
+                        deleteCategory()
+                    }
                 }
             }
-            List<Category>(it) with{
+            List<String>(it) with{
                 width = 150
                 height = 180
+                bindSelectedTo("selectedCategory")
                 bindItemsTo("nonSelectedCategories")
             }
         }
@@ -112,22 +118,22 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
             asHorizontal()
             Button(it) with {
                 caption = "aceptar"
-                onClick(Action {
+                onClick{
                     aceptar()
-                })
+                }
             }
             Button(it) with {
                 caption = "cancelar"
-                onClick(Action {
+                onClick{
                     cancelar()
-                })
+                }
             }
 
         }
     }
 
     open fun aceptar(){
-        onAccept(Action { nuevaSerie() })
+        onAccept{ nuevaSerie() }
         accept()
     }
     open fun cancelar(){
@@ -135,5 +141,11 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
     }
     private fun nuevaSerie(){
         modelObject.nuevaSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.contentState, modelObject.categories, modelObject.relatedContent)
+    }
+    private fun addCategory(){
+        modelObject.addCategory(modelObject.selectedCategory)
+    }
+    private fun deleteCategory(){
+        modelObject.deleteCategory(modelObject.selectedCategory)
     }
 }
