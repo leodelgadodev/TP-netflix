@@ -2,6 +2,7 @@ package ui.unq.edu.ar.window
 
 import domain.Category
 import domain.Content
+import org.uqbar.arena.bindings.ValueTransformer
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.widgets.List
@@ -70,6 +71,7 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
                 asVertical()
                 Button(it) with {
                     text = "<"
+
                 }
                 Button(it) with {
                     text = ">"
@@ -78,6 +80,7 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
             List<Category>(it) with{
                 width = 150
                 height = 180
+                bindItemsTo("nonSelectedCategories")
             }
         }
         Label(mainPanel) with{

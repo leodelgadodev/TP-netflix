@@ -10,16 +10,20 @@ class UNQFlixAppModel {
     var system : UNQFlix = UNQFlix()
     var series : MutableList<SerieAppModel> = initSeries()
     var selectSerie : SerieAppModel? = null
+    val idGenerator = IdGenerator()
     var allAategories = initCategories()
     var allContents = initContents()
     var allMovies = initMovies()
-    val idGenerator = IdGenerator()
 
     fun initSeries() : MutableList<SerieAppModel>{
-
         return system.series.map{SerieAppModel(serie = it)}.toMutableList()
     }
     fun initCategories() : MutableList<Category> {
+        var categoriesName = arrayOf("Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy",
+                                     "History", "Horror", "Music", "Mistery", "Romance", "Sience Fiction", "TV Movie", "War", "Thriller", "Western", "Unknown")
+        for(name : String in categoriesName){
+            system.addCategory(Category(idGenerator.nextCategoryId(), name))
+        }
         return system.categories.toMutableList()
     }
     fun initContents() : MutableList<Content>{

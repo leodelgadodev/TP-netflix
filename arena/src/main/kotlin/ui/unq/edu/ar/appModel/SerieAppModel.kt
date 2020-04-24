@@ -1,6 +1,7 @@
 package ui.unq.edu.ar.appModel
 
 import domain.*
+import org.uqbar.arena.bindings.ValueTransformer
 import org.uqbar.commons.model.annotations.Observable
 
 
@@ -18,7 +19,10 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
     var seasons : MutableList<Season> = mutableListOf()
     var relatedContent : MutableList<Content> = mutableListOf()
     var model : Serie? = null
+    var nonSelectedCategories : MutableList<Category> = mutableListOf()
     var cantSeason = seasons.size
+    var selectedCategory = null
+    var selectedContent = null
 
     init{
         this.unqFlix = unqFlixAppModel
@@ -33,6 +37,10 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
             this.relatedContent = serie.relatedContent
             this.model = serie
         }
+        if (unqFlixAppModel != null) {
+            this.nonSelectedCategories = unqFlixAppModel.allAategories.filter { category -> !categories.contains(category) }.toMutableList()
+        }
+
 
     }
 
