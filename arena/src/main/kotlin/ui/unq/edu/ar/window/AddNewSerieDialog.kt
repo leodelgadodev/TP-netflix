@@ -63,31 +63,31 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
         Panel(mainPanel) with {
             asHorizontal()
             List<CategoryAppModel>(it) with{
+                bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
                 bindSelectedTo("selectedCategory")
                 width = 150
                 height = 180
-                bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
             }
             Panel(it) with{
                 asVertical()
                 Button(it) with {
-                    text = "<"
+                    caption = "<"
                     onClick{
                         addCategory()
                     }
                 }
                 Button(it) with {
-                    text = ">"
+                    caption = ">"
                     onClick{
                         deleteCategory()
                     }
                 }
             }
             List<CategoryAppModel>(it) with{
+                bindItemsTo("nonSelectedCategories").adaptWithProp<CategoryAppModel>("name")
+                bindSelectedTo("selectedCategory")
                 width = 150
                 height = 180
-                bindSelectedTo("selectedCategory")
-                bindItemsTo("nonSelectedCategories").adaptWithProp<CategoryAppModel>("name")
             }
         }
         Label(mainPanel) with{
@@ -105,13 +105,13 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
             Panel(it) with{
                 asVertical()
                 Button(it) with {
-                    text= "<"
+                    caption = "<"
                     onClick {
                         addContent()
                     }
                 }
                 Button(it) with {
-                    text= ">"
+                    caption = ">"
                     onClick {
                         deleteContent()
                     }

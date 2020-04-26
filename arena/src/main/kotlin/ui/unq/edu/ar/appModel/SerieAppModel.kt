@@ -81,30 +81,30 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
     fun addCategory(selectedCategory: CategoryAppModel?) {
         val category = selectedCategory
         if(category != null && !categories.contains(category)) {
-            nonSelectedCategories.remove(category)
             categories.add(category)
+            nonSelectedCategories = nonSelectedCategories.filter { it.id != category.id }.toMutableList()
         }
     }
     fun deleteCategory(selectedCategory: CategoryAppModel?) {
         val category = selectedCategory
         if (category != null && !nonSelectedCategories.contains(category)) {
-            categories.remove(category)
             nonSelectedCategories.add(category)
+            categories = categories.filter { it.id != category.id }.toMutableList()
         }
     }
     fun addContent(selectedContent : ContentAppModel?){
         val content = selectedContent
         if(content != null && !relatedContent.contains(content)) {
-            nonRelatedContent.remove(content)
             relatedContent.add(content)
+            nonRelatedContent = nonRelatedContent.filter { it.id != content.id }.toMutableList()
         }
     }
 
     fun deleteContent(selectedContent : ContentAppModel?){
         val content = selectedContent
         if(content != null && !nonRelatedContent.contains(content)) {
-            relatedContent.remove(content)
             nonRelatedContent.add(content)
+            relatedContent = relatedContent.filter { it.id != content.id }.toMutableList()
         }
     }
 

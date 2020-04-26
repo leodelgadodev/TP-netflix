@@ -32,11 +32,7 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
         }
 
         table<SerieAppModel>(mainPanel) with {
-            bindItemsTo("series")
-            bindSelectionTo("selectSerie")
-
             visibleRows = 10
-
             column {
                 title = "#"
                 weight = 50
@@ -60,6 +56,8 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
                 weight = 50
                 bindContentsTo("contentState")
             }
+            bindSelectionTo("selectSerie")
+            bindItemsTo("series")
         }
 
         val model = modelObject
@@ -86,7 +84,7 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             }
             Button(it) with {
                 text = "Show Serie"
-
+                TODO("Aca hay que poner para que habra la ventana de temporadas")
             }
         }
 
