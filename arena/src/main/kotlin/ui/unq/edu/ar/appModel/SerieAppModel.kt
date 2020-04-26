@@ -19,12 +19,17 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
     var relatedContent : MutableList<Content> = mutableListOf()
     var model : Serie? = null
     var nonSelectedCategories : MutableList<String> = mutableListOf()
+    var nonRelatedContent : MutableList<Content> = mutableListOf()
     var cantSeason = seasons.size
     var selectedCategory : String? = null
-    var selectedContent = null
+    var selectedContent : Content?= null
 
     init{
         this.unqFlix = unqFlixAppModel
+        if (unqFlixAppModel != null) {
+            this.nonSelectedCategories = unqFlixAppModel.allCategories.filter{!this.categories.contains(it.name)}.map{it.name}.toMutableList()
+            this.nonRelatedContent = unqFlixAppModel.allContents().toMutableList()
+        }
         if (serie != null) {
             this.id = serie.id
             this.title = serie.title
@@ -35,10 +40,7 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
             this.seasons = serie.seasons
             this.relatedContent = serie.relatedContent
             this.model = serie
-        }
-        if (unqFlixAppModel != null) {
-            this.nonSelectedCategories = unqFlixAppModel.allCategories.filter{!this.categories.contains(it.name)}.map{it.name}.toMutableList()
-        }
+            }
 
 
     }
@@ -81,15 +83,29 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
         return categories.map{it.name}.toMutableList()
     }
     fun addCategory(selectedCategory: String?) {
-        if(selectedCategory != null && !categories.contains(selectedCategory)){
+        if(selectedCategory != null && !categories.contains(selectedCategory)) {
             categories.add(selectedCategory)
             nonSelectedCategories.remove(selectedCategory)
         }
     }
     fun deleteCategory(selectedCategory: String?) {
-        if(selectedCategory != null && !nonSelectedCategories.contains(selectedCategory)){
+        if (selectedCategory != null && !nonSelectedCategories.contains(selectedCategory)) {
             categories.remove(selectedCategory)
             nonSelectedCategories.add(selectedCategory)
         }
     }
+    fun addContent(selectedContent : Content?){
+        if(selectedContent != null && !relatedContent.contains(selectedContent)) {
+            nonRelatedContent.remove(selectedContent)
+            relatedContent.add(selectedContent)
+        }
+    }
+
+    fun deleteContent(selectedContent : Content?){
+        if(selectedContent != null && !nonRelatedContent.contains(selectedContent)) {
+            relatedContent.remove(selectedContent)
+            nonRelatedContent.add(selectedContent)
+        }
+    }
+
 }

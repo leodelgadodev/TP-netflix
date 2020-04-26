@@ -6,7 +6,6 @@ import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.widgets.List
 import org.uqbar.arena.windows.Dialog
-import org.uqbar.lacar.ui.model.Action
 import ui.unq.edu.ar.appModel.SerieAppModel
 
 open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
@@ -93,9 +92,11 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
             text = "Related Content: "
             alignLeft()
         }
+        val mo = modelObject
         Panel(mainPanel) with {
             asHorizontal()
             List<Content>(it) with{
+                bindSelectedTo("selectedContent")
                 width = 280
                 height = 180
                 bindItemsTo("relatedContent")
@@ -104,14 +105,22 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
                 asVertical()
                 Button(it) with {
                     text= "<"
+                    onClick {
+                        addContent()
+                    }
                 }
                 Button(it) with {
                     text= ">"
+                    onClick {
+                        deleteContent()
+                    }
                 }
             }
             List<Content>(it) with{
                 width = 280
                 height = 180
+                bindItemsTo("nonRelatedContent")
+                bindSelectedTo("selectedContent")
             }
         }
         Panel(mainPanel) with {
@@ -147,5 +156,11 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
     }
     private fun deleteCategory(){
         modelObject.deleteCategory(modelObject.selectedCategory)
+    }
+    private fun addContent(){
+        modelObject.addContent(modelObject.selectedContent)
+    }
+    private fun deleteContent(){
+        modelObject.deleteContent(modelObject.selectedContent)
     }
 }
