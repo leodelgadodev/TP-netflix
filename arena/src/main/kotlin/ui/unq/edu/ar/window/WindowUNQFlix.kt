@@ -86,7 +86,7 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             }
             Button(it) with {
                 text = "Show Serie"
-
+                TODO("Hay que poner para que se abra la ventana de temporadas")
             }
         }
 
