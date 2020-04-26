@@ -79,32 +79,28 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
         this.nonSelectedCategories = unqFlix!!.allCategories().filter { !categories.map { it.id }.contains(it.id) }.toMutableList()
     }
     fun addCategory(selectedCategory: CategoryAppModel?) {
-        val category = selectedCategory
-        if(category != null && !categories.contains(category)) {
-            categories.add(category)
-            nonSelectedCategories = nonSelectedCategories.filter { it.id != category.id }.toMutableList()
+        if(selectedCategory != null && !categories.contains(selectedCategory)) {
+            categories.add(selectedCategory)
+            nonSelectedCategories = nonSelectedCategories.filter { it.id != selectedCategory.id }.toMutableList()
         }
     }
     fun deleteCategory(selectedCategory: CategoryAppModel?) {
-        val category = selectedCategory
-        if (category != null && !nonSelectedCategories.contains(category)) {
-            nonSelectedCategories.add(category)
-            categories = categories.filter { it.id != category.id }.toMutableList()
+        if (selectedCategory != null && !nonSelectedCategories.contains(selectedCategory)) {
+            nonSelectedCategories.add(selectedCategory)
+            categories = categories.filter { it.id != selectedCategory.id }.toMutableList()
         }
     }
     fun addContent(selectedContent : ContentAppModel?){
-        val content = selectedContent
-        if(content != null && !relatedContent.contains(content)) {
-            relatedContent.add(content)
-            nonRelatedContent = nonRelatedContent.filter { it.id != content.id }.toMutableList()
+        if(selectedContent != null && !relatedContent.contains(selectedContent)) {
+            relatedContent.add(selectedContent)
+            nonRelatedContent = nonRelatedContent.filter { it.id != selectedContent.id }.toMutableList()
         }
     }
 
     fun deleteContent(selectedContent : ContentAppModel?){
-        val content = selectedContent
-        if(content != null && !nonRelatedContent.contains(content)) {
-            nonRelatedContent.add(content)
-            relatedContent = relatedContent.filter { it.id != content.id }.toMutableList()
+        if(selectedContent != null && !nonRelatedContent.contains(selectedContent)) {
+            nonRelatedContent.add(selectedContent)
+            relatedContent = relatedContent.filter { it.id != selectedContent.id }.toMutableList()
         }
     }
 
