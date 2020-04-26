@@ -14,21 +14,21 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
     var description : String = ""
     var state : ContentState = Unavailable()
     var contentState : Boolean = false
-    var categories : MutableList<String> = mutableListOf()
+    var categories : MutableList<CategoryAppModel> = mutableListOf()
     var seasons : MutableList<Season> = mutableListOf()
-    var relatedContent : MutableList<Content> = mutableListOf()
+    var relatedContent : MutableList<ContentAppModel> = mutableListOf()
     var model : Serie? = null
-    var nonSelectedCategories : MutableList<String> = mutableListOf()
-    var nonRelatedContent : MutableList<Content> = mutableListOf()
+    var nonSelectedCategories : MutableList<CategoryAppModel> = mutableListOf()
+    var nonRelatedContent : MutableList<ContentAppModel> = mutableListOf()
     var cantSeason = seasons.size
-    var selectedCategory : String? = null
-    var selectedContent : Content?= null
+    var selectedCategory : CategoryAppModel? = null
+    var selectedContent : ContentAppModel? = null
 
     init{
         this.unqFlix = unqFlixAppModel
         if (unqFlixAppModel != null) {
-            this.nonSelectedCategories = unqFlixAppModel.allCategories.filter{!this.categories.contains(it.name)}.map{it.name}.toMutableList()
-            this.nonRelatedContent = unqFlixAppModel.allContents().toMutableList()
+            this.nonSelectedCategories = unqFlixAppModel.allCategories()
+            this.nonRelatedContent = unqFlixAppModel.allContents()
         }
         if (serie != null) {
             this.id = serie.id
@@ -36,16 +36,16 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
             this.poster = serie.poster
             this.description = serie.description
             this.state = serie.state
-            this.categories = serie.categories.map { it.name }.toMutableList()
+            this.categories = unqFlix!!.toCategories(serie.categories.map { it.id }.toMutableList())
             this.seasons = serie.seasons
-            this.relatedContent = serie.relatedContent
+            this.relatedContent = unqFlix!!.getContentsAppModel(serie.relatedContent.map { it.id }.toMutableList())
             this.model = serie
-            }
+        }
 
 
     }
 
-    fun nuevaSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<String>, relatedContent: MutableList<Content>){
+    fun nuevaSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>){
         this.id = unqFlix?.idGenerator!!.nextSerieId()
         this.title = title
         this.poster = poster
@@ -54,57 +54,57 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = nu
         this.contentState = state
         this.categories = categories
         this.relatedContent = relatedContent
-        this.model = Serie(id, title, description, poster, if (state){Available()} else {Unavailable()}, unqFlix!!.toCategories(categories), seasons, relatedContent)
+        this.model = Serie(id, title, description, poster, if (state){Available()} else {Unavailable()}, categories.map { it.model }.toMutableList(), seasons, unqFlix!!.getContents(relatedContent.map { it.id }.toMutableList()))
 
         unqFlix!!.newSerie(this)
     }
 
-    fun modificarSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<String>, relatedContent: MutableList<Content>) {
+    fun modificarSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>) {
         model!!.title = title
         model!!.poster = poster
         model!!.description = description
         model!!.state = if (state){Available()} else {Unavailable()}
-        model!!.categories = unqFlix!!.toCategories(categories)
-        model!!.relatedContent = relatedContent
+        model!!.categories = categories.map { it.model }.toMutableList()
+        model!!.relatedContent = unqFlix!!.getContents(relatedContent.map { it.id }.toMutableList())
     }
     fun cancelar(oldState : Boolean){
-        if (model != null){
-            this.title = model!!.title
-            this.poster = model!!.poster
-            this.description = model!!.description
-            this.state = model!!.state
-            this.contentState = oldState
-            this.categories = toCategoryName(model!!.categories)
-            this.relatedContent = model!!.relatedContent
+        this.title = model!!.title
+        this.poster = model!!.poster
+        this.description = model!!.description
+        this.state = model!!.state
+        this.contentState = oldState
+        this.categories = unqFlix!!.toCategories(model!!.categories.map { it.id }.toMutableList())
+        this.relatedContent = unqFlix!!.getContentsAppModel(model!!.relatedContent.map { it.id }.toMutableList())
+        this.nonRelatedContent = unqFlix!!.allContents().filter { !relatedContent.contains(it) && it.id != this.id }.toMutableList()
+        this.nonSelectedCategories = unqFlix!!.allCategories().filter { !categories.map { it.id }.contains(it.id) }.toMutableList()
+    }
+    fun addCategory(selectedCategory: CategoryAppModel?) {
+        val category = selectedCategory
+        if(category != null && !categories.contains(category)) {
+            nonSelectedCategories.remove(category)
+            categories.add(category)
         }
+    }
+    fun deleteCategory(selectedCategory: CategoryAppModel?) {
+        val category = selectedCategory
+        if (category != null && !nonSelectedCategories.contains(category)) {
+            categories.remove(category)
+            nonSelectedCategories.add(category)
+        }
+    }
+    fun addContent(selectedContent : ContentAppModel?){
+        val content = selectedContent
+        if(content != null && !relatedContent.contains(content)) {
+            nonRelatedContent.remove(content)
+            relatedContent.add(content)
+        }
+    }
 
-    }
-    private fun toCategoryName(categories: MutableList<Category>): MutableList<String> {
-        return categories.map{it.name}.toMutableList()
-    }
-    fun addCategory(selectedCategory: String?) {
-        if(selectedCategory != null && !categories.contains(selectedCategory)) {
-            categories.add(selectedCategory)
-            nonSelectedCategories.remove(selectedCategory)
-        }
-    }
-    fun deleteCategory(selectedCategory: String?) {
-        if (selectedCategory != null && !nonSelectedCategories.contains(selectedCategory)) {
-            categories.remove(selectedCategory)
-            nonSelectedCategories.add(selectedCategory)
-        }
-    }
-    fun addContent(selectedContent : Content?){
-        if(selectedContent != null && !relatedContent.contains(selectedContent)) {
-            nonRelatedContent.remove(selectedContent)
-            relatedContent.add(selectedContent)
-        }
-    }
-
-    fun deleteContent(selectedContent : Content?){
-        if(selectedContent != null && !nonRelatedContent.contains(selectedContent)) {
-            relatedContent.remove(selectedContent)
-            nonRelatedContent.add(selectedContent)
+    fun deleteContent(selectedContent : ContentAppModel?){
+        val content = selectedContent
+        if(content != null && !nonRelatedContent.contains(content)) {
+            relatedContent.remove(content)
+            nonRelatedContent.add(content)
         }
     }
 

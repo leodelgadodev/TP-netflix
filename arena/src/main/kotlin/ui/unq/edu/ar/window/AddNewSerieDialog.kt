@@ -6,6 +6,8 @@ import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.widgets.List
 import org.uqbar.arena.windows.Dialog
+import ui.unq.edu.ar.appModel.CategoryAppModel
+import ui.unq.edu.ar.appModel.ContentAppModel
 import ui.unq.edu.ar.appModel.SerieAppModel
 
 open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
@@ -60,11 +62,11 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
         }
         Panel(mainPanel) with {
             asHorizontal()
-            List<Category>(it) with{
+            List<CategoryAppModel>(it) with{
                 bindSelectedTo("selectedCategory")
                 width = 150
                 height = 180
-                bindItemsTo("categories")
+                bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
             }
             Panel(it) with{
                 asVertical()
@@ -81,25 +83,24 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
                     }
                 }
             }
-            List<String>(it) with{
+            List<CategoryAppModel>(it) with{
                 width = 150
                 height = 180
                 bindSelectedTo("selectedCategory")
-                bindItemsTo("nonSelectedCategories")
+                bindItemsTo("nonSelectedCategories").adaptWithProp<CategoryAppModel>("name")
             }
         }
         Label(mainPanel) with{
             text = "Related Content: "
             alignLeft()
         }
-        val mo = modelObject
         Panel(mainPanel) with {
             asHorizontal()
-            List<Content>(it) with{
+            List<ContentAppModel>(it) with{
+                bindItemsTo("relatedContent").adaptWithProp<ContentAppModel>("title")
                 bindSelectedTo("selectedContent")
-                width = 280
-                height = 180
-                bindItemsTo("relatedContent")
+                width = 150
+                height = 200
             }
             Panel(it) with{
                 asVertical()
@@ -116,11 +117,11 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
                     }
                 }
             }
-            List<Content>(it) with{
-                width = 280
-                height = 180
-                bindItemsTo("nonRelatedContent")
+            List<ContentAppModel>(it) with{
+                bindItemsTo("nonRelatedContent").adaptWithProp<ContentAppModel>("title")
                 bindSelectedTo("selectedContent")
+                width = 150
+                height = 200
             }
         }
         Panel(mainPanel) with {
@@ -142,25 +143,25 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
     }
 
     open fun aceptar(){
-        onAccept{ nuevaSerie() }
-        accept()
+        nuevaSerie()
+        close()
     }
     open fun cancelar(){
-        cancel()
+        close()
     }
-    private fun nuevaSerie(){
+    fun nuevaSerie(){
         modelObject.nuevaSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.contentState, modelObject.categories, modelObject.relatedContent)
     }
-    private fun addCategory(){
+    fun addCategory(){
         modelObject.addCategory(modelObject.selectedCategory)
     }
-    private fun deleteCategory(){
+    fun deleteCategory(){
         modelObject.deleteCategory(modelObject.selectedCategory)
     }
-    private fun addContent(){
+    fun addContent(){
         modelObject.addContent(modelObject.selectedContent)
     }
-    private fun deleteContent(){
+    fun deleteContent(){
         modelObject.deleteContent(modelObject.selectedContent)
     }
 }
