@@ -9,7 +9,7 @@ import ui.unq.edu.ar.serie.model.ContentAppModel
 import ui.unq.edu.ar.serie.model.SerieAppModel
 import ui.unq.edu.ar.mainWindow.WindowUNQFlix
 
-open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
+open class NewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
 
     override fun createFormPanel(mainPanel: Panel) {
         Panel(mainPanel) with {

@@ -7,11 +7,10 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
-import org.uqbar.lacar.ui.model.Action
 import ui.unq.edu.ar.serie.model.SerieAppModel
-import ui.unq.edu.ar.serie.view.AddNewSerieDialog
+import ui.unq.edu.ar.serie.view.NewSerieDialog
 import ui.unq.edu.ar.serie.view.ConfirmDeleteSerieDialog
-import ui.unq.edu.ar.serie.view.ModificarSerieDialog
+import ui.unq.edu.ar.serie.view.ModifySerieDialog
 
 class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, unqFlixAppModel){
     override fun addActions(p0: Panel?) { }
@@ -22,11 +21,12 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             asHorizontal()
             Label(it) with {
                 text = "Search: "
-                height = 15
+                fontSize = 12
+                height = 16
                 width = 50
             }
             TextBox(it) with {
-                height = 15
+                height = 16
                 width = 300
             }
         }
@@ -62,15 +62,39 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
 
         val model = modelObject
 
+        // -------------------
+        // Series CRUD Buttons
+        // -------------------
+
         Panel(mainPanel) with{
             asHorizontal()
+
             Button(it) with {
                 text = "New Serie"
-                onClick { AddNewSerieDialog(
+                onClick { NewSerieDialog(
                     this@WindowUNQFlix,
                     SerieAppModel(unqFlixAppModel = model)
                 ).open()}
             }
+
+            Button(it) with {
+                text = "Show Serie"
+                onClick {
+
+                }
+            }
+
+            Button(it) with {
+                text = "Modify Serie"
+                onClick {
+                    if(model.selectSerie != null)
+                        ModifySerieDialog(
+                            this@WindowUNQFlix,
+                            model.selectSerie!!
+                        ).open()
+                }
+            }
+
             Button(it) with {
                 text = "Delete Serie"
                 onClick {
@@ -78,27 +102,6 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
                         ConfirmDeleteSerieDialog(this@WindowUNQFlix, model).open()
                 }
             }
-            Button(it) with {
-                text = "Modify Serie"
-                onClick {
-                    if(model.selectSerie != null)
-                        ModificarSerieDialog(
-                            this@WindowUNQFlix,
-                            model.selectSerie!!
-                        ).open()
-                }
-            }
-            Button(it) with {
-                text = "WIP button"
-                onClick {
-                    if(model.selectSerie != null)
-                        ModificarSerieDialog(
-                            this@WindowUNQFlix,
-                            model.selectSerie!!
-                        ).open()
-                }
-            }
         }
-
     }
 }

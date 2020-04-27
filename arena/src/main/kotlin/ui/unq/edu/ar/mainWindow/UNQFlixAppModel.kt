@@ -39,7 +39,7 @@ class UNQFlixAppModel {
         this.series.add(serieAppModel)
     }
 
-    fun eliminarSerie(serie: SerieAppModel){
+    fun eliminarSerie(serie: SerieAppModel) {
         system.deleteSerie(serie.id)
         series.remove(serie)
     }
