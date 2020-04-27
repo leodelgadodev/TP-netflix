@@ -1,12 +1,12 @@
-package ui.unq.edu.ar.appModel
+package ui.unq.edu.ar.serie.model
 
 import domain.*
 import org.uqbar.commons.model.annotations.Observable
+import ui.unq.edu.ar.mainWindow.UNQFlixAppModel
 
 
 @Observable
 class SerieAppModel(unqFlixAppModel: UNQFlixAppModel? = null, serie: Serie? = null) {
-
     var unqFlix : UNQFlixAppModel? = null
     var id : String = ""
     var title : String = ""

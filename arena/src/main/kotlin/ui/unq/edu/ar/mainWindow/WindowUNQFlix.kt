@@ -1,4 +1,4 @@
-package ui.unq.edu.ar.window
+package ui.unq.edu.ar.mainWindow
 
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.Button
@@ -8,13 +8,13 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.lacar.ui.model.Action
-import ui.unq.edu.ar.appModel.SerieAppModel
-import ui.unq.edu.ar.appModel.UNQFlixAppModel
+import ui.unq.edu.ar.serie.model.SerieAppModel
+import ui.unq.edu.ar.serie.view.AddNewSerieDialog
+import ui.unq.edu.ar.serie.view.ConfirmDeleteSerieDialog
+import ui.unq.edu.ar.serie.view.ModificarSerieDialog
 
 class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, unqFlixAppModel){
-    override fun addActions(p0: Panel?) {
-
-    }
+    override fun addActions(p0: Panel?) { }
 
     override fun createFormPanel(mainPanel: Panel) {
         title = "UNQFlix"
@@ -66,25 +66,37 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             asHorizontal()
             Button(it) with {
                 text = "New Serie"
-                onClick(Action{ AddNewSerieDialog(this@WindowUNQFlix, SerieAppModel(unqFlixAppModel = model)).open()})
+                onClick { AddNewSerieDialog(
+                    this@WindowUNQFlix,
+                    SerieAppModel(unqFlixAppModel = model)
+                ).open()}
             }
             Button(it) with {
                 text = "Delete Serie"
-                onClick(Action {
+                onClick {
                     if(model.selectSerie != null)
                         ConfirmDeleteSerieDialog(this@WindowUNQFlix, model).open()
-                })
+                }
             }
             Button(it) with {
                 text = "Modify Serie"
-                onClick(Action {
+                onClick {
                     if(model.selectSerie != null)
-                        ModificarSerieDialog(this@WindowUNQFlix, model.selectSerie!!).open()
-                })
+                        ModificarSerieDialog(
+                            this@WindowUNQFlix,
+                            model.selectSerie!!
+                        ).open()
+                }
             }
             Button(it) with {
-                text = "Show Serie"
-                TODO("Aca hay que poner para que habra la ventana de temporadas")
+                text = "WIP button"
+                onClick {
+                    if(model.selectSerie != null)
+                        ModificarSerieDialog(
+                            this@WindowUNQFlix,
+                            model.selectSerie!!
+                        ).open()
+                }
             }
         }
 

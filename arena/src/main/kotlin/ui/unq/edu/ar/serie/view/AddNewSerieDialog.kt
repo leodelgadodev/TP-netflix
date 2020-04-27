@@ -1,14 +1,13 @@
-package ui.unq.edu.ar.window
+package ui.unq.edu.ar.serie.view
 
-import domain.Category
-import domain.Content
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.widgets.List
 import org.uqbar.arena.windows.Dialog
-import ui.unq.edu.ar.appModel.CategoryAppModel
-import ui.unq.edu.ar.appModel.ContentAppModel
-import ui.unq.edu.ar.appModel.SerieAppModel
+import ui.unq.edu.ar.serie.model.CategoryAppModel
+import ui.unq.edu.ar.serie.model.ContentAppModel
+import ui.unq.edu.ar.serie.model.SerieAppModel
+import ui.unq.edu.ar.mainWindow.WindowUNQFlix
 
 open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
 
@@ -127,13 +126,13 @@ open class AddNewSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : Dialo
         Panel(mainPanel) with {
             asHorizontal()
             Button(it) with {
-                caption = "aceptar"
+                caption = "Submit"
                 onClick{
                     aceptar()
                 }
             }
             Button(it) with {
-                caption = "cancelar"
+                caption = "Cancel"
                 onClick{
                     cancelar()
                 }

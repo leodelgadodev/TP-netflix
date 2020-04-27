@@ -1,18 +1,15 @@
-package ui.unq.edu.ar
+package ui.unq.edu.ar.mainWindow
 
 import org.uqbar.arena.Application
 import org.uqbar.arena.windows.Window
-import ui.unq.edu.ar.appModel.UNQFlixAppModel
-import ui.unq.edu.ar.window.WindowUNQFlix
 
 
-class ApplicationUNQFlix : Application(){
-    // Test commit
+class ApplicationUNQFlix : Application() {
     override fun createMainWindow(): Window<*> {
         return WindowUNQFlix(this, UNQFlixAppModel())
     }
 }
 
-fun main(){
+fun main() {
     ApplicationUNQFlix().start()
 }

@@ -1,8 +1,11 @@
-package ui.unq.edu.ar.appModel
+package ui.unq.edu.ar.mainWindow
 
 import domain.*
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
+import ui.unq.edu.ar.serie.model.CategoryAppModel
+import ui.unq.edu.ar.serie.model.ContentAppModel
+import ui.unq.edu.ar.serie.model.SerieAppModel
 
 
 @Observable
@@ -15,7 +18,7 @@ class UNQFlixAppModel {
     var content : MutableList<ContentAppModel> = initMovies()
 
     fun initSeries() : MutableList<SerieAppModel>{
-        return system.series.map{SerieAppModel(serie = it)}.toMutableList()
+        return system.series.map{ SerieAppModel(serie = it) }.toMutableList()
     }
     fun initCategories() : MutableList<CategoryAppModel> {
         val categoriesName = arrayOf("Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy",
@@ -35,13 +38,16 @@ class UNQFlixAppModel {
         this.content.add(ContentAppModel(serieAppModel.model!!))
         this.series.add(serieAppModel)
     }
+
     fun eliminarSerie(serie: SerieAppModel){
         system.deleteSerie(serie.id)
         series.remove(serie)
     }
+
     fun toCategories(ids : MutableList<String>) : MutableList<CategoryAppModel> {
         return categories.filter { ids.contains(it.id) }.toMutableList()
     }
+
     fun allContents() : MutableList<ContentAppModel>{
         return content
     }

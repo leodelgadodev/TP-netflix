@@ -1,13 +1,7 @@
-package ui.unq.edu.ar.window
+package ui.unq.edu.ar.serie.view
 
-import domain.Category
-import domain.Content
-import org.uqbar.arena.kotlin.extensions.*
-import org.uqbar.arena.widgets.*
-import org.uqbar.arena.windows.Dialog
-import org.uqbar.arena.windows.SimpleWindow
-import org.uqbar.lacar.ui.model.Action
-import ui.unq.edu.ar.appModel.SerieAppModel
+import ui.unq.edu.ar.serie.model.SerieAppModel
+import ui.unq.edu.ar.mainWindow.WindowUNQFlix
 
 class ModificarSerieDialog(owner: WindowUNQFlix, model: SerieAppModel) : AddNewSerieDialog(owner, model){
 
