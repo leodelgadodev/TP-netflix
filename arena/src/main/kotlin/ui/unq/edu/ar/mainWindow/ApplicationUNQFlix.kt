@@ -6,7 +6,7 @@ import org.uqbar.arena.windows.Window
 
 class ApplicationUNQFlix : Application() {
     override fun createMainWindow(): Window<*> {
-        return WindowUNQFlix(this, UNQFlixAppModel())
+        return UNQFlixWindow(this, UNQFlixAppModel())
     }
 }
 

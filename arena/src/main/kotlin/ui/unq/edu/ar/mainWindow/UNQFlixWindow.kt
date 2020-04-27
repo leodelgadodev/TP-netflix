@@ -12,7 +12,7 @@ import ui.unq.edu.ar.serie.view.NewSerieDialog
 import ui.unq.edu.ar.serie.view.ConfirmDeleteSerieDialog
 import ui.unq.edu.ar.serie.view.ModifySerieDialog
 
-class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, unqFlixAppModel){
+class UNQFlixWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, unqFlixAppModel){
     override fun addActions(p0: Panel?) { }
 
     override fun createFormPanel(mainPanel: Panel) {
@@ -72,7 +72,7 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             Button(it) with {
                 text = "New Serie"
                 onClick { NewSerieDialog(
-                    this@WindowUNQFlix,
+                    this@UNQFlixWindow,
                     SerieAppModel(unqFlixAppModel = model)
                 ).open()}
             }
@@ -89,7 +89,7 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
                 onClick {
                     if(model.selectSerie != null)
                         ModifySerieDialog(
-                            this@WindowUNQFlix,
+                            this@UNQFlixWindow,
                             model.selectSerie!!
                         ).open()
                 }
@@ -99,7 +99,7 @@ class WindowUNQFlix (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
                 text = "Delete Serie"
                 onClick {
                     if(model.selectSerie != null)
-                        ConfirmDeleteSerieDialog(this@WindowUNQFlix, model).open()
+                        ConfirmDeleteSerieDialog(this@UNQFlixWindow, model).open()
                 }
             }
         }
