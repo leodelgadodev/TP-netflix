@@ -4,14 +4,8 @@ import ui.unq.edu.ar.serie.model.SerieAppModel
 import ui.unq.edu.ar.mainWindow.UNQFlixWindow
 
 class ModifySerieDialog(owner: UNQFlixWindow, model: SerieAppModel) : NewSerieDialog(owner, model){
-    val oldState = model.contentState // no se me ocurre otra forma de guardar este estado
 
-    override fun cancelar() {
-        modelObject.cancelar(oldState)
-        close()
-    }
-
-    override fun aceptar() {
+    override fun accept() {
         modificarSerie()
         close()
     }

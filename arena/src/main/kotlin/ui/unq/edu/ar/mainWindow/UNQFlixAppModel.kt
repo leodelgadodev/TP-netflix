@@ -18,7 +18,7 @@ class UNQFlixAppModel {
     var content : MutableList<ContentAppModel> = initMovies()
 
     fun initSeries() : MutableList<SerieAppModel>{
-        return system.series.map{ SerieAppModel(serie = it) }.toMutableList()
+        return system.series.map{ SerieAppModel(this, it) }.toMutableList()
     }
     fun initCategories() : MutableList<CategoryAppModel> {
         val categoriesName = arrayOf("Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy",
@@ -39,12 +39,17 @@ class UNQFlixAppModel {
         this.series.add(serieAppModel)
     }
 
+    fun modificarSerie(serieAppModel: SerieAppModel){
+        series.remove(series.find { it.id === serieAppModel.id  })
+        series.add(serieAppModel)
+    }
+
     fun eliminarSerie(serie: SerieAppModel) {
         system.deleteSerie(serie.id)
         series.remove(serie)
     }
 
-    fun toCategories(ids : MutableList<String>) : MutableList<CategoryAppModel> {
+    fun getCategoriesAppModel(ids : MutableList<String>) : MutableList<CategoryAppModel> {
         return categories.filter { ids.contains(it.id) }.toMutableList()
     }
 
@@ -54,9 +59,6 @@ class UNQFlixAppModel {
 
     fun getContentsAppModel(ids: MutableList<String>) : MutableList<ContentAppModel>{
         return content.filter { ids.contains(it.id) }.toMutableList()
-    }
-    fun getContents(ids: MutableList<String>): MutableList<Content> {
-        return content.filter { ids.contains(it.id) }.map{it.model!!}.toMutableList()
     }
 
     fun initMovies() : MutableList<ContentAppModel>{

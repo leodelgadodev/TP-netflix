@@ -90,7 +90,7 @@ class UNQFlixWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
                     if(model.selectSerie != null)
                         ModifySerieDialog(
                             this@UNQFlixWindow,
-                            model.selectSerie!!
+                            SerieAppModel(model, model.selectSerie!!.model)
                         ).open()
                 }
             }

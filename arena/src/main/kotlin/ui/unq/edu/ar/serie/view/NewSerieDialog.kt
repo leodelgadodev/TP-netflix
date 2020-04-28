@@ -128,26 +128,24 @@ open class NewSerieDialog(owner: UNQFlixWindow, model: SerieAppModel) : Dialog<S
             Button(it) with {
                 caption = "Submit"
                 onClick{
-                    aceptar()
+                    accept()
                 }
             }
             Button(it) with {
                 caption = "Cancel"
                 onClick{
-                    cancelar()
+                    cancel()
                 }
             }
 
         }
     }
 
-    open fun aceptar(){
+    override fun accept(){
         nuevaSerie()
         close()
     }
-    open fun cancelar(){
-        close()
-    }
+
     fun nuevaSerie(){
         modelObject.nuevaSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.contentState, modelObject.categories, modelObject.relatedContent)
     }

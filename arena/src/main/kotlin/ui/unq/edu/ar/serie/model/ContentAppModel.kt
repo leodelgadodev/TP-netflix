@@ -7,5 +7,5 @@ import org.uqbar.commons.model.annotations.Observable
 class ContentAppModel(content : Content) {
     var id : String = content.id
     var title : String = content.title
-    var model : Content? = content
+    var model : Content = content
 }
