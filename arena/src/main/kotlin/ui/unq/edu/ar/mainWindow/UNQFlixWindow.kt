@@ -73,7 +73,7 @@ class UNQFlixWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
                 text = "New Serie"
                 onClick { NewSerieDialog(
                     this@UNQFlixWindow,
-                    SerieAppModel(unqFlixAppModel = model)
+                    SerieAppModel(model)
                 ).open()}
             }
 
