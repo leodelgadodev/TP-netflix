@@ -118,7 +118,7 @@ open class NewSerieDialog(owner: UNQFlixWindow, model: SerieAppModel) : Dialog<S
                 }
             }
             List<ContentAppModel>(it) with{
-                bindItemsTo("nonRelatedContent").adaptWithProp<ContentAppModel>("title")
+                bindItemsTo("nonRelatedContent").adaptWithProp<ContentAppModel>("description")
                 bindSelectedTo("selectedContent")
                 width = 150
                 height = 200

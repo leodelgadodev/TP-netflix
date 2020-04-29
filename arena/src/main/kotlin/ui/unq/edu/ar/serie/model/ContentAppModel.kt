@@ -8,4 +8,6 @@ class ContentAppModel(content : Content) {
     var id : String = content.id
     var title : String = content.title
     var model : Content = content
+
+    fun description() = "$id - $title"
 }
