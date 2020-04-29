@@ -14,7 +14,6 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
     var poster : String = ""
     var description : String = ""
     var state : ContentState = Unavailable()
-    var contentState : Boolean = false
     var categories : MutableList<CategoryAppModel> = mutableListOf()
     var seasons : MutableList<Season> = mutableListOf()
     var relatedContent : MutableList<ContentAppModel> = mutableListOf()
@@ -41,25 +40,24 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
 
     }
 
-    fun nuevaSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>){
+    fun nuevaSerie(title : String, poster : String, description : String, state: ContentState, categories : MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>){
         this.id = unqFlix.idGenerator.nextSerieId()
         this.title = title
         this.poster = poster
         this.description = description
-        this.state = if (state){Available()} else {Unavailable()}
-        this.contentState = state
+        this.state = state
         this.categories = categories
         this.relatedContent = relatedContent
-        this.model = Serie(id, title, description, poster, if (state){Available()} else {Unavailable()}, categories.map { it.model }.toMutableList(), seasons, relatedContent.map { it.model }.toMutableList())
+        this.model = Serie(id, title, description, poster, state, categories.map { it.model }.toMutableList(), seasons, relatedContent.map { it.model }.toMutableList())
 
         unqFlix.newSerie(this)
     }
 
-    fun modificarSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>) {
+    fun modificarSerie(title : String, poster : String, description : String, state : ContentState, categories : MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>) {
         model!!.title = title
         model!!.poster = poster
         model!!.description = description
-        model!!.state = if (state){Available()} else {Unavailable()}
+        model!!.state = state
         model!!.categories = categories.map { it.model }.toMutableList()
         model!!.relatedContent = relatedContent.map { it.model }.toMutableList()
         unqFlix.modificarSerie(this)

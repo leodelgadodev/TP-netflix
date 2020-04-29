@@ -7,6 +7,7 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
+import ui.unq.edu.ar.transformers.StateToStringTransformer
 import ui.unq.edu.ar.serie.model.SerieAppModel
 import ui.unq.edu.ar.serie.view.NewSerieDialog
 import ui.unq.edu.ar.serie.view.ConfirmDeleteSerieDialog
@@ -53,8 +54,8 @@ class UNQFlixWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
 
             column {
                 title = "State"
-                weight = 50
-                bindContentsTo("contentState")
+                weight = 85
+                bindContentsTo("state").setTransformer(StateToStringTransformer())
             }
             bindSelectionTo("selectSerie")
             bindItemsTo("series")

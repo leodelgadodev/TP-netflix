@@ -11,6 +11,6 @@ class ModifySerieDialog(owner: UNQFlixWindow, model: SerieAppModel) : NewSerieDi
     }
 
     private fun modificarSerie() {
-        modelObject.modificarSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.contentState, modelObject.categories, modelObject.relatedContent)
+        modelObject.modificarSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.state, modelObject.categories, modelObject.relatedContent)
     }
 }
