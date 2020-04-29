@@ -89,4 +89,12 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
         }
     }
 
+    fun stateDescription() : String{
+        return if(Available().javaClass === state.javaClass){
+            "Available"
+        } else {
+            "Unavailable"
+        }
+    }
+
 }
