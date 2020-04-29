@@ -3,6 +3,7 @@ package ui.unq.edu.ar.serie.model
 import domain.*
 import org.uqbar.commons.model.annotations.Observable
 import ui.unq.edu.ar.mainWindow.UNQFlixAppModel
+import ui.unq.edu.ar.season.model.SeasonAppModel
 
 
 @Observable
@@ -15,11 +16,12 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
     var description : String = ""
     var state : ContentState = Unavailable()
     var categories : MutableList<CategoryAppModel> = mutableListOf()
-    var seasons : MutableList<Season> = mutableListOf()
+    var seasons : MutableList<SeasonAppModel> = mutableListOf()
     var relatedContent : MutableList<ContentAppModel> = mutableListOf()
     var nonSelectedCategories : MutableList<CategoryAppModel> = mutableListOf()
     var nonRelatedContent : MutableList<ContentAppModel> = mutableListOf()
     var cantSeason = seasons.size
+    var selectedSeason : SeasonAppModel? = null
     var selectedCategory : CategoryAppModel? = null
     var selectedContent : ContentAppModel? = null
 
@@ -31,7 +33,6 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
             this.description = serie.description
             this.state = serie.state
             this.categories = unqFlix.getCategoriesAppModel(serie.categories.map { it.id }.toMutableList())
-            this.seasons = serie.seasons
             this.relatedContent = unqFlix.getContentsAppModel(serie.relatedContent.map { it.id }.toMutableList())
             this.model = serie
         }
@@ -48,7 +49,7 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
         this.state = state
         this.categories = categories
         this.relatedContent = relatedContent
-        this.model = Serie(id, title, description, poster, state, categories.map { it.model }.toMutableList(), seasons, relatedContent.map { it.model }.toMutableList())
+        this.model = Serie(id, title, description, poster, state, categories.map { it.model }.toMutableList(), mutableListOf(),relatedContent.map { it.model }.toMutableList())
 
         unqFlix.newSerie(this)
     }
