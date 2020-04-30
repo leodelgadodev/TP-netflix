@@ -7,6 +7,7 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
+import ui.unq.edu.ar.season.SeasonWindow
 import ui.unq.edu.ar.serie.model.SerieAppModel
 import ui.unq.edu.ar.serie.view.NewSerieDialog
 import ui.unq.edu.ar.serie.view.ConfirmDeleteSerieDialog
@@ -80,7 +81,9 @@ class UNQFlixWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             Button(it) with {
                 text = "Show Serie"
                 onClick {
-
+                    SeasonWindow(
+                        this@UNQFlixWindow, SerieAppModel(model)
+                    ).open()
                 }
             }
 
