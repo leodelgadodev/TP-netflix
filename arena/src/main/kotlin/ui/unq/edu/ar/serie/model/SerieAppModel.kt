@@ -3,6 +3,7 @@ package ui.unq.edu.ar.serie.model
 import domain.*
 import org.uqbar.commons.model.annotations.Observable
 import ui.unq.edu.ar.mainWindow.UNQFlixAppModel
+import ui.unq.edu.ar.season.model.SeasonAppModel
 
 
 @Observable
@@ -14,13 +15,13 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
     var poster : String = ""
     var description : String = ""
     var state : ContentState = Unavailable()
-    var contentState : Boolean = false
     var categories : MutableList<CategoryAppModel> = mutableListOf()
-    var seasons : MutableList<Season> = mutableListOf()
+    var seasons : MutableList<SeasonAppModel> = mutableListOf()
     var relatedContent : MutableList<ContentAppModel> = mutableListOf()
     var nonSelectedCategories : MutableList<CategoryAppModel> = mutableListOf()
     var nonRelatedContent : MutableList<ContentAppModel> = mutableListOf()
     var cantSeason = seasons.size
+    var selectedSeason : SeasonAppModel? = null
     var selectedCategory : CategoryAppModel? = null
     var selectedContent : ContentAppModel? = null
 
@@ -32,7 +33,6 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
             this.description = serie.description
             this.state = serie.state
             this.categories = unqFlix.getCategoriesAppModel(serie.categories.map { it.id }.toMutableList())
-            this.seasons = serie.seasons
             this.relatedContent = unqFlix.getContentsAppModel(serie.relatedContent.map { it.id }.toMutableList())
             this.model = serie
         }
@@ -41,25 +41,24 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
 
     }
 
-    fun nuevaSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>){
+    fun nuevaSerie(title : String, poster : String, description : String, state: ContentState, categories : MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>){
         this.id = unqFlix.idGenerator.nextSerieId()
         this.title = title
         this.poster = poster
         this.description = description
-        this.state = if (state){Available()} else {Unavailable()}
-        this.contentState = state
+        this.state = state
         this.categories = categories
         this.relatedContent = relatedContent
-        this.model = Serie(id, title, description, poster, if (state){Available()} else {Unavailable()}, categories.map { it.model }.toMutableList(), seasons, relatedContent.map { it.model }.toMutableList())
+        this.model = Serie(id, title, description, poster, state, categories.map { it.model }.toMutableList(), mutableListOf(),relatedContent.map { it.model }.toMutableList())
 
         unqFlix.newSerie(this)
     }
 
-    fun modificarSerie(title : String, poster : String, description : String, state : Boolean, categories : MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>) {
+    fun modificarSerie(title : String, poster : String, description : String, state : ContentState, categories : MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>) {
         model!!.title = title
         model!!.poster = poster
         model!!.description = description
-        model!!.state = if (state){Available()} else {Unavailable()}
+        model!!.state = state
         model!!.categories = categories.map { it.model }.toMutableList()
         model!!.relatedContent = relatedContent.map { it.model }.toMutableList()
         unqFlix.modificarSerie(this)
@@ -88,6 +87,14 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
         if(selectedContent != null && !nonRelatedContent.contains(selectedContent)) {
             nonRelatedContent.add(selectedContent)
             relatedContent.remove(selectedContent)
+        }
+    }
+
+    fun stateDescription() : String{
+        return if(Available().javaClass === state.javaClass){
+            "Available"
+        } else {
+            "Unavailable"
         }
     }
 

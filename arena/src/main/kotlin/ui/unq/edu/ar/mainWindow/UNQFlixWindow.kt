@@ -54,8 +54,8 @@ class UNQFlixWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
 
             column {
                 title = "State"
-                weight = 50
-                bindContentsTo("contentState")
+                weight = 85
+                bindContentsTo("stateDescription")
             }
             bindSelectionTo("selectSerie")
             bindItemsTo("series")

@@ -4,6 +4,7 @@ import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.widgets.List
 import org.uqbar.arena.windows.Dialog
+import ui.unq.edu.ar.transformers.StateToBooleanTransformer
 import ui.unq.edu.ar.serie.model.CategoryAppModel
 import ui.unq.edu.ar.serie.model.ContentAppModel
 import ui.unq.edu.ar.serie.model.SerieAppModel
@@ -52,7 +53,7 @@ open class NewSerieDialog(owner: UNQFlixWindow, model: SerieAppModel) : Dialog<S
                 text = "  State: "
             }
             CheckBox(it)with{
-                bindTo("contentState")
+                bindTo("state").setTransformer(StateToBooleanTransformer())
             }
         }
         Label(mainPanel) with{
@@ -117,7 +118,7 @@ open class NewSerieDialog(owner: UNQFlixWindow, model: SerieAppModel) : Dialog<S
                 }
             }
             List<ContentAppModel>(it) with{
-                bindItemsTo("nonRelatedContent").adaptWithProp<ContentAppModel>("title")
+                bindItemsTo("nonRelatedContent").adaptWithProp<ContentAppModel>("description")
                 bindSelectedTo("selectedContent")
                 width = 150
                 height = 200
@@ -147,7 +148,7 @@ open class NewSerieDialog(owner: UNQFlixWindow, model: SerieAppModel) : Dialog<S
     }
 
     fun nuevaSerie(){
-        modelObject.nuevaSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.contentState, modelObject.categories, modelObject.relatedContent)
+        modelObject.nuevaSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.state, modelObject.categories, modelObject.relatedContent)
     }
     fun addCategory(){
         modelObject.addCategory(modelObject.selectedCategory)
