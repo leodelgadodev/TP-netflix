@@ -1,4 +1,4 @@
-package ui.unq.edu.ar.mainWindow
+package ui.unq.edu.ar.serie.view
 
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.Button
@@ -7,12 +7,10 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
+import ui.unq.edu.ar.mainWindow.UNQFlixAppModel
 import ui.unq.edu.ar.serie.model.SerieAppModel
-import ui.unq.edu.ar.serie.view.NewSerieDialog
-import ui.unq.edu.ar.serie.view.ConfirmDeleteSerieDialog
-import ui.unq.edu.ar.serie.view.ModifySerieDialog
 
-class UNQFlixWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, unqFlixAppModel){
+class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, unqFlixAppModel){
     override fun addActions(p0: Panel?) { }
 
     override fun createFormPanel(mainPanel: Panel) {
@@ -60,8 +58,6 @@ class UNQFlixWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             bindItemsTo("series")
         }
 
-        val model = modelObject
-
         // -------------------
         // Series CRUD Buttons
         // -------------------
@@ -72,8 +68,8 @@ class UNQFlixWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             Button(it) with {
                 text = "New Serie"
                 onClick { NewSerieDialog(
-                    this@UNQFlixWindow,
-                    SerieAppModel(model)
+                    thisWindow,
+                    SerieAppModel(thisWindow.modelObject)
                 ).open()}
             }
 
@@ -87,10 +83,10 @@ class UNQFlixWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             Button(it) with {
                 text = "Modify Serie"
                 onClick {
-                    if(model.selectSerie != null)
+                    if(thisWindow.modelObject.selectSerie != null)
                         ModifySerieDialog(
-                            this@UNQFlixWindow,
-                            SerieAppModel(model, model.selectSerie!!.model)
+                            thisWindow,
+                            SerieAppModel(thisWindow.modelObject, thisWindow.modelObject.selectSerie!!.model)
                         ).open()
                 }
             }
@@ -98,8 +94,8 @@ class UNQFlixWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Si
             Button(it) with {
                 text = "Delete Serie"
                 onClick {
-                    if(model.selectSerie != null)
-                        ConfirmDeleteSerieDialog(this@UNQFlixWindow, model).open()
+                    if(thisWindow.modelObject.selectSerie != null)
+                        ConfirmDeleteSerieDialog(thisWindow, thisWindow.modelObject).open()
                 }
             }
         }

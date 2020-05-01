@@ -8,9 +8,8 @@ import ui.unq.edu.ar.transformers.StateToBooleanTransformer
 import ui.unq.edu.ar.serie.model.CategoryAppModel
 import ui.unq.edu.ar.serie.model.ContentAppModel
 import ui.unq.edu.ar.serie.model.SerieAppModel
-import ui.unq.edu.ar.mainWindow.UNQFlixWindow
 
-open class NewSerieDialog(owner: UNQFlixWindow, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
+open class NewSerieDialog(owner: SeriesWindow, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
 
     override fun createFormPanel(mainPanel: Panel) {
         Panel(mainPanel) with {
