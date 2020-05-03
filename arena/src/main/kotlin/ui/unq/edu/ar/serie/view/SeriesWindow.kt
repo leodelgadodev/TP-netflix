@@ -75,10 +75,11 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
             }
 
             Button(it) with {
-                text = "Show Serie"
+                text = "View Seasons"
                 onClick {
                     if(thisWindow.modelObject.selectSerie != null) {
-                        SeasonWindow(thisWindow, thisWindow.modelObject.selectSerie!!)
+                        SeasonWindow(thisWindow, thisWindow.modelObject.selectSerie!!
+                        ).open()
                     }
                 }
             }

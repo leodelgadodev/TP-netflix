@@ -6,18 +6,15 @@ import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
-import ui.unq.edu.ar.chapter.ChapterWindow
-import ui.unq.edu.ar.chapter.model.ChapterAppModel
-import ui.unq.edu.ar.mainWindow.UNQFlixAppModel
 import ui.unq.edu.ar.season.model.SeasonAppModel
+import ui.unq.edu.ar.season.view.ConfirmDeleteSeasonDialog
 import ui.unq.edu.ar.season.view.ModifySeasonDialog
+import ui.unq.edu.ar.season.view.NewSeasonDialog
 import ui.unq.edu.ar.serie.model.SerieAppModel
-import ui.unq.edu.ar.serie.view.NewSerieDialog
 
-class SeasonWindow(owner: WindowOwner, seasonAppModel: SerieAppModel) : SimpleWindow<SeasonAppModel>(owner, seasonAppModel) {
-    val model = UNQFlixAppModel
+class SeasonWindow(owner: WindowOwner, serieAppModel: SerieAppModel) : SimpleWindow<SerieAppModel>(owner, serieAppModel) {
 
-    override fun addActions(p0: Panel?) { }
+    override fun addActions(p0: Panel?) {}
 
     override fun createFormPanel(mainPanel: Panel) {
         title = "Seasons"
@@ -26,27 +23,30 @@ class SeasonWindow(owner: WindowOwner, seasonAppModel: SerieAppModel) : SimpleWi
             Label(it) with {
                 text = "Test"
                 fontSize = 12
-                height = 16
-                width = 50
+                height = 50
+                width = 300
             }
         }
 
-        Panel(mainPanel) with{
-            asHorizontal()
+// --------------------------------------------------
+// Season CRUD Buttons
+// --------------------------------------------------
 
+        Panel(mainPanel) with {
+            asHorizontal()
             Button(it) with {
                 text = "New Season"
-                onClick { NewSerieDialog(
-                    this@SeasonWindow,
-                    SeasonAppModel(model)
-                ).open()}
+                onClick {
+                    NewSeasonDialog(
+                        thisWindow, SeasonAppModel(thisWindow.modelObject)
+                    ).open()
+                }
             }
 
             Button(it) with {
                 text = "View Chapters"
                 onClick {
-                    //ChapterWindow(
-                    //    this@SeasonWindow, SeasonAppModel(model)
+                    //ChapterWindow(thisWindow, thisWindow.modelObject.selectedSeason!!
                     //).open()
                 }
             }
@@ -54,10 +54,10 @@ class SeasonWindow(owner: WindowOwner, seasonAppModel: SerieAppModel) : SimpleWi
             Button(it) with {
                 text = "Modify Season"
                 onClick {
-                    if(model.selectedSeason != null)
+                    if (thisWindow.modelObject.selectedSeason != null)
                         ModifySeasonDialog(
-                            this@SeasonWindow,
-                            SeasonAppModel(model, model.selectedSeason!!.model)
+                            thisWindow,
+                            SeasonAppModel(thisWindow.modelObject, thisWindow.modelObject.selectedSeason!!.model)
                         ).open()
                 }
             }
@@ -65,8 +65,10 @@ class SeasonWindow(owner: WindowOwner, seasonAppModel: SerieAppModel) : SimpleWi
             Button(it) with {
                 text = "Delete Season"
                 onClick {
-                    if(model.selectedSeason != null)
-                        ConfirmDeleteSeasonDialog(this@SeasonWindow, model).open()
+                    if (thisWindow.modelObject.selectedSeason != null)
+                        ConfirmDeleteSeasonDialog(
+                            thisWindow, thisWindow.modelObject
+                        ).open()
                 }
             }
         }

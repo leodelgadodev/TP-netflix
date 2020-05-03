@@ -98,4 +98,9 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
         }
     }
 
+    fun deleteSeason(aSeasonAppModel: SeasonAppModel) {
+        model!!.deleteSeason(aSeasonAppModel.id)
+        seasons.remove(aSeasonAppModel)
+    }
+
 }
