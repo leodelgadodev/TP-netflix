@@ -8,6 +8,7 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import ui.unq.edu.ar.mainWindow.UNQFlixAppModel
+import ui.unq.edu.ar.season.SeasonWindow
 import ui.unq.edu.ar.serie.model.SerieAppModel
 
 class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, unqFlixAppModel){
@@ -58,9 +59,9 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
             bindItemsTo("series")
         }
 
-        // -------------------
-        // Series CRUD Buttons
-        // -------------------
+// --------------------------------------
+// Series CRUD Buttons
+// --------------------------------------
 
         Panel(mainPanel) with{
             asHorizontal()
@@ -76,7 +77,9 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
             Button(it) with {
                 text = "Show Serie"
                 onClick {
-
+                    if(thisWindow.modelObject.selectSerie != null) {
+                        SeasonWindow(thisWindow, thisWindow.modelObject.selectSerie!!)
+                    }
                 }
             }
 
