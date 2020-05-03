@@ -2,11 +2,12 @@ package ui.unq.edu.ar.mainWindow
 
 import org.uqbar.arena.Application
 import org.uqbar.arena.windows.Window
+import ui.unq.edu.ar.serie.view.SeriesWindow
 
 
 class ApplicationUNQFlix : Application() {
     override fun createMainWindow(): Window<*> {
-        return UNQFlixWindow(this, UNQFlixAppModel())
+        return SeriesWindow(this, UNQFlixAppModel())
     }
 }
 
