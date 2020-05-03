@@ -4,6 +4,7 @@ import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
+import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import ui.unq.edu.ar.season.model.SeasonAppModel
@@ -18,14 +19,28 @@ class SeasonWindow(owner: WindowOwner, serieAppModel: SerieAppModel) : SimpleWin
 
     override fun createFormPanel(mainPanel: Panel) {
         title = "Seasons"
-        Panel(mainPanel) with {
-            asHorizontal()
-            Label(it) with {
-                text = "Test"
-                fontSize = 12
-                height = 50
-                width = 300
+
+        table<SeasonAppModel>(mainPanel) with {
+            visibleRows = 10
+            column {
+                title = "#"
+                weight = 50
+                bindContentsTo("numero")
             }
+
+            column {
+                title = "Description"
+                weight = 200
+                bindContentsTo("descripcion")
+            }
+
+            column {
+                title = "#Chapters"
+                weight = 75
+                bindContentsTo("cantCapitulos")
+            }
+            bindSelectionTo("selectedSeason")
+            bindItemsTo("seasons")
         }
 
 // --------------------------------------------------

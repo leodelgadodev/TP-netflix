@@ -9,8 +9,9 @@ import ui.unq.edu.ar.serie.model.SerieAppModel
 class SeasonAppModel(serieAppModel: SerieAppModel, season: Season? = null) {
     var model : Season? = null
     var id: String = ""
+    var numero: Int = 0
     var descripcion: String = ""
     var capitulos: MutableList<Chapter> = mutableListOf()
+    var cantCapitulos: String = ""
     var poster: String = ""
-
 }
