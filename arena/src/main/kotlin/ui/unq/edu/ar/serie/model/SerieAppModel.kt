@@ -101,12 +101,21 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
     fun deleteSeason(aSeasonAppModel: SeasonAppModel) {
         model!!.deleteSeason(aSeasonAppModel.id)
         seasons.remove(aSeasonAppModel)
+        cantSeasons--
     }
 
     fun newSeason(aSeasonAppModel: SeasonAppModel) {
-        model!!.addSeason(aSeasonAppModel.model!!)
+        this.model!!.addSeason(aSeasonAppModel.model!!)
         this.seasons.add(aSeasonAppModel)
         this.cantSeasons++
+    }
+
+    fun modifySeason(aSeasonAppModel: SeasonAppModel) {
+        model!!.deleteSeason(aSeasonAppModel.id)
+        seasons.remove( seasons.find { it.id === aSeasonAppModel.id  } )
+
+        seasons.add(aSeasonAppModel)
+        model!!.addSeason(aSeasonAppModel.model!!)
     }
 
 }

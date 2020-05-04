@@ -6,7 +6,7 @@ import org.uqbar.arena.windows.Dialog
 import ui.unq.edu.ar.season.SeasonWindow
 import ui.unq.edu.ar.season.model.SeasonAppModel
 
-class NewSeasonDialog(owner: SeasonWindow, model: SeasonAppModel) : Dialog<SeasonAppModel>(owner, model) {
+open class NewSeasonDialog(owner: SeasonWindow, model: SeasonAppModel) : Dialog<SeasonAppModel>(owner, model) {
 
     override fun createFormPanel(mainPanel: Panel) {
         Panel(mainPanel) with {

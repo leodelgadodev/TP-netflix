@@ -8,7 +8,7 @@ import ui.unq.edu.ar.serie.model.SerieAppModel
 @Observable
 class SeasonAppModel(serieAppModel: SerieAppModel, season: Season? = null) {
     var model : Season? = null
-    var serie : SerieAppModel = serieAppModel
+    var serieAppModel : SerieAppModel = serieAppModel
     var idGenerator = serieAppModel.unqFlix.idGenerator
     var id: String = ""
 
@@ -36,14 +36,19 @@ class SeasonAppModel(serieAppModel: SerieAppModel, season: Season? = null) {
         this.poster = poster
         this.model = Season(id, nombre, descripcion, poster, mutableListOf())
 
-        serie.newSeason(this)
+        serieAppModel.newSeason(this)
     }
 
-    fun modifySeason() {
+    fun modifySeason(nombre: String, poster: String, descripcion: String) {
+        this.model!!.title = nombre
+        this.model!!.poster = poster
+        this.model!!.description = descripcion
 
+        this.nombre = nombre
+        this.descripcion = descripcion
+        this.poster = poster
+
+        serieAppModel.modifySeason(this)
     }
 
-    fun deleteSeason() {
-
-    }
 }
