@@ -45,7 +45,7 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
             }
 
             column {
-                title = "#Season"
+                title = "#Seasons"
                 weight = 75
                 bindContentsTo("cantSeasons")
             }
@@ -55,7 +55,7 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
                 weight = 85
                 bindContentsTo("stateDescription")
             }
-            bindSelectionTo("selectSerie")
+            bindSelectionTo("selectedSerie")
             bindItemsTo("series")
         }
 

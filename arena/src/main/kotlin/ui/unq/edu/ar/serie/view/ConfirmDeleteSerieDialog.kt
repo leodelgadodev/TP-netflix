@@ -33,6 +33,6 @@ class ConfirmDeleteSerieDialog(owner : WindowOwner, model : UNQFlixAppModel) : D
     }
 
     private fun eliminarSerie() {
-        modelObject.eliminarSerie(modelObject.selectSerie!!)
+        modelObject.eliminarSerie(modelObject.selectedSerie!!)
     }
 }
