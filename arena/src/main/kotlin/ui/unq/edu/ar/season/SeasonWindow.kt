@@ -23,9 +23,9 @@ class SeasonWindow(owner: WindowOwner, serieAppModel: SerieAppModel) : SimpleWin
         table<SeasonAppModel>(mainPanel) with {
             visibleRows = 10
             column {
-                title = "#"
+                title = "#Name"
                 weight = 50
-                bindContentsTo("numero")
+                bindContentsTo("nombre")
             }
 
             column {

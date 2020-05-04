@@ -47,7 +47,7 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
             column {
                 title = "#Season"
                 weight = 75
-                bindContentsTo("cantSeason")
+                bindContentsTo("cantSeasons")
             }
 
             column {

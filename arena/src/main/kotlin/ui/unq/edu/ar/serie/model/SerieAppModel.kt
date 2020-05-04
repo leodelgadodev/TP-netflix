@@ -2,6 +2,7 @@ package ui.unq.edu.ar.serie.model
 
 import domain.*
 import org.uqbar.commons.model.annotations.Observable
+import org.uqbar.commons.model.exceptions.UserException
 import ui.unq.edu.ar.mainWindow.UNQFlixAppModel
 import ui.unq.edu.ar.season.model.SeasonAppModel
 
@@ -20,7 +21,7 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
     var relatedContent : MutableList<ContentAppModel> = mutableListOf()
     var nonSelectedCategories : MutableList<CategoryAppModel> = mutableListOf()
     var nonRelatedContent : MutableList<ContentAppModel> = mutableListOf()
-    var cantSeason = seasons.size
+    var cantSeasons = 0
     var selectedSeason : SeasonAppModel? = null
     var selectedCategory : CategoryAppModel? = null
     var selectedContent : ContentAppModel? = null
@@ -50,7 +51,6 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
         this.categories = categories
         this.relatedContent = relatedContent
         this.model = Serie(id, title, description, poster, state, categories.map { it.model }.toMutableList(), mutableListOf(),relatedContent.map { it.model }.toMutableList())
-
         unqFlix.newSerie(this)
     }
 
@@ -101,6 +101,12 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
     fun deleteSeason(aSeasonAppModel: SeasonAppModel) {
         model!!.deleteSeason(aSeasonAppModel.id)
         seasons.remove(aSeasonAppModel)
+    }
+
+    fun newSeason(aSeasonAppModel: SeasonAppModel) {
+        model!!.addSeason(aSeasonAppModel.model!!)
+        this.seasons.add(aSeasonAppModel)
+        this.cantSeasons++
     }
 
 }
