@@ -44,7 +44,6 @@ open class NewSeasonDialog(owner: SeasonWindow, model: SeasonAppModel) : Dialog<
                 Button(it) with {
                     caption = "Submit"
                     onClick {
-                        newSeason()
                         accept()
                     }
                 }
@@ -56,6 +55,11 @@ open class NewSeasonDialog(owner: SeasonWindow, model: SeasonAppModel) : Dialog<
                 }
             }
         }
+    }
+
+    override fun accept() {
+        newSeason()
+        close()
     }
 
     private fun newSeason() {
