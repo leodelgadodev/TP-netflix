@@ -16,7 +16,7 @@ class UNQFlixAppModel {
     var categories : MutableList<CategoryAppModel> = initCategories()
     var content : MutableList<ContentAppModel> = initContent()
     var series : MutableList<SerieAppModel> = initSeries()
-    var selectSerie : SerieAppModel? = null
+    var selectedSerie : SerieAppModel? = null
 
     fun initSeries() : MutableList<SerieAppModel>{
         return this.system.series.map{ SerieAppModel(this, it) }.toMutableList()

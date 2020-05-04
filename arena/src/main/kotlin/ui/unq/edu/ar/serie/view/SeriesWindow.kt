@@ -77,8 +77,8 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
             Button(it) with {
                 text = "View Seasons"
                 onClick {
-                    if(thisWindow.modelObject.selectSerie != null) {
-                        SeasonWindow(thisWindow, thisWindow.modelObject.selectSerie!!
+                    if(thisWindow.modelObject.selectedSerie != null) {
+                        SeasonWindow(thisWindow, thisWindow.modelObject.selectedSerie!!
                         ).open()
                     }
                 }
@@ -87,10 +87,10 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
             Button(it) with {
                 text = "Modify Serie"
                 onClick {
-                    if(thisWindow.modelObject.selectSerie != null)
+                    if(thisWindow.modelObject.selectedSerie != null)
                         ModifySerieDialog(
                             thisWindow,
-                            SerieAppModel(thisWindow.modelObject, thisWindow.modelObject.selectSerie!!.model)
+                            SerieAppModel(thisWindow.modelObject, thisWindow.modelObject.selectedSerie!!.model)
                         ).open()
                 }
             }
@@ -98,7 +98,7 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
             Button(it) with {
                 text = "Delete Serie"
                 onClick {
-                    if(thisWindow.modelObject.selectSerie != null)
+                    if(thisWindow.modelObject.selectedSerie != null)
                         ConfirmDeleteSerieDialog(thisWindow, thisWindow.modelObject).open()
                 }
             }
