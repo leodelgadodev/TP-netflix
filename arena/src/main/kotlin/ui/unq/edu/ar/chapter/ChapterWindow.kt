@@ -21,12 +21,14 @@ class ChapterWindow(owner: WindowOwner,chapterAppModel: ChapterAppModel) : Simpl
     override fun createFormPanel(panel: Panel) {
 
         Label(panel) with {text = "Title:";alignLeft()}
+
         TextBox(panel) with {
             width = 200
             bindTo("title")
         }
 
         Label(panel) with {text = "Description:";alignLeft()}
+
         TextBox(panel) with {
             width = 200
             height = 70
@@ -34,18 +36,21 @@ class ChapterWindow(owner: WindowOwner,chapterAppModel: ChapterAppModel) : Simpl
         }
 
         Label(panel) with {text = "Duration:";alignLeft()}
+
         NumericField(panel) with {
             width = 200
             bindTo("duration")
         }
 
         Label(panel) with {text = "Thumbnail:";alignLeft()}
+
         TextBox(panel) with {
             width = 200
             bindTo("thumbnail")
         }
 
         Label(panel) with {text = "Video:";alignLeft()}
+
         TextBox(panel) with {
             width = 200
             bindTo("video")

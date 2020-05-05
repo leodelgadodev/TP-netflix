@@ -61,7 +61,5 @@ class ShowChaptersWindow( owner: WindowOwner, model: SeasonAppModel) : SimpleWin
             }
 
         }
-
-
     }
 }

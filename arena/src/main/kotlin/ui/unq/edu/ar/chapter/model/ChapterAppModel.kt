@@ -28,7 +28,4 @@ class ChapterAppModel (chapter: Chapter? = null){
         }
     }
 
-
-
-
 }

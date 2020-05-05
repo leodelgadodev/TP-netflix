@@ -13,6 +13,7 @@ import ui.unq.edu.ar.chapter.model.ChapterAppModel
 class NewChapterDialog (owner: WindowOwner,model: ChapterAppModel) : Dialog<ChapterAppModel>(owner,model) {
 
     override fun createFormPanel(panel: Panel?) {
+
         Label(panel) with {
             text = "Esta seguro de añadir este capitulo?"
         }
