@@ -3,6 +3,7 @@ package ui.unq.edu.ar.season.model
 import domain.Chapter
 import domain.Season
 import org.uqbar.commons.model.annotations.Observable
+import ui.unq.edu.ar.chapter.model.ChapterAppModel
 import ui.unq.edu.ar.serie.model.SerieAppModel
 
 @Observable
@@ -14,10 +15,12 @@ class SeasonAppModel(serieAppModel: SerieAppModel, season: Season? = null) {
 
     var nombre: String = ""
     var descripcion: String = ""
-    var capitulos: MutableList<Chapter> = mutableListOf()
+    var capitulos: MutableList<ChapterAppModel> = mutableListOf()
     var poster: String = ""
 
     var cantCapitulos: Int = 0
+
+    var selectChapter : ChapterAppModel? = null
 
     init{
         if (season != null) {
@@ -25,6 +28,8 @@ class SeasonAppModel(serieAppModel: SerieAppModel, season: Season? = null) {
             this.nombre = season.title
             this.poster = season.poster
             this.descripcion = season.description
+            this.capitulos = season.chapters.map { ChapterAppModel(it) }.toMutableList()
+            this.cantCapitulos = capitulos.size
             this.model = season
         }
     }

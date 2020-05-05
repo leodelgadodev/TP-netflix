@@ -7,6 +7,7 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
+import ui.unq.edu.ar.chapter.ShowChaptersWindow
 import ui.unq.edu.ar.season.model.SeasonAppModel
 import ui.unq.edu.ar.season.view.ConfirmDeleteSeasonDialog
 import ui.unq.edu.ar.season.view.ModifySeasonDialog
@@ -61,8 +62,8 @@ class SeasonWindow(owner: WindowOwner, serieAppModel: SerieAppModel) : SimpleWin
             Button(it) with {
                 text = "View Chapters"
                 onClick {
-                    //ChapterWindow(thisWindow, thisWindow.modelObject.selectedSeason!!
-                    //).open()
+                    ShowChaptersWindow(thisWindow, thisWindow.modelObject.selectedSeason!!
+                    ).open()
                 }
             }
 
