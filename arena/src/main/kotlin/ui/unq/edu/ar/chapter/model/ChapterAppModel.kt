@@ -7,7 +7,6 @@ import org.uqbar.commons.model.annotations.Observable
 class ChapterAppModel (chapter: Chapter? = null){
 
     var model : Chapter? = null
-    var selectChapter : Chapter? = null
 
     var id: String = ""
     var title: String = ""
@@ -20,6 +19,7 @@ class ChapterAppModel (chapter: Chapter? = null){
     init {
         if (chapter != null) {
             this.id = chapter.id
+            this.title = chapter.title
             this.description = chapter.description
             this.duration = chapter.duration
             this.video = chapter.video
@@ -27,5 +27,6 @@ class ChapterAppModel (chapter: Chapter? = null){
             this.model = chapter
         }
     }
+
 
 }

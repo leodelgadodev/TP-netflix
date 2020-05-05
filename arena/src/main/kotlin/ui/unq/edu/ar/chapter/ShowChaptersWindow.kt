@@ -25,23 +25,23 @@ class ShowChaptersWindow( owner: WindowOwner, model: SeasonAppModel) : SimpleWin
         table<ChapterAppModel>(panel) {
             bindItemsTo("capitulos")
             bindSelectionTo("selectChapter")
-            visibleRows = 5
+            visibleRows = 9
 
             column {
                 title = "#"
-                weight = 50
+                fixedSize = 50
                 bindContentsTo("id")
             }
 
             column {
                 title = "Title"
-                weight = 50
+                fixedSize = 350
                 bindContentsTo("title")
             }
 
             column {
                 title = "Duration"
-                weight = 50
+                fixedSize = 80
                 bindContentsTo("duration")
             }
 
@@ -50,7 +50,7 @@ class ShowChaptersWindow( owner: WindowOwner, model: SeasonAppModel) : SimpleWin
                 Button(this) with {
                     caption = "Add new chapter"
                     onClick {
-                        ChapterWindow(owner, modelObject as ChapterAppModel)
+                        ChapterWindow(owner, ChapterAppModel()) // no funciona revisar gt
                     }
                 }
 
