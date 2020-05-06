@@ -10,7 +10,8 @@ class ChapterAppModel (seasonAppModel: SeasonAppModel, chapter: Chapter? = null)
 
     var model : Chapter? = null
     var seasonModel : SeasonAppModel = seasonAppModel
-    var idGenerator : IdGenerator = seasonAppModel.idGenerator
+
+    var idGenerator : IdGenerator = seasonAppModel.serieAppModel.unqFlix.idGenerator
 
     var id: String = ""
     var title: String = ""
@@ -42,6 +43,22 @@ class ChapterAppModel (seasonAppModel: SeasonAppModel, chapter: Chapter? = null)
         this.model = Chapter(id, title, description, duration, video, thumbnail)
 
         seasonModel.addChapter(this)
+    }
+
+    fun modifyChapter(title: String,description: String,duration: Int,thumbnail: String,video: String){
+        this.model!!.title = title
+        this.model!!.description = description
+        this.model!!.duration = duration
+        this.model!!.thumbnail = thumbnail
+        this.model!!.video = video
+
+        this.title = title
+        this.description = description
+        this.duration = duration
+        this.thumbnail = thumbnail
+        this.video = video
+
+        seasonModel.modifyChapter(this)
     }
 
 }
