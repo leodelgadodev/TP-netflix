@@ -32,7 +32,7 @@ class ChapterAppModel (seasonAppModel: SeasonAppModel, chapter: Chapter? = null)
         }
     }
 
-    fun addChapter(title: String,description : String, duration : Int,thumbnail: String, video : String){
+    fun addNewChapter(title: String,description : String, duration : Int,thumbnail: String, video : String){
         this.id = idGenerator.nextChapterId()
         this.title = title
         this.description = description

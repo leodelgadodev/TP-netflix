@@ -1,12 +1,14 @@
-package ui.unq.edu.ar.chapter
+package ui.unq.edu.ar.chapter.view
 
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
+import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.windows.SimpleWindow
+import ui.unq.edu.ar.chapter.ChaptersWindow
 import ui.unq.edu.ar.chapter.model.ChapterAppModel
 
 
-class ChapterWindow(owner: ChapterWindow, chapterAppModel: ChapterAppModel) : SimpleWindow<ChapterAppModel>(owner,chapterAppModel) {
+class NewChapterDialog(owner: ChaptersWindow, chapterAppModel: ChapterAppModel) : Dialog<ChapterAppModel>(owner,chapterAppModel) {
 
     override fun addActions(p0: Panel?) {
 
@@ -54,8 +56,7 @@ class ChapterWindow(owner: ChapterWindow, chapterAppModel: ChapterAppModel) : Si
             Button(this) with {
                 caption = "Aceptar"
                 onClick {
-                    //NewChapterDialog(owner, modelObject as ChapterAppModel).open()
-                    ChapterWindow(thisWindow, ChapterAppModel())
+                    accept()
                 }
             }
 
@@ -64,6 +65,15 @@ class ChapterWindow(owner: ChapterWindow, chapterAppModel: ChapterAppModel) : Si
                 onClick {  }
             }
         }
+    }
+
+    override fun accept() {
+        newChapter()
+        close()
+    }
+
+    private  fun newChapter(){
+        modelObject.addNewChapter(modelObject.title,modelObject.description,modelObject.duration,modelObject.thumbnail,modelObject.video)
     }
 }
 
