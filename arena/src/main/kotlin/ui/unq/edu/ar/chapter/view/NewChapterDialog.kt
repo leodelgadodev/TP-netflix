@@ -1,31 +1,80 @@
 package ui.unq.edu.ar.chapter.view
 
-import org.uqbar.arena.kotlin.extensions.caption
-import org.uqbar.arena.kotlin.extensions.text
-import org.uqbar.arena.kotlin.extensions.with
-import org.uqbar.arena.widgets.Button
-import org.uqbar.arena.widgets.Label
-import org.uqbar.arena.widgets.Panel
+import org.uqbar.arena.kotlin.extensions.*
+import org.uqbar.arena.widgets.*
 import org.uqbar.arena.windows.Dialog
-import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.arena.windows.SimpleWindow
+import ui.unq.edu.ar.chapter.ChaptersWindow
 import ui.unq.edu.ar.chapter.model.ChapterAppModel
 
-class NewChapterDialog (owner: WindowOwner,model: ChapterAppModel) : Dialog<ChapterAppModel>(owner,model) {
 
-    override fun createFormPanel(panel: Panel?) {
+class NewChapterDialog(owner: ChaptersWindow, chapterAppModel: ChapterAppModel) : Dialog<ChapterAppModel>(owner,chapterAppModel) {
 
-        Label(panel) with {
-            text = "Esta seguro de añadir este capitulo?"
+    override fun addActions(p0: Panel?) {
+
+    }
+
+    override fun createFormPanel(panel: Panel) {
+
+        Label(panel) with {text = "Title:";alignLeft()}
+
+        TextBox(panel) with {
+            width = 200
+            bindTo("title")
         }
 
-        Button(panel) with {
-            caption = "Aceptar"
-            onClick { accept() }
+        Label(panel) with {text = "Description:";alignLeft()}
+
+        TextBox(panel) with {
+            width = 200
+            height = 70
+            bindTo("description")
         }
 
-        Button(panel) with {
-            caption = "Cancelar"
-            onClick { cancel() }
+        Label(panel) with {text = "Duration:";alignLeft()}
+
+        NumericField(panel) with {
+            width = 200
+            bindTo("duration")
+        }
+
+        Label(panel) with {text = "Thumbnail:";alignLeft()}
+
+        TextBox(panel) with {
+            width = 200
+            bindTo("thumbnail")
+        }
+
+        Label(panel) with {text = "Video:";alignLeft()}
+
+        TextBox(panel) with {
+            width = 200
+            bindTo("video")
+        }
+        Panel(this) with {
+            asHorizontal()
+            Button(this) with {
+                caption = "Aceptar"
+                onClick {
+                    accept()
+                }
+            }
+
+            Button(this) with {
+                caption = "Cancelar"
+                onClick {  }
+            }
         }
     }
+
+    override fun accept() {
+        newChapter()
+        close()
+    }
+
+    private  fun newChapter(){
+        modelObject.addNewChapter(modelObject.title,modelObject.description,modelObject.duration,modelObject.thumbnail,modelObject.video)
+    }
 }
+
+

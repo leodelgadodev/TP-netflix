@@ -7,10 +7,11 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import ui.unq.edu.ar.chapter.model.ChapterAppModel
+import ui.unq.edu.ar.chapter.view.NewChapterDialog
 import ui.unq.edu.ar.season.model.SeasonAppModel
 
 
-class ShowChaptersWindow( owner: WindowOwner, model: SeasonAppModel) : SimpleWindow<SeasonAppModel>(owner,model) {
+class ChaptersWindow(owner: WindowOwner, model: SeasonAppModel) : SimpleWindow<SeasonAppModel>(owner,model) {
 
     override fun addActions(panel: Panel?) {
 
@@ -44,22 +45,24 @@ class ShowChaptersWindow( owner: WindowOwner, model: SeasonAppModel) : SimpleWin
                 fixedSize = 80
                 bindContentsTo("duration")
             }
+        }
 
-            Panel(panel) with {
-                asHorizontal()
-                Button(this) with {
-                    caption = "Add new chapter"
-                    onClick {
-                        ChapterWindow(owner, ChapterAppModel()) // no funciona revisar gt
-                    }
-                }
-
-                Button(this) with {
-                    caption = "Modified Chapter"
-                    onClick {  }
+        Panel(panel) with {
+            asHorizontal()
+            Button(this) with {
+                caption = "Add new chapter"
+                onClick {
+                    NewChapterDialog(
+                        thisWindow,
+                        ChapterAppModel(thisWindow.modelObject)
+                    ).open()
                 }
             }
 
+            Button(this) with {
+                caption = "Modified Chapter"
+                onClick {  }
+            }
         }
     }
 }
