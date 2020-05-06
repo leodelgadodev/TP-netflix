@@ -5,12 +5,12 @@ import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.widgets.List
 import org.uqbar.arena.windows.Dialog
+import org.uqbar.commons.model.exceptions.UserException
+import ui.unq.edu.ar.exceptions.NoNameException
 import ui.unq.edu.ar.transformers.StateToBooleanTransformer
 import ui.unq.edu.ar.serie.model.CategoryAppModel
 import ui.unq.edu.ar.serie.model.ContentAppModel
 import ui.unq.edu.ar.serie.model.SerieAppModel
-import ui.unq.edu.ar.sharedviews.NoNameErrorDialog
-import ui.unq.edu.ar.sharedviews.RepeatedNameErrorDialog
 
 open class NewSerieDialog(owner: SeriesWindow, model: SerieAppModel) : Dialog<SerieAppModel>(owner, model){
 
@@ -131,15 +131,11 @@ open class NewSerieDialog(owner: SeriesWindow, model: SerieAppModel) : Dialog<Se
             Button(it) with {
                 caption = "Submit"
                 onClick{
-                    //try {
                         if (thisWindow.modelObject.title != "") {
                             accept()
                         } else {
-                            NoNameErrorDialog(thisWindow as Dialog<Any>, thisWindow.modelObject).open()
+                            throw NoNameException("Please, set a name.")
                         }
-                    //} catch(e: ExistsException) {
-                    //    RepeatedNameErrorDialog(thisWindow as Dialog<Any>, thisWindow.modelObject).open()
-                    //}
                 }
             }
             Button(it) with {
