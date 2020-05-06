@@ -27,6 +27,8 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
             TextBox(it) with {
                 height = 16
                 width = 300
+
+                bindTo("imput")
             }
         }
 
@@ -56,7 +58,7 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
                 bindContentsTo("stateDescription")
             }
             bindSelectionTo("selectedSerie")
-            bindItemsTo("series")
+            bindItemsTo("seriesBuscadas")
         }
 
 // --------------------------------------

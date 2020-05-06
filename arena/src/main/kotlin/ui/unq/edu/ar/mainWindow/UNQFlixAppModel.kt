@@ -13,12 +13,21 @@ import ui.unq.edu.ar.serie.model.SerieAppModel
 class UNQFlixAppModel {
     var system : UNQFlix  = getUNQFlix()
     val idGenerator = IdGenerator()
+    var imput : String = ""
+        set(value) {
+            field = value.toLowerCase()
+            busqueda()
+        }
     var categories : MutableList<CategoryAppModel> = initCategories()
     var content : MutableList<ContentAppModel> = initContent()
     var series : MutableList<SerieAppModel> = initSeries()
+    var seriesBuscadas : MutableList<SerieAppModel> = series
     var selectedSerie : SerieAppModel? = null
 
     fun initSeries() : MutableList<SerieAppModel>{
+        for (s in system.series){
+            idGenerator.nextSerieId()
+        }
         return this.system.series.map{ SerieAppModel(this, it) }.toMutableList()
 
     }
@@ -66,5 +75,9 @@ class UNQFlixAppModel {
 
     fun allCategories(): MutableList<CategoryAppModel> {
         return categories
+    }
+
+    fun busqueda() {
+        seriesBuscadas = series.filter { it.title.toLowerCase().contains(imput) }.toMutableList()
     }
 }
