@@ -13,11 +13,12 @@ import ui.unq.edu.ar.serie.model.SerieAppModel
 class UNQFlixAppModel {
     var system : UNQFlix  = getUNQFlix()
     val idGenerator = IdGenerator()
-    var imput : String = ""
+    var busquedaInput : String = ""
         set(value) {
             field = value.toLowerCase()
-            busqueda()
+            buscarSeries()
         }
+
     var categories : MutableList<CategoryAppModel> = initCategories()
     var content : MutableList<ContentAppModel> = initContent()
     var series : MutableList<SerieAppModel> = initSeries()
@@ -31,6 +32,7 @@ class UNQFlixAppModel {
         return this.system.series.map{ SerieAppModel(this, it) }.toMutableList()
 
     }
+
     fun initCategories() : MutableList<CategoryAppModel> {
         return system.categories.map { CategoryAppModel(it) }.toMutableList()
     }
@@ -38,14 +40,15 @@ class UNQFlixAppModel {
     fun newSerie(serieAppModel: SerieAppModel) {
         try{
             system.addSerie(serieAppModel.model!!)
-        } catch (e : ExistsException){
+        } catch (e : ExistsException) {
             throw UserException(e.message)
         }
+
         this.content.add(ContentAppModel(serieAppModel.model!!))
         this.series.add(serieAppModel)
     }
 
-    fun modificarSerie(serieAppModel: SerieAppModel){
+    fun modificarSerie(serieAppModel: SerieAppModel) {
         series.remove(series.find { it.id === serieAppModel.id  })
         series.add(serieAppModel)
     }
@@ -77,7 +80,7 @@ class UNQFlixAppModel {
         return categories
     }
 
-    fun busqueda() {
-        seriesBuscadas = series.filter { it.title.toLowerCase().contains(imput) }.toMutableList()
+    private fun buscarSeries() {
+        seriesBuscadas = series.filter { it.title.toLowerCase().contains(busquedaInput) }.toMutableList()
     }
 }

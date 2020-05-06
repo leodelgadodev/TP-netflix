@@ -20,29 +20,29 @@ class SeasonWindow(owner: WindowOwner, serieAppModel: SerieAppModel) : SimpleWin
 
     override fun createFormPanel(mainPanel: Panel) {
         title = "Seasons"
+            table<SeasonAppModel>(mainPanel) with {
+                visibleRows = 10
+                column {
+                    title = "Name"
+                    fixedSize = 100
+                    bindContentsTo("nombre")
+                }
 
-        table<SeasonAppModel>(mainPanel) with {
-            visibleRows = 10
-            column {
-                title = "Name"
-                weight = 50
-                bindContentsTo("nombre")
+                column {
+                    title = "Description"
+                    fixedSize = 400
+                    bindContentsTo("descripcion")
+                }
+
+                column {
+                    title = "#Chapters"
+                    fixedSize = 100
+                    bindContentsTo("cantCapitulos")
+                }
+                bindSelectionTo("selectedSeason")
+                bindItemsTo("seasons")
             }
 
-            column {
-                title = "Description"
-                weight = 200
-                bindContentsTo("descripcion")
-            }
-
-            column {
-                title = "#Chapters"
-                weight = 75
-                bindContentsTo("cantCapitulos")
-            }
-            bindSelectionTo("selectedSeason")
-            bindItemsTo("seasons")
-        }
 
 // --------------------------------------------------
 // Season CRUD Buttons

@@ -28,7 +28,7 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
                 height = 16
                 width = 300
 
-                bindTo("imput")
+                bindTo("busquedaInput")
             }
         }
 
