@@ -32,6 +32,10 @@ class SeasonAppModel(serieAppModel: SerieAppModel, season: Season? = null) {
             this.cantCapitulos = capitulos.size
             this.model = season
         }
+        for (c in capitulos){
+            idGenerator.nextChapterId()
+        }
+
     }
 
     fun newSeason(nombre: String, poster: String, descripcion: String) {

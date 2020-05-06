@@ -66,7 +66,7 @@ class ChaptersWindow(owner: WindowOwner, model: SeasonAppModel) : SimpleWindow<S
                     if (thisWindow.modelObject.selectChapter != null) {
                         ModifyChapterDialog(
                             thisWindow,
-                            ChapterAppModel(thisWindow.modelObject)
+                            ChapterAppModel(thisWindow.modelObject, thisWindow.modelObject.selectChapter!!.model)
                         ).open()
                     }
                 }

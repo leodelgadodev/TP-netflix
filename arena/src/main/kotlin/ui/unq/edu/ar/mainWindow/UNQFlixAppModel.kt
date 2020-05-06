@@ -46,16 +46,23 @@ class UNQFlixAppModel {
 
         this.content.add(ContentAppModel(serieAppModel.model!!))
         this.series.add(serieAppModel)
+        this.busquedaInput = ""
     }
 
     fun modificarSerie(serieAppModel: SerieAppModel) {
-        series.remove(series.find { it.id === serieAppModel.id  })
-        series.add(serieAppModel)
+        eliminarSerie(serieAppModel.id)
+        newSerie(serieAppModel)
     }
 
-    fun eliminarSerie(serie: SerieAppModel) {
-        system.deleteSerie(serie.id)
-        series.remove(serie)
+    fun eliminarSerie(id:String) {
+        system.deleteSerie(id)
+        removeContent(id)
+        series.removeIf { it.id === id }
+        this.busquedaInput = ""
+    }
+
+    fun removeContent(id : String){
+        content.removeIf { it.id === id }
     }
 
     fun getCategoriesAppModel(ids : MutableList<String>) : MutableList<CategoryAppModel> {
