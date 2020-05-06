@@ -1,6 +1,5 @@
 package ui.unq.edu.ar.serie.view
 
-import org.eclipse.ui.internal.Model
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
@@ -8,10 +7,11 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.commons.model.exceptions.UserException
+import ui.unq.edu.ar.exceptions.NoSelectedException
 import ui.unq.edu.ar.mainWindow.UNQFlixAppModel
 import ui.unq.edu.ar.season.SeasonWindow
 import ui.unq.edu.ar.serie.model.SerieAppModel
-import ui.unq.edu.ar.sharedviews.SelectErrorDialog
 
 class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, unqFlixAppModel) {
     override fun addActions(p0: Panel?) {}
@@ -88,7 +88,7 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
                             thisWindow, thisWindow.modelObject.selectedSerie!!
                         ).open()
                     } else {
-                        SelectErrorDialog(thisWindow as SimpleWindow<Any>, thisWindow.modelObject).open()
+                        throw NoSelectedException("Please, select an item from the list.")
                     }
                 }
             }
@@ -102,7 +102,7 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
                             SerieAppModel(thisWindow.modelObject, thisWindow.modelObject.selectedSerie!!.model)
                         ).open()
                     } else {
-                        SelectErrorDialog(thisWindow as SimpleWindow<Any>, thisWindow.modelObject).open()
+                        throw NoSelectedException("Please, select an item from the list.")
                     }
                 }
             }
@@ -113,7 +113,7 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
                     if (thisWindow.modelObject.selectedSerie != null) {
                         ConfirmDeleteSerieDialog(thisWindow, thisWindow.modelObject).open()
                     } else {
-                        SelectErrorDialog(thisWindow as SimpleWindow<Any>, thisWindow.modelObject).open()
+                        throw NoSelectedException("Please, select an item from the list.")
                     }
                 }
             }
