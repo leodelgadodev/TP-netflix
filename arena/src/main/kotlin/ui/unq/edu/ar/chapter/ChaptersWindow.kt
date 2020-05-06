@@ -7,6 +7,7 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import ui.unq.edu.ar.chapter.model.ChapterAppModel
+import ui.unq.edu.ar.chapter.view.ModifyChapterDialog
 import ui.unq.edu.ar.chapter.view.NewChapterDialog
 import ui.unq.edu.ar.season.model.SeasonAppModel
 
@@ -61,7 +62,14 @@ class ChaptersWindow(owner: WindowOwner, model: SeasonAppModel) : SimpleWindow<S
 
             Button(this) with {
                 caption = "Modified Chapter"
-                onClick {  }
+                onClick {
+                    if (thisWindow.modelObject.selectChapter != null) {
+                        ModifyChapterDialog(
+                            thisWindow,
+                            ChapterAppModel(thisWindow.modelObject)
+                        ).open()
+                    }
+                }
             }
         }
     }
