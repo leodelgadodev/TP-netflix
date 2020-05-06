@@ -11,7 +11,7 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.windows.SimpleWindow
 
-class SelectErrorDialog(owner: SimpleWindow<Any>, model: Model): Dialog<Any>(owner, model) {
+class SelectErrorDialog(owner: SimpleWindow<Any>, model: Any): Dialog<Any>(owner, model) {
     override fun addActions(p0: Panel?) {}
 
     override fun createFormPanel(mainPanel : Panel) {

@@ -10,7 +10,7 @@ import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.Dialog
 
-class RepeatedNameErrorDialog(owner: Dialog<Any>, model: Model): Dialog<Any>(owner, model) {
+class RepeatedNameErrorDialog(owner: Dialog<Any>, model: Any): Dialog<Any>(owner, model) {
     override fun createFormPanel(mainPanel : Panel) {
         Label(mainPanel) with {
             text = "Error: This name already exist on the system. Please, choose another name."

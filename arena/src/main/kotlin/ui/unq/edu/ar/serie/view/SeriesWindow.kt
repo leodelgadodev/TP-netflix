@@ -1,5 +1,6 @@
 package ui.unq.edu.ar.serie.view
 
+import org.eclipse.ui.internal.Model
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
@@ -10,9 +11,10 @@ import org.uqbar.arena.windows.WindowOwner
 import ui.unq.edu.ar.mainWindow.UNQFlixAppModel
 import ui.unq.edu.ar.season.SeasonWindow
 import ui.unq.edu.ar.serie.model.SerieAppModel
+import ui.unq.edu.ar.sharedviews.SelectErrorDialog
 
-class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, unqFlixAppModel){
-    override fun addActions(p0: Panel?) { }
+class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, unqFlixAppModel) {
+    override fun addActions(p0: Panel?) {}
 
     override fun createFormPanel(mainPanel: Panel) {
         title = "UNQFlix"
@@ -65,23 +67,28 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
 // Series CRUD Buttons
 // --------------------------------------
 
-        Panel(mainPanel) with{
+        Panel(mainPanel) with {
             asHorizontal()
 
             Button(it) with {
                 text = "New Serie"
-                onClick { NewSerieDialog(
-                    thisWindow,
-                    SerieAppModel(thisWindow.modelObject)
-                ).open()}
+                onClick {
+                    NewSerieDialog(
+                        thisWindow,
+                        SerieAppModel(thisWindow.modelObject)
+                    ).open()
+                }
             }
 
             Button(it) with {
                 text = "View Seasons"
                 onClick {
-                    if(thisWindow.modelObject.selectedSerie != null) {
-                        SeasonWindow(thisWindow, thisWindow.modelObject.selectedSerie!!
+                    if (thisWindow.modelObject.selectedSerie != null) {
+                        SeasonWindow(
+                            thisWindow, thisWindow.modelObject.selectedSerie!!
                         ).open()
+                    } else {
+                        SelectErrorDialog(thisWindow as SimpleWindow<Any>, thisWindow.modelObject).open()
                     }
                 }
             }
@@ -89,19 +96,25 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
             Button(it) with {
                 text = "Modify Serie"
                 onClick {
-                    if(thisWindow.modelObject.selectedSerie != null)
+                    if (thisWindow.modelObject.selectedSerie != null) {
                         ModifySerieDialog(
                             thisWindow,
                             SerieAppModel(thisWindow.modelObject, thisWindow.modelObject.selectedSerie!!.model)
                         ).open()
+                    } else {
+                        SelectErrorDialog(thisWindow as SimpleWindow<Any>, thisWindow.modelObject).open()
+                    }
                 }
             }
 
             Button(it) with {
                 text = "Delete Serie"
                 onClick {
-                    if(thisWindow.modelObject.selectedSerie != null)
+                    if (thisWindow.modelObject.selectedSerie != null) {
                         ConfirmDeleteSerieDialog(thisWindow, thisWindow.modelObject).open()
+                    } else {
+                        SelectErrorDialog(thisWindow as SimpleWindow<Any>, thisWindow.modelObject).open()
+                    }
                 }
             }
         }

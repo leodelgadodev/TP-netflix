@@ -12,7 +12,7 @@ import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.Window
 
-class NoNameErrorDialog(owner: Dialog<Any>, model: Model): Dialog<Any>(owner, model) {
+class NoNameErrorDialog(owner: Dialog<Any>, model: Any): Dialog<Any>(owner, model) {
     override fun createFormPanel(mainPanel : Panel) {
         Label(mainPanel) with {
             text = "Error: Please set a name."
