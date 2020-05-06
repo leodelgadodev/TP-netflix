@@ -28,7 +28,7 @@ class SeasonAppModel(serieAppModel: SerieAppModel, season: Season? = null) {
             this.nombre = season.title
             this.poster = season.poster
             this.descripcion = season.description
-            this.capitulos = season.chapters.map { ChapterAppModel(it) }.toMutableList()
+            this.capitulos = season.chapters.map { ChapterAppModel(this,it) }.toMutableList()
             this.cantCapitulos = capitulos.size
             this.model = season
         }
@@ -54,6 +54,12 @@ class SeasonAppModel(serieAppModel: SerieAppModel, season: Season? = null) {
         this.poster = poster
 
         serieAppModel.modifySeason(this)
+    }
+
+    fun addChapter(chapterAppModel: ChapterAppModel) {
+        this.model!!.addChapter(chapterAppModel.model!!)
+        this.capitulos.add(chapterAppModel)
+        this.cantCapitulos++
     }
 
 }

@@ -8,9 +8,12 @@ import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.windows.WindowOwner
+import ui.unq.edu.ar.chapter.ShowChaptersWindow
 import ui.unq.edu.ar.chapter.model.ChapterAppModel
+import ui.unq.edu.ar.season.SeasonWindow
+import ui.unq.edu.ar.season.model.SeasonAppModel
 
-class NewChapterDialog (owner: WindowOwner,model: ChapterAppModel) : Dialog<ChapterAppModel>(owner,model) {
+class ChapterComfirmDialog (owner: ShowChaptersWindow, model: ChapterAppModel) : Dialog<ChapterAppModel>(owner,model) {
 
     override fun createFormPanel(panel: Panel?) {
 
@@ -28,4 +31,24 @@ class NewChapterDialog (owner: WindowOwner,model: ChapterAppModel) : Dialog<Chap
             onClick { cancel() }
         }
     }
+
+    override fun accept() {
+
+    }
+
+    /*
+    * override fun accept(){
+        nuevaSerie()
+        close()
+    }
+
+    fun nuevaSerie(){
+        modelObject.nuevaSerie(modelObject.title, modelObject.poster, modelObject.description, modelObject.state, modelObject.categories, modelObject.relatedContent)
+    }*/
 }
+
+
+
+
+
+

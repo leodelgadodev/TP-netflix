@@ -1,15 +1,12 @@
 package ui.unq.edu.ar.chapter
 
-import domain.Chapter
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.windows.SimpleWindow
-import org.uqbar.arena.windows.WindowOwner
 import ui.unq.edu.ar.chapter.model.ChapterAppModel
-import ui.unq.edu.ar.chapter.view.NewChapterDialog
 
 
-class ChapterWindow(owner: WindowOwner, chapterAppModel: ChapterAppModel) : SimpleWindow<ChapterAppModel>(owner,chapterAppModel) {
+class ChapterWindow(owner: ChapterWindow, chapterAppModel: ChapterAppModel) : SimpleWindow<ChapterAppModel>(owner,chapterAppModel) {
 
     override fun addActions(p0: Panel?) {
 
@@ -57,7 +54,8 @@ class ChapterWindow(owner: WindowOwner, chapterAppModel: ChapterAppModel) : Simp
             Button(this) with {
                 caption = "Aceptar"
                 onClick {
-                    NewChapterDialog(owner, modelObject as ChapterAppModel).open()
+                    //NewChapterDialog(owner, modelObject as ChapterAppModel).open()
+                    ChapterWindow(thisWindow, ChapterAppModel())
                 }
             }
 

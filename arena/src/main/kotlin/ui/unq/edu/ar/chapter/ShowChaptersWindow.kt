@@ -44,22 +44,21 @@ class ShowChaptersWindow( owner: WindowOwner, model: SeasonAppModel) : SimpleWin
                 fixedSize = 80
                 bindContentsTo("duration")
             }
+        }
 
-            Panel(panel) with {
-                asHorizontal()
-                Button(this) with {
-                    caption = "Add new chapter"
-                    onClick {
-                        ChapterWindow(owner, ChapterAppModel()) // no funciona revisar gt
-                    }
-                }
-
-                Button(this) with {
-                    caption = "Modified Chapter"
-                    onClick {  }
+        Panel(panel) with {
+            asHorizontal()
+            Button(this) with {
+                caption = "Add new chapter"
+                onClick {
+                    ChapterWindow(thisWindow, ChapterAppModel(thisWindow.modelObject))
                 }
             }
 
+            Button(this) with {
+                caption = "Modified Chapter"
+                onClick {  }
+            }
         }
     }
 }
