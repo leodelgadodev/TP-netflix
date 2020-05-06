@@ -10,6 +10,7 @@ class ChapterAppModel (seasonAppModel: SeasonAppModel, chapter: Chapter? = null)
 
     var model : Chapter? = null
     var seasonModel : SeasonAppModel = seasonAppModel
+
     var idGenerator : IdGenerator = seasonAppModel.serieAppModel.unqFlix.idGenerator
 
     var id: String = ""

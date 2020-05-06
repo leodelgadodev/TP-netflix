@@ -6,6 +6,7 @@ import ui.unq.edu.ar.chapter.model.ChapterAppModel
 
 class ModifyChapterDialog (owner : ChaptersWindow, model: ChapterAppModel) : NewChapterDialog(owner,model){
 
+
     override fun accept() {
         modifyChapter()
         close()

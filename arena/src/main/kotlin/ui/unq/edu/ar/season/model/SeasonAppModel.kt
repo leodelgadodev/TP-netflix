@@ -65,6 +65,7 @@ class SeasonAppModel(serieAppModel: SerieAppModel, season: Season? = null) {
     fun modifyChapter(chapterAppModel: ChapterAppModel){
         model!!.deleteChapter(chapterAppModel.id)
         capitulos.remove(capitulos.find { it.id === chapterAppModel.id })
+
         capitulos.add(chapterAppModel)
         model!!.addChapter(chapterAppModel.model!!)
 

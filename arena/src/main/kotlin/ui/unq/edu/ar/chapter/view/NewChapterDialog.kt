@@ -12,21 +12,26 @@ import ui.unq.edu.ar.chapter.model.ChapterAppModel
 open class NewChapterDialog(owner: ChaptersWindow, chapterAppModel: ChapterAppModel) : Dialog<ChapterAppModel>(owner,chapterAppModel) {
 
     override fun addActions(p0: Panel?) {
-
     }
 
     override fun createFormPanel(panel: Panel) {
 
         Panel(panel) with {
             asVertical()
-            Label(it) with {text = "Title:";alignLeft()}
+            Label(it) with {
+                text = "Title:"
+                align = "left"
+            }
 
             TextBox(it) with {
                 width = 200
                 bindTo("title")
             }
 
-            Label(it) with {text = "Description:";alignLeft()}
+            Label(it) with {
+                text = "Description:"
+                align = "left"
+            }
 
             TextBox(it) with {
                 width = 200
@@ -34,21 +39,30 @@ open class NewChapterDialog(owner: ChaptersWindow, chapterAppModel: ChapterAppMo
                 bindTo("description")
             }
 
-            Label(it) with {text = "Duration:";alignLeft()}
+            Label(it) with {
+                text = "Duration:"
+                align = "left"
+            }
 
             NumericField(it) with {
                 width = 200
                 bindTo("duration")
             }
 
-            Label(it) with {text = "Thumbnail:";alignLeft()}
+            Label(it) with {
+                text = "Thumbnail:"
+                align = "left"
+            }
 
             TextBox(it) with {
                 width = 200
                 bindTo("thumbnail")
             }
 
-            Label(it) with {text = "Video:";alignLeft()}
+            Label(it) with {
+                text = "Video:"
+                align = "left"
+            }
 
             TextBox(it) with {
                 width = 200
