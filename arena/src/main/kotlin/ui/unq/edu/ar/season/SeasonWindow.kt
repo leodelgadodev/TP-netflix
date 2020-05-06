@@ -6,6 +6,7 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import ui.unq.edu.ar.chapter.ChaptersWindow
+import ui.unq.edu.ar.exceptions.NoSelectedException
 import ui.unq.edu.ar.season.model.SeasonAppModel
 import ui.unq.edu.ar.season.view.ConfirmDeleteSeasonDialog
 import ui.unq.edu.ar.season.view.ModifySeasonDialog
@@ -60,29 +61,40 @@ class SeasonWindow(owner: WindowOwner, serieAppModel: SerieAppModel) : SimpleWin
             Button(it) with {
                 text = "View Chapters"
                 onClick {
-                    ChaptersWindow(thisWindow, thisWindow.modelObject.selectedSeason!!
-                    ).open()
+                    if(thisWindow.modelObject.selectedSeason != null) {
+                        ChaptersWindow(
+                            thisWindow, thisWindow.modelObject.selectedSeason!!
+                        ).open()
+                    } else {
+                        throw NoSelectedException("Please, select an item from the list.")
+                    }
                 }
             }
 
             Button(it) with {
                 text = "Modify Season"
                 onClick {
-                    if (thisWindow.modelObject.selectedSeason != null)
+                    if (thisWindow.modelObject.selectedSeason != null) {
                         ModifySeasonDialog(
                             thisWindow,
                             SeasonAppModel(thisWindow.modelObject, thisWindow.modelObject.selectedSeason!!.model)
                         ).open()
+                    } else {
+                        throw NoSelectedException("Please, select an item from the list.")
+                    }
                 }
             }
 
             Button(it) with {
                 text = "Delete Season"
                 onClick {
-                    if (thisWindow.modelObject.selectedSeason != null)
+                    if (thisWindow.modelObject.selectedSeason != null) {
                         ConfirmDeleteSeasonDialog(
                             thisWindow, thisWindow.modelObject
                         ).open()
+                    } else {
+                        throw NoSelectedException("Please, select an item from the list.")
+                    }
                 }
             }
         }
