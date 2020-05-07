@@ -7,6 +7,7 @@ import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.windows.SimpleWindow
 import ui.unq.edu.ar.chapter.ChaptersWindow
 import ui.unq.edu.ar.chapter.model.ChapterAppModel
+import ui.unq.edu.ar.exceptions.NoNameException
 
 
 open class NewChapterDialog(owner: ChaptersWindow, chapterAppModel: ChapterAppModel) : Dialog<ChapterAppModel>(owner,chapterAppModel) {
@@ -33,7 +34,7 @@ open class NewChapterDialog(owner: ChaptersWindow, chapterAppModel: ChapterAppMo
                 align = "left"
             }
 
-            TextBox(it) with {
+            KeyWordTextArea(it) with {
                 width = 200
                 height = 70
                 bindTo("description")
@@ -71,14 +72,18 @@ open class NewChapterDialog(owner: ChaptersWindow, chapterAppModel: ChapterAppMo
             Panel(panel) with {
                 asHorizontal()
                 Button(it) with {
-                    caption = "Aceptar"
+                    caption = "Accept"
                     onClick {
-                        accept()
+                        if (thisWindow.modelObject.title != "") {
+                            accept()
+                        } else {
+                            NoNameException("Please, set a title.")
+                        }
                     }
                 }
 
                 Button(it) with {
-                    caption = "Cancelar"
+                    caption = "Cancel"
                     onClick {
                         close()
                     }

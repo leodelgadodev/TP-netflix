@@ -134,7 +134,7 @@ open class NewSerieDialog(owner: SeriesWindow, model: SerieAppModel) : Dialog<Se
                         if (thisWindow.modelObject.title != "") {
                             accept()
                         } else {
-                            throw NoNameException("Please, set a name.")
+                            throw NoNameException("Please, set a title.")
                         }
                 }
             }

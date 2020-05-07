@@ -13,9 +13,10 @@ open class NewSeasonDialog(owner: SeasonWindow, model: SeasonAppModel) : Dialog<
         Panel(mainPanel) with {
             asVertical()
             Label(it) with {
-                text = "Season Name:"
+                text = "Season Title:"
                 align = "left"
             }
+
             TextBox(it) with {
                 bindTo("nombre")
             }
@@ -29,14 +30,14 @@ open class NewSeasonDialog(owner: SeasonWindow, model: SeasonAppModel) : Dialog<
                 bindTo("poster")
             }
 
-            Label(mainPanel) with {
+            Label(it) with {
                 text = "Description:"
                 align = "left"
             }
 
             KeyWordTextArea(it) with {
-                width = 200
                 height = 75
+                width = 200
                 bindTo("descripcion")
             }
 
@@ -48,7 +49,7 @@ open class NewSeasonDialog(owner: SeasonWindow, model: SeasonAppModel) : Dialog<
                         if (thisWindow.modelObject.nombre != "") {
                             accept()
                         } else {
-                            throw NoNameException("Please, set a name.")
+                            throw NoNameException("Please, set a title.")
                         }
                     }
                 }

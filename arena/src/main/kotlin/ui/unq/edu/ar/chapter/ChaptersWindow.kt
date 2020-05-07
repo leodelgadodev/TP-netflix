@@ -9,6 +9,7 @@ import org.uqbar.arena.windows.WindowOwner
 import ui.unq.edu.ar.chapter.model.ChapterAppModel
 import ui.unq.edu.ar.chapter.view.ModifyChapterDialog
 import ui.unq.edu.ar.chapter.view.NewChapterDialog
+import ui.unq.edu.ar.exceptions.NoSelectedException
 import ui.unq.edu.ar.season.model.SeasonAppModel
 
 
@@ -20,9 +21,11 @@ class ChaptersWindow(owner: WindowOwner, model: SeasonAppModel) : SimpleWindow<S
 
     override fun createFormPanel(panel: Panel) {
 
-        Label(panel) with { bindTo("nombre"); alignLeft()}
-
-        Label(panel) with { text="Chapters:"}
+        Label(panel) with {
+            fontSize = 18
+            bindTo("nombre")
+            alignLeft()
+        }
 
         table<ChapterAppModel>(panel) {
             bindItemsTo("capitulos")
@@ -51,7 +54,7 @@ class ChaptersWindow(owner: WindowOwner, model: SeasonAppModel) : SimpleWindow<S
         Panel(panel) with {
             asHorizontal()
             Button(this) with {
-                caption = "Add new chapter"
+                caption = "New Chapter"
                 onClick {
                     NewChapterDialog(
                         thisWindow,
@@ -61,13 +64,15 @@ class ChaptersWindow(owner: WindowOwner, model: SeasonAppModel) : SimpleWindow<S
             }
 
             Button(this) with {
-                caption = "Modified Chapter"
+                caption = "Modify Chapter"
                 onClick {
                     if (thisWindow.modelObject.selectChapter != null) {
                         ModifyChapterDialog(
                             thisWindow,
                             ChapterAppModel(thisWindow.modelObject, thisWindow.modelObject.selectChapter!!.model)
                         ).open()
+                    } else {
+                        throw NoSelectedException("Please, select an item from the list.")
                     }
                 }
             }
