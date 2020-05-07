@@ -42,7 +42,7 @@ class UNQFlixAppModel {
         try{
             system.addSerie(serieAppModel.model!!)
         } catch (e : ExistsException) {
-            throw RepeatedNameException("\"${serieAppModel.title}\" already exists. Please, use another name.")
+            throw RepeatedNameException("\"${serieAppModel.model!!.title}\" already exists. Please, use another name.")
         }
 
         this.content.add(ContentAppModel(serieAppModel.model!!))
@@ -51,8 +51,13 @@ class UNQFlixAppModel {
     }
 
     fun modificarSerie(serieAppModel: SerieAppModel) {
-        eliminarSerie(serieAppModel.id)
-        newSerie(serieAppModel)
+        val ser = series.find { it.title == serieAppModel.title }
+        if ( ser == null || ser.id == serieAppModel.id) {
+            eliminarSerie(serieAppModel.id)
+            newSerie(serieAppModel)
+        } else {
+            throw RepeatedNameException("\"${serieAppModel.title}\" already exists. Please, use another name.")
+        }
     }
 
     fun eliminarSerie(id:String) {

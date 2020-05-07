@@ -58,13 +58,13 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
     }
 
     fun modificarSerie(title : String, poster : String, description : String, state : ContentState, categories : MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>) {
+        unqFlix.modificarSerie(this)
         model!!.title = title
         model!!.poster = poster
         model!!.description = description
         model!!.state = state
         model!!.categories = categories.map { it.model }.toMutableList()
         model!!.relatedContent = relatedContent.map { it.model }.toMutableList()
-        unqFlix.modificarSerie(this)
     }
 
     fun addCategory(selectedCategory: CategoryAppModel?) {
