@@ -1,9 +1,12 @@
 package ui.unq.edu.ar.season.model
 
 import domain.Chapter
+import domain.ExistsException
 import domain.Season
 import org.uqbar.commons.model.annotations.Observable
+import org.uqbar.commons.model.exceptions.UserException
 import ui.unq.edu.ar.chapter.model.ChapterAppModel
+import ui.unq.edu.ar.exceptions.RepeatedNameException
 import ui.unq.edu.ar.serie.model.SerieAppModel
 
 @Observable
@@ -61,9 +64,13 @@ class SeasonAppModel(serieAppModel: SerieAppModel, season: Season? = null) {
     }
 
     fun addChapter(chapterAppModel: ChapterAppModel) {
+    try {
         this.model!!.addChapter(chapterAppModel.model!!)
         this.capitulos.add(chapterAppModel)
         this.cantCapitulos++
+    } catch (e: ExistsException) {
+        throw RepeatedNameException("\"${chapterAppModel.title}\" already exists. Please, use another name.")
+    }
     }
 
     fun modifyChapter(chapterAppModel: ChapterAppModel){

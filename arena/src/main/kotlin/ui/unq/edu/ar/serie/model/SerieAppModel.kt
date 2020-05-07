@@ -3,6 +3,7 @@ package ui.unq.edu.ar.serie.model
 import domain.*
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
+import ui.unq.edu.ar.exceptions.RepeatedNameException
 import ui.unq.edu.ar.mainWindow.UNQFlixAppModel
 import ui.unq.edu.ar.season.model.SeasonAppModel
 
@@ -107,9 +108,13 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
     }
 
     fun newSeason(aSeasonAppModel: SeasonAppModel) {
-        this.model!!.addSeason(aSeasonAppModel.model!!)
-        this.seasons.add(aSeasonAppModel)
-        this.cantSeasons++
+        try {
+            this.model!!.addSeason(aSeasonAppModel.model!!)
+            this.seasons.add(aSeasonAppModel)
+            this.cantSeasons++
+        } catch(e: ExistsException) {
+            throw RepeatedNameException("\"${aSeasonAppModel.nombre}\" already exists. Please, use another name.")
+        }
     }
 
     fun modifySeason(aSeasonAppModel: SeasonAppModel) {

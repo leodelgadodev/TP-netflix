@@ -4,6 +4,7 @@ import data.getUNQFlix
 import domain.*
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
+import ui.unq.edu.ar.exceptions.RepeatedNameException
 import ui.unq.edu.ar.serie.model.CategoryAppModel
 import ui.unq.edu.ar.serie.model.ContentAppModel
 import ui.unq.edu.ar.serie.model.SerieAppModel
@@ -41,7 +42,7 @@ class UNQFlixAppModel {
         try{
             system.addSerie(serieAppModel.model!!)
         } catch (e : ExistsException) {
-            throw UserException(e.message)
+            throw RepeatedNameException("\"${serieAppModel.title}\" already exists. Please, use another name.")
         }
 
         this.content.add(ContentAppModel(serieAppModel.model!!))
