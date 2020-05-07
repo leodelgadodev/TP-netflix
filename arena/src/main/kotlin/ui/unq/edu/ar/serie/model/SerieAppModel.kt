@@ -118,11 +118,16 @@ class SerieAppModel(unqFlixAppModel: UNQFlixAppModel, serie: Serie? = null) {
     }
 
     fun modifySeason(aSeasonAppModel: SeasonAppModel) {
-        model!!.deleteSeason(aSeasonAppModel.id)
-        seasons.remove( seasons.find { it.id === aSeasonAppModel.id  } )
+        val sea = seasons.find { it.nombre == aSeasonAppModel.nombre }
+        if (sea == null || sea.id == aSeasonAppModel.id){
+            model!!.deleteSeason(aSeasonAppModel.id)
+            seasons.remove( seasons.find { it.id === aSeasonAppModel.id  } )
+            seasons.add(aSeasonAppModel)
+            model!!.addSeason(aSeasonAppModel.model!!)
+        } else {
+            throw RepeatedNameException("\"${aSeasonAppModel.nombre}\" already exists. Please, use another name.")
+        }
 
-        seasons.add(aSeasonAppModel)
-        model!!.addSeason(aSeasonAppModel.model!!)
     }
 
 }

@@ -52,15 +52,13 @@ class SeasonAppModel(serieAppModel: SerieAppModel, season: Season? = null) {
     }
 
     fun modifySeason(nombre: String, poster: String, descripcion: String) {
-        this.model!!.title = nombre
-        this.model!!.poster = poster
-        this.model!!.description = descripcion
-
         this.nombre = nombre
         this.descripcion = descripcion
         this.poster = poster
-
         serieAppModel.modifySeason(this)
+        this.model!!.title = nombre
+        this.model!!.poster = poster
+        this.model!!.description = descripcion
     }
 
     fun addChapter(chapterAppModel: ChapterAppModel) {
@@ -74,11 +72,16 @@ class SeasonAppModel(serieAppModel: SerieAppModel, season: Season? = null) {
     }
 
     fun modifyChapter(chapterAppModel: ChapterAppModel){
-        model!!.deleteChapter(chapterAppModel.id)
-        capitulos.remove(capitulos.find { it.id === chapterAppModel.id })
+        val char = capitulos.find { it.title == chapterAppModel.title}
+        if(char == null || char.id == chapterAppModel.id){
+            model!!.deleteChapter(chapterAppModel.id)
+            capitulos.remove(capitulos.find { it.id === chapterAppModel.id })
+            capitulos.add(chapterAppModel)
+            model!!.addChapter(chapterAppModel.model!!)
+        } else {
+            throw RepeatedNameException("\"${chapterAppModel.title}\" already exists. Please, use another name.")
+        }
 
-        capitulos.add(chapterAppModel)
-        model!!.addChapter(chapterAppModel.model!!)
 
     }
 

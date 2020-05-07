@@ -46,19 +46,17 @@ class ChapterAppModel (seasonAppModel: SeasonAppModel, chapter: Chapter? = null)
     }
 
     fun modifyChapter(title: String,description: String,duration: Int,thumbnail: String,video: String){
-        this.model!!.title = title
-        this.model!!.description = description
-        this.model!!.duration = duration
-        this.model!!.thumbnail = thumbnail
-        this.model!!.video = video
-
         this.title = title
         this.description = description
         this.duration = duration
         this.thumbnail = thumbnail
         this.video = video
-
         seasonModel.modifyChapter(this)
+        this.model!!.title = title
+        this.model!!.description = description
+        this.model!!.duration = duration
+        this.model!!.thumbnail = thumbnail
+        this.model!!.video = video
     }
 
 }
