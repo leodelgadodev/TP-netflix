@@ -1,11 +1,12 @@
-package ui.unq.edu.ar.season
+package ui.unq.edu.ar.season.view
 
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.Button
+import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
-import ui.unq.edu.ar.chapter.ChaptersWindow
+import ui.unq.edu.ar.chapter.view.ChaptersWindow
 import ui.unq.edu.ar.exceptions.NoSelectedException
 import ui.unq.edu.ar.season.model.SeasonAppModel
 import ui.unq.edu.ar.season.view.ConfirmDeleteSeasonDialog
@@ -19,6 +20,12 @@ class SeasonWindow(owner: WindowOwner, serieAppModel: SerieAppModel) : SimpleWin
 
     override fun createFormPanel(mainPanel: Panel) {
         title = "Seasons"
+
+        Label(mainPanel) with {
+            fontSize = 18
+            bindTo("title")
+            alignLeft()
+        }
             table<SeasonAppModel>(mainPanel) with {
                 visibleRows = 10
                 column {

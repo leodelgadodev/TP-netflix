@@ -7,10 +7,9 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
-import org.uqbar.commons.model.exceptions.UserException
 import ui.unq.edu.ar.exceptions.NoSelectedException
 import ui.unq.edu.ar.mainWindow.UNQFlixAppModel
-import ui.unq.edu.ar.season.SeasonWindow
+import ui.unq.edu.ar.season.view.SeasonWindow
 import ui.unq.edu.ar.serie.model.SerieAppModel
 
 class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : SimpleWindow<UNQFlixAppModel>(owner, unqFlixAppModel) {
@@ -20,6 +19,7 @@ class SeriesWindow (owner : WindowOwner, unqFlixAppModel: UNQFlixAppModel) : Sim
         title = "UNQFlix"
         Panel(mainPanel) with {
             asHorizontal()
+
             Label(it) with {
                 text = "Search: "
                 fontSize = 12

@@ -1,11 +1,8 @@
 package ui.unq.edu.ar.chapter.view
 
-import javafx.scene.layout.Pane
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.windows.Dialog
-import org.uqbar.arena.windows.SimpleWindow
-import ui.unq.edu.ar.chapter.ChaptersWindow
 import ui.unq.edu.ar.chapter.model.ChapterAppModel
 import ui.unq.edu.ar.exceptions.NoNameException
 

@@ -4,7 +4,6 @@ import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.windows.Dialog
 import ui.unq.edu.ar.exceptions.NoNameException
-import ui.unq.edu.ar.season.SeasonWindow
 import ui.unq.edu.ar.season.model.SeasonAppModel
 
 open class NewSeasonDialog(owner: SeasonWindow, model: SeasonAppModel) : Dialog<SeasonAppModel>(owner, model) {

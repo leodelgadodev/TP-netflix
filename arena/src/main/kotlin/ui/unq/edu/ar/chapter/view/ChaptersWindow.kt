@@ -1,4 +1,4 @@
-package ui.unq.edu.ar.chapter
+package ui.unq.edu.ar.chapter.view
 
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.Button
