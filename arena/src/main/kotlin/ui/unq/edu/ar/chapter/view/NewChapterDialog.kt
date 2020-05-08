@@ -74,7 +74,7 @@ open class NewChapterDialog(owner: ChaptersWindow, chapterAppModel: ChapterAppMo
                         if (thisWindow.modelObject.title != "") {
                             accept()
                         } else {
-                            NoNameException("Please, set a title.")
+                            throw NoNameException("Please, set a title.")
                         }
                     }
                 }
