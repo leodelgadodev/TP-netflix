@@ -1,12 +1,19 @@
-# Enunciado
+# TP 2
+
+___
+___
+___
+
+# TP 1
+## Enunciado
 
 https://github.com/unq-ui/material/blob/master/TPs/2020s1/TP1-Desktop.md
 
-# Ejemplos Componentes Arena-kotlin
+## Ejemplos Componentes Arena-kotlin
 
 https://github.com/unq-ui/arena-kotlin-extensions
 
-# Interfaz UNQFlix
+## Interfaz UNQFlix
 
 ```kotlin
 domain.UNQFlix
