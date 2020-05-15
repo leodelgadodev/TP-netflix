@@ -1,4 +1,10 @@
 # TP 2
+## Enunciado
+https://github.com/unq-ui/material/blob/master/TPs/2020s1/TP2-API.md
+
+## Javalin
+
+https://javalin.io/
 
 ___
 ___
