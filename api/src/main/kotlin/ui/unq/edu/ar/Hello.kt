@@ -10,4 +10,7 @@ fun main() {
     fun helloWorld(): String {
         return "asd"
     }
+    fun hola(){
+
+    }
 }
