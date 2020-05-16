@@ -13,4 +13,9 @@ fun main() {
     fun hola(){
 
     }
+    fun otraCosaDistinta(){
+
+    }
+
+
 }
