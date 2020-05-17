@@ -1,7 +1,8 @@
 package ui.unq.edu.ar
 
 import data.getUNQFlix
-import io.javalin.http.Context
+
+import domain.Available
 
 class UnqflixController {
 
@@ -28,6 +29,9 @@ class UnqflixController {
     }
 
     fun getBanners(ctx : Context){
+        val banners = unqFlix.banners.map { BannerMapper(it.id, it.title, it.description, it.poster, it.state::javaClass === Available()::javaClass) }
+
+        ctx.json(banners)
 
     }
 

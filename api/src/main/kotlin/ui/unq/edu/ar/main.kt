@@ -26,13 +26,13 @@ fun main() {
             path("lastSeen"){
                 post(unqflixController::postLastSeen)
             }
-            path("fav/{:contentId}"){
+            path("fav/:contentId"){
                 post(unqflixController::postFavById)
             }
         }
         path("content"){
             get(unqflixController::getContent)
-            path("{:contentId}"){
+            path(":contentId"){
                 get(unqflixController::getContentById)
             }
         }
@@ -40,7 +40,7 @@ fun main() {
             get(unqflixController::getBanners)
         }
 
-        path("search?text={text}"){
+        path("search?text=text"){
             get(unqflixController::search)
         }
     }

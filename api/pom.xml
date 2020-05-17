@@ -54,6 +54,11 @@
             <version>${slf4j.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.unq-ui</groupId>
             <artifactId>unqflix</artifactId>
             <version>1.2.0</version>
