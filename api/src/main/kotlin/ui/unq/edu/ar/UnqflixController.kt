@@ -1,9 +1,11 @@
 package ui.unq.edu.ar
 
+import data.getUNQFlix
 import io.javalin.http.Context
 
 class UnqflixController {
 
+    val unqFlix = getUNQFlix()
 
     fun register(ctx : Context){
 
