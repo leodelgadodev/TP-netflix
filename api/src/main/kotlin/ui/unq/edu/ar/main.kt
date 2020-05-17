@@ -1,8 +1,11 @@
 package ui.unq.edu.ar
 
+import domain.ExistsException
+import domain.NotFoundException
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
 import io.javalin.core.util.RouteOverviewPlugin
+import io.javalin.http.NotFoundResponse
 
 fun main() {
     val app = Javalin.create{
@@ -39,12 +42,8 @@ fun main() {
         path("banners"){
             get(unqflixController::getBanners)
         }
-
-        path("search?text=text"){
+        path("search"){
             get(unqflixController::search)
         }
     }
-
-
-
 }
