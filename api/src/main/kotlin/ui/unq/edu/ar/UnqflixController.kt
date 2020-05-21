@@ -34,7 +34,7 @@ class UnqflixController {
             unqFlix.addLastSeen("u_1", idMapper.id!!)
             ctx.json(mapOf("result" to "ok"))
         } catch (e : NotFoundException){
-            throw BadRequestResponse(e.message!!)
+            throw NotFoundResponse(e.message!!)
         }
 
     }
