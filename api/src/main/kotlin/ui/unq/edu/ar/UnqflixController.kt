@@ -40,8 +40,8 @@ class UnqflixController {
     }
 
     fun getContent(ctx : Context){
-        val movies = unqFlix.movies.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available()::javaClass) }
-        val serie = unqFlix.series.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available()::javaClass) }
+        val movies = unqFlix.movies.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available().javaClass) }
+        val serie = unqFlix.series.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available().javaClass) }
         val content : MutableList<ContentViewMapper> = mutableListOf()
         content.addAll(movies)
         content.addAll(serie)
@@ -50,7 +50,7 @@ class UnqflixController {
     }
 
     fun getBanners(ctx : Context){
-        val banners = unqFlix.banners.map { BannerViewMapper(it.id, it.title, it.description, it.poster, it.state::javaClass === Available()::javaClass) }
+        val banners = unqFlix.banners.map { ContentViewMapper(it.id, it.title, it.description, it.state.javaClass === Available().javaClass) }
         ctx.json(mapOf("Banners" to banners))
     }
 
