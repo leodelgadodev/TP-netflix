@@ -40,6 +40,12 @@ class UnqflixController {
     }
 
     fun getContent(ctx : Context){
+        val movies = unqFlix.movies.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available()::javaClass) }
+        val serie = unqFlix.series.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available()::javaClass) }
+        val content : MutableList<ContentViewMapper> = mutableListOf()
+        content.addAll(movies)
+        content.addAll(serie)
+        ctx.json(mapOf("content" to content))
 
     }
 
