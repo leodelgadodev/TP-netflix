@@ -3,28 +3,77 @@ package ui.unq.edu.ar
 import data.getUNQFlix
 import domain.*
 import domain.Available
+import io.javalin.http.BadRequestResponse
+import io.javalin.http.ConflictResponse
 import io.javalin.http.Context
 import io.javalin.http.NotFoundResponse
+import ui.unq.edu.ar.JWT.JWTAccessManager
+import ui.unq.edu.ar.JWT.TokenJWT
 import ui.unq.edu.ar.mappers.*
+import java.lang.NullPointerException
 
-class UnqflixController {
+class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
+    private val idGenerator = IdGenerator()
 
-    val unqFlix = getUNQFlix()
-    val idGenerator = IdGenerator()
-    init {
-        unqFlix.addUser(User(idGenerator.nextUserId(), "Nacho", "0", "image.png", "email@mail", "1234"))
+    fun register(ctx : Context) {
+        try {
+            val newUser = ctx.bodyValidator<UserRegisterMapper>()
+                    .check({
+                        it.name != null
+                        it.email != null
+                        it.password != null
+                        it.image != null
+                        it.creditCard != null
+                    }, "Request inválido: Faltan parámetros.")
+                    .get()
+
+            if (!emailExists(newUser.email!!)) {
+                val Id = idGenerator.nextUserId()
+                val user = User(Id, newUser.name!!, newUser.creditCard!!,
+                        newUser.image!!, newUser.email, newUser.password!!, mutableListOf(), mutableListOf())
+                unqFlix.addUser(user)
+                ctx.status(201)
+                ctx.json("OK.")
+            } else {
+                throw BadRequestResponse("Ya existe un usuario con el mail = ${newUser.email}.")
+            }
+        } catch(e: NullPointerException) {
+            throw BadRequestResponse("Request inválido: Faltan parámetros.")
+        }
     }
 
-    fun register(ctx : Context){
-
+    private fun emailExists(email: String): Boolean {
+        return unqFlix.users.map {
+            UserViewMapper(it.id, it.name, it.email, it.image)
+        }.toMutableList().any { it.email == email }
     }
 
-    fun login(ctx : Context){
+    fun login(ctx: Context) {
+        val loginUser = ctx.bodyValidator<UserLoginMapper>()
+                .check({
+                    true
+                    true
+                }, "Request inválido: Faltan parámetros.")
+                .get()
 
+        if(userExists(loginUser.email, loginUser.password)) {
+            ctx.json(tokenJWT.generateToken(loginUser))
+        } else NotFoundResponse("Wrong email or password.")
     }
 
-    fun getUser(ctx : Context){
+    private fun userExists(email: String, password: String): Boolean {
+        return unqFlix.users.map {
+            UserLoginMapper(it.email, it.password)
+        }.toMutableList().any {
+            it.email == email && it.password == password
+        }
+    }
 
+    fun getUser(ctx : Context) {
+        /*val userEmail = tokenJWT.validate(ctx.header("Authorization")!!)
+        return unqFlix.users.map {
+            UserViewMapper(it.id, it.name, it.email, it.image)
+        }.toMutableList().find { it.email == userEmail }!!*/
     }
 
     fun postLastSeen(ctx : Context){
