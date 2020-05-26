@@ -28,12 +28,12 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
                     .get()
 
             if (!emailExists(newUser.email!!)) {
-                val Id = idGenerator.nextUserId()
-                val user = User(Id, newUser.name!!, newUser.creditCard!!,
+                val id = idGenerator.nextUserId()
+                val user = User(id, newUser.name!!, newUser.creditCard!!,
                         newUser.image!!, newUser.email, newUser.password!!, mutableListOf(), mutableListOf())
                 unqFlix.addUser(user)
                 ctx.status(201)
-                ctx.json("OK.")
+                ctx.json(mapOf("result" to "ok"))
             } else {
                 throw BadRequestResponse("Ya existe un usuario con el mail = ${newUser.email}.")
             }
@@ -57,8 +57,12 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
                 .get()
 
         if(userExists(loginUser.email, loginUser.password)) {
-            ctx.json(tokenJWT.generateToken(loginUser))
-        } else NotFoundResponse("Wrong email or password.")
+            ctx.header("Authentication", tokenJWT.generateToken(loginUser))
+            ctx.json(mapOf("result" to "ok"))
+        } else {
+            ctx.status(404)
+            ctx.json(mapOf("result" to "error", "message" to "user not found"))
+        }
     }
 
     private fun userExists(email: String, password: String): Boolean {
