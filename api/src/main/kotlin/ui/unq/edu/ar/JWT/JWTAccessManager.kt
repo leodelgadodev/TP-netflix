@@ -15,15 +15,15 @@ import ui.unq.edu.ar.mappers.UserViewMapper
 
 class JWTAccessManager(val tokenJWT: TokenJWT, val unqFlix: UNQFlix): AccessManager {
 
-    fun getUser(token: String): UserViewMapper {
+    fun getUser(token: String){
+        var user: User?
         try {
-            val userEmail = tokenJWT.validate(token)
-            return unqFlix.users.map {
-                UserViewMapper(it.id, it.name, it.email, it.image)
-            }.toMutableList().find { it.id == userEmail }!!
+            val userId = tokenJWT.validate(token)
+            user  = unqFlix.users.firstOrNull { it.id == userId }
         } catch (e: TokenNotFoundException) {
             throw UnauthorizedResponse("Token not found")
-        } catch (e: NullPointerException) {
+        }
+        if (user === null){
             throw UnauthorizedResponse("Invalid Token")
         }
     }

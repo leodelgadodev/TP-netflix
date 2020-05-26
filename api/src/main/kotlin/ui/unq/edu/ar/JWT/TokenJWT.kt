@@ -11,7 +11,7 @@ import ui.unq.edu.ar.mappers.UserLoginMapper
 
 class UserGenerator : JWTGenerator<UserLoginMapper> {
     override fun generate(user: UserLoginMapper, algorithm: Algorithm): String {
-        val token = JWT.create().withClaim("email", user.email)
+        val token = JWT.create().withClaim("id", user.id)
         return token.sign(algorithm)
     }
 }
@@ -29,6 +29,6 @@ class TokenJWT {
     fun validate(token: String): String {
         val token = provider.validateToken(token)
         if (!token.isPresent) throw TokenNotFoundException()
-        return token.get().getClaim("email").asString()
+        return token.get().getClaim("id").asString()
     }
 }

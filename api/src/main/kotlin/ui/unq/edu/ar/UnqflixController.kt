@@ -1,13 +1,10 @@
 package ui.unq.edu.ar
 
-import data.getUNQFlix
 import domain.*
 import domain.Available
 import io.javalin.http.BadRequestResponse
-import io.javalin.http.ConflictResponse
 import io.javalin.http.Context
 import io.javalin.http.NotFoundResponse
-import ui.unq.edu.ar.JWT.JWTAccessManager
 import ui.unq.edu.ar.JWT.TokenJWT
 import ui.unq.edu.ar.mappers.*
 import java.lang.NullPointerException
@@ -32,6 +29,7 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
                 val user = User(id, newUser.name!!, newUser.creditCard!!,
                         newUser.image!!, newUser.email, newUser.password!!, mutableListOf(), mutableListOf())
                 unqFlix.addUser(user)
+                ctx.header("Authorization", tokenJWT.generateToken(UserLoginMapper(user.id, user.email, user.password)))
                 ctx.status(201)
                 ctx.json(mapOf("result" to "ok"))
             } else {
@@ -51,13 +49,15 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
     fun login(ctx: Context) {
         val loginUser = ctx.bodyValidator<UserLoginMapper>()
                 .check({
-                    true
-                    true
+                    it.email !== null
+                    it.password !== null
                 }, "Request inválido: Faltan parámetros.")
                 .get()
 
-        if(userExists(loginUser.email, loginUser.password)) {
-            ctx.header("Authentication", tokenJWT.generateToken(loginUser))
+        val user : User? = unqFlix.users.firstOrNull { it.email == loginUser.email && it.password == loginUser.password }
+        if(user !== null) {
+            loginUser.id = user.id
+            ctx.header("Authorization", tokenJWT.generateToken(loginUser))
             ctx.json(mapOf("result" to "ok"))
         } else {
             ctx.status(404)
@@ -66,9 +66,7 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
     }
 
     private fun userExists(email: String, password: String): Boolean {
-        return unqFlix.users.map {
-            UserLoginMapper(it.email, it.password)
-        }.toMutableList().any {
+        return unqFlix.users.any {
             it.email == email && it.password == password
         }
     }
@@ -81,9 +79,10 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
     }
 
     fun postLastSeen(ctx : Context){
+        val id : String = tokenJWT.validate(ctx.header("Authorization")!!)
         val idMapper : IdMapper = ctx.bodyValidator<IdMapper>().check({it.id !== null}).get()
         try {
-            unqFlix.addLastSeen("u_1", idMapper.id!!)
+            unqFlix.addLastSeen(id, idMapper.id!!)
             ctx.json(mapOf("result" to "ok"))
         } catch (e : NotFoundException){
             throw NotFoundResponse(e.message!!)
