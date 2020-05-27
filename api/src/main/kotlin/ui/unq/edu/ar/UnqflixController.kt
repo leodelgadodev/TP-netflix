@@ -142,10 +142,14 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
     }
 
     fun postFavById(ctx : Context){
-      /*  val idUser : String = tokenJWT.validate(ctx.header("Authorization")!!)
-        val contentId = ctx.pathParam("fav/:contentId")
-        val content = ctx.body()
-       */
+        val idUser : String = tokenJWT.validate(ctx.header("Authorization")!!)
+        val contentId = ctx.pathParam(":contentId")
+        try {
+            unqFlix.addOrDeleteFav(idUser,contentId)
+            ctx.json(mapOf("result" to "ok"))
+        } catch (e : NotFoundException){
+            throw NotFoundResponse(e.message!!)
+        }
     }
 
     fun search(ctx : Context){
