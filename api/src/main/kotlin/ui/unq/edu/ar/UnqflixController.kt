@@ -72,10 +72,13 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
     }
 
     fun getUser(ctx : Context) {
-        /*val userEmail = tokenJWT.validate(ctx.header("Authorization")!!)
-        return unqFlix.users.map {
-            UserViewMapper(it.id, it.name, it.email, it.image)
-        }.toMutableList().find { it.email == userEmail }!!*/
+        val idUser : String = tokenJWT.validate(ctx.header("Authorization")!!)
+        val user = unqFlix.users.find { it.id == idUser }
+        val favs = user!!.favorites.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available().javaClass ) }.toMutableList()
+        val lastSeen = user.lastSeen.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available().javaClass) }.toMutableList()
+
+        val userMapper = GetUserViewMapper(user.name,user.image,favs,lastSeen)
+        ctx.json(userMapper)
     }
 
     fun postLastSeen(ctx : Context){
@@ -87,7 +90,6 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
         } catch (e : NotFoundException){
             throw NotFoundResponse(e.message!!)
         }
-
     }
 
     fun getContent(ctx : Context){
@@ -97,7 +99,6 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
         content.addAll(movies)
         content.addAll(serie)
         ctx.json(mapOf("content" to content))
-
     }
 
     fun getBanners(ctx : Context){
@@ -141,7 +142,10 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
     }
 
     fun postFavById(ctx : Context){
-
+      /*  val idUser : String = tokenJWT.validate(ctx.header("Authorization")!!)
+        val contentId = ctx.pathParam("fav/:contentId")
+        val content = ctx.body()
+       */
     }
 
     fun search(ctx : Context){
