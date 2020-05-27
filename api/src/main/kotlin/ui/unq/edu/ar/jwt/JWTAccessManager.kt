@@ -1,16 +1,11 @@
-package ui.unq.edu.ar.JWT
+package ui.unq.edu.ar.jwt
 
 import domain.UNQFlix
 import domain.User
-import io.javalin.core.security.AccessManager
-import io.javalin.core.security.Role
-import io.javalin.http.Context
-import io.javalin.http.Handler
-import io.javalin.http.UnauthorizedResponse
+import io.javalin.core.security.*
+import io.javalin.http.*
 import ui.unq.edu.ar.Roles
 import ui.unq.edu.ar.excepciones.TokenNotFoundException
-import ui.unq.edu.ar.excepciones.UserNotFoundException
-import ui.unq.edu.ar.mappers.UserViewMapper
 
 
 class JWTAccessManager(val tokenJWT: TokenJWT, val unqFlix: UNQFlix): AccessManager {
@@ -29,7 +24,7 @@ class JWTAccessManager(val tokenJWT: TokenJWT, val unqFlix: UNQFlix): AccessMana
     }
 
     override fun manage(handler: Handler, ctx: Context, roles: MutableSet<Role>) {
-        val token = ctx.header("Authorization")
+        val token = ctx.header("Authentication")
         when {
             token == null && roles.contains(Roles.ANYONE) -> handler.handle(ctx)
             token == null -> throw UnauthorizedResponse("Token not found")

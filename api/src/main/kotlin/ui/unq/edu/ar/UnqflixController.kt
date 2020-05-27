@@ -2,10 +2,8 @@ package ui.unq.edu.ar
 
 import domain.*
 import domain.Available
-import io.javalin.http.BadRequestResponse
-import io.javalin.http.Context
-import io.javalin.http.NotFoundResponse
-import ui.unq.edu.ar.JWT.TokenJWT
+import io.javalin.http.*
+import ui.unq.edu.ar.jwt.TokenJWT
 import ui.unq.edu.ar.mappers.*
 import java.lang.NullPointerException
 
@@ -29,7 +27,7 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
                 val user = User(id, newUser.name!!, newUser.creditCard!!,
                         newUser.image!!, newUser.email, newUser.password!!, mutableListOf(), mutableListOf())
                 unqFlix.addUser(user)
-                ctx.header("Authorization", tokenJWT.generateToken(UserLoginMapper(user.id, user.email, user.password)))
+                ctx.header("Authentication", tokenJWT.generateToken(UserLoginMapper(user.id, user.email, user.password)))
                 ctx.status(201)
                 ctx.json(mapOf("result" to "ok"))
             } else {
@@ -57,7 +55,7 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
         val user : User? = unqFlix.users.firstOrNull { it.email == loginUser.email && it.password == loginUser.password }
         if(user !== null) {
             loginUser.id = user.id
-            ctx.header("Authorization", tokenJWT.generateToken(loginUser))
+            ctx.header("Authentication", tokenJWT.generateToken(loginUser))
             ctx.json(mapOf("result" to "ok"))
         } else {
             ctx.status(404)
@@ -66,7 +64,7 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
     }
 
     fun getUser(ctx : Context) {
-        val idUser : String = tokenJWT.validate(ctx.header("Authorization")!!)
+        val idUser : String = tokenJWT.validate(ctx.header("Authentication")!!)
         val user = unqFlix.users.find { it.id == idUser }
         val favs = user!!.favorites.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available().javaClass ) }.toMutableList()
         val lastSeen = user.lastSeen.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available().javaClass) }.toMutableList()
@@ -76,7 +74,7 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
     }
 
     fun postLastSeen(ctx : Context){
-        val id : String = tokenJWT.validate(ctx.header("Authorization")!!)
+        val id : String = tokenJWT.validate(ctx.header("Authentication")!!)
         val idMapper : IdMapper = ctx.bodyValidator<IdMapper>().check({it.id !== null}).get()
         try {
             unqFlix.addLastSeen(id, idMapper.id!!)
@@ -106,7 +104,7 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
 
         if (id.startsWith("mov")) return getMovieContent(ctx,id)
         if (id.startsWith("ser")) return getSerieContent(ctx,id)
-        else throw NotFoundResponse("No se ha encontrado contenido con el id = ${id}")
+        else throw NotFoundResponse("No se ha encontrado contenido con el id = $id")
     }
 
     private fun getSerieContent(ctx: Context,id: String) {
@@ -120,7 +118,7 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
 
             ctx.json(SerieViewMapper(serie.id, serie.title,serie.description,serie.poster,categories ,relatedContent, season as MutableList<SeasonViewMapper>))
         } else{
-            throw NotFoundResponse("No se ha encontrado la serie con el id = ${id}")
+            throw NotFoundResponse("No se ha encontrado la serie con el id = $id")
         }
     }
     private fun getMovieContent(ctx: Context,id: String) {
@@ -132,12 +130,12 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
             ctx.json(MovieViewMapper(movie.id,movie.title,movie.description,movie.poster,movie.video,movie.duration,movie.actors,movie.directors,categories,
                 relatedContent as MutableList<ContentViewMapper>))
         } else{
-            throw NotFoundResponse("No se ha encontrado la pelicula con el id = ${id}")
+            throw NotFoundResponse("No se ha encontrado la pelicula con el id = $id")
         }
     }
 
     fun postFavById(ctx : Context){
-        val idUser : String = tokenJWT.validate(ctx.header("Authorization")!!)
+        val idUser : String = tokenJWT.validate(ctx.header("Authentication")!!)
         val contentId = ctx.pathParam(":contentId")
         try {
             unqFlix.addOrDeleteFav(idUser,contentId)

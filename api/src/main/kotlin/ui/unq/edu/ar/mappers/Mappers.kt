@@ -4,8 +4,6 @@ class IdMapper (val id : String?) {}
 
 data class ContentViewMapper(val id: String, val title: String, val description : String, val state : Boolean)
 
-
-
 data class MovieViewMapper(
     val id: String, val title: String, val description: String, val poster: String, val video: String,
     val duration: Int, val actors: MutableList<String>, val directors: MutableList<String>,
@@ -21,8 +19,6 @@ data class SeasonViewMapper(val id: String, val title: String, val description: 
 
 data class ChapterViewMapper (val id: String, val title: String, val description: String, val duration: Int,
                               val video: String, val thumbnail: String)
-
-
 
 // UserMappers
 

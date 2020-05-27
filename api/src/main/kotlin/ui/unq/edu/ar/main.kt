@@ -1,16 +1,11 @@
 package ui.unq.edu.ar
 
 import data.getUNQFlix
-import domain.ExistsException
-import domain.IdGenerator
-import domain.NotFoundException
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
 import io.javalin.core.security.Role
 import io.javalin.core.util.RouteOverviewPlugin
-import io.javalin.http.NotFoundResponse
-import ui.unq.edu.ar.JWT.JWTAccessManager
-import ui.unq.edu.ar.JWT.TokenJWT
+import ui.unq.edu.ar.jwt.*
 
 fun main() {
     UnqflixAPI(7000).init()

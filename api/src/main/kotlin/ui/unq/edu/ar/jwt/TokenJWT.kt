@@ -1,10 +1,8 @@
-package ui.unq.edu.ar.JWT
+package ui.unq.edu.ar.jwt
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import domain.User
-import javalinjwt.JWTGenerator
-import javalinjwt.JWTProvider
+import javalinjwt.*
 import ui.unq.edu.ar.excepciones.TokenNotFoundException
 import ui.unq.edu.ar.mappers.UserLoginMapper
 
