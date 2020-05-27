@@ -65,12 +65,6 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
         }
     }
 
-    private fun userExists(email: String, password: String): Boolean {
-        return unqFlix.users.any {
-            it.email == email && it.password == password
-        }
-    }
-
     fun getUser(ctx : Context) {
         val idUser : String = tokenJWT.validate(ctx.header("Authorization")!!)
         val user = unqFlix.users.find { it.id == idUser }
@@ -98,6 +92,7 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
         val content : MutableList<ContentViewMapper> = mutableListOf()
         content.addAll(movies)
         content.addAll(serie)
+        content.sortWith(compareBy{it.title})
         ctx.json(mapOf("content" to content))
     }
 
@@ -107,7 +102,7 @@ class UnqflixController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
     }
 
     fun getContentById(ctx : Context){
-        var id = ctx.pathParam(":contentId")
+        val id = ctx.pathParam(":contentId")
 
         if (id.startsWith("mov")) return getMovieContent(ctx,id)
         if (id.startsWith("ser")) return getSerieContent(ctx,id)
