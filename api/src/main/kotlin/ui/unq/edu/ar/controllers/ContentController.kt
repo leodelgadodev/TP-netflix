@@ -55,16 +55,6 @@ class ContentController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
         }
     }
 
-    fun postFavById(ctx : Context){
-        val idUser : String = tokenJWT.validate(ctx.header("Authentication")!!)
-        val contentId = ctx.pathParam(":contentId")
-        try {
-            unqFlix.addOrDeleteFav(idUser,contentId)
-            ctx.json(mapOf("result" to "ok"))
-        } catch (e : NotFoundException){
-            throw NotFoundResponse(e.message!!)
-        }
-    }
 
     fun getBanners(ctx : Context){
         val banners = unqFlix.banners.map { ContentViewMapper(it.id, it.title, it.description, it.state.javaClass === Available().javaClass) }

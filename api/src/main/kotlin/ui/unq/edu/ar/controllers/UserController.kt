@@ -74,6 +74,17 @@ class UserController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
         ctx.json(userMapper)
     }
 
+    fun postFavById(ctx : Context){
+        val idUser : String = tokenJWT.validate(ctx.header("Authentication")!!)
+        val contentId = ctx.bodyValidator<IdMapper>().check({it.id !== null}).get()
+        try {
+            unqFlix.addOrDeleteFav(idUser, contentId.id!!)
+            ctx.json(mapOf("result" to "ok"))
+        } catch (e : NotFoundException){
+            throw NotFoundResponse(e.message!!)
+        }
+    }
+
     fun postLastSeen(ctx : Context){
         val id : String = tokenJWT.validate(ctx.header("Authentication")!!)
         val idMapper : IdMapper = ctx.bodyValidator<IdMapper>().check({it.id !== null}).get()

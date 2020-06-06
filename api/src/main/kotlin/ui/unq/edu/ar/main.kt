@@ -46,8 +46,8 @@ class UnqflixAPI(private val port: Int) {
                 path("lastSeen") {
                     post(userController::postLastSeen, mutableSetOf<Role>(Roles.USER))
                 }
-                path("fav/:contentId") {
-                    post(contentController::postFavById, mutableSetOf<Role>(Roles.USER))
+                path("fav") {
+                    post(userController::postFavById, mutableSetOf<Role>(Roles.USER))
                 }
             }
             path("content") {
