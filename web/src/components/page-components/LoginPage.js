@@ -1,8 +1,8 @@
 import React from 'react';
 import Login from '../Login';
-export default function LoginPageComponent(){
+export default function LoginPage(){
     return (
-        <div className="login-page-component">
+        <div className="login-page">
             <Login />
         </div>
     );

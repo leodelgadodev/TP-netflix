@@ -57,7 +57,7 @@ class Register extends React.Component{
                     </form>
                 </div>
                 <div className="btn-register" id="close-register">
-                    <u> <Link to="/"> back </Link> </u>
+                    <u> <Link to="/login"> back </Link> </u>
                 </div>
             </div>
         );

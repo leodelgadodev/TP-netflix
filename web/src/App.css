@@ -37,3 +37,45 @@
     padding-right: 20px;
     padding-top: 40px;
 }
+
+
+.navbar-logo{
+    padding-right: 20px;
+}
+
+.logo{
+    width: 30px; 
+    height: 30px; 
+}
+
+.search-svg{
+    width: 20px;
+    filter: opacity(.6);
+}
+
+.search-svg:hover{
+    filter: none;
+}
+
+.logout-btn{
+    padding-right: 20px;
+}
+
+.logout{
+    width: 30px;
+}
+
+#barra-navegacion{
+    background-color: gray;
+}
+
+.video-container{
+    padding: 20px;
+}
+
+.video-player{
+    width: 97%;
+    height: 85%;
+    position: absolute;
+
+}

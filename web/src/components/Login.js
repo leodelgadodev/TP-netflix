@@ -12,7 +12,6 @@ class Login extends React.Component{
     }
 
     login = () => {
-        
     }
     
     updatePassword = (event) => {
@@ -25,7 +24,7 @@ class Login extends React.Component{
     render(){
         return (
             <div className="container" id="login-container">
-                <img className="unqflix-logo" src= "https://pbs.twimg.com/profile_images/2241566105/Logo_Q_TWITER_400x400.jpg" alt= "Unflix logo"></img>
+                <img className="unqflix-logo" src= "https://pbs.twimg.com/profile_images/2241566105/Logo_Q_TWITER_400x400.jpg" alt= "Unflix logo" id="login-logo"></img>
                 <div className="login-form">
                     <form>
                         <div className="form-group">
