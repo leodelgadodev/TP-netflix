@@ -1,3 +1,15 @@
+# TP 3
+## Enunciado 
+https://github.com/unq-ui/material/blob/master/TPs/2020s1/TP3-Web.md
+
+## React
+https://es.reactjs.org/docs/getting-started.html
+https://reacttraining.com/react-router/
+https://github.com/axios/axios
+
+## Mockup
+https://www.figma.com/file/7KDzydk5XUvH2FifedxSRY/Unqflix-web?node-id=0%3A1
+
 # TP 2
 ## Enunciado
 https://github.com/unq-ui/material/blob/master/TPs/2020s1/TP2-API.md
