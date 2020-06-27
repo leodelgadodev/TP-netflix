@@ -28,6 +28,7 @@ class UserController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
                 val user = User(id, newUser.name!!, newUser.creditCard!!,
                         newUser.image!!, newUser.email, newUser.password!!, mutableListOf(), mutableListOf())
                 unqFlix.addUser(user)
+                print(user)
                 ctx.header("Authentication", tokenJWT.generateToken(UserLoginMapper(user.id, user.email, user.password)))
                 ctx.status(201)
                 ctx.json(mapOf("result" to "ok"))
