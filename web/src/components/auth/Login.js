@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {Link, useHistory, useLocation} from 'react-router-dom';
-import AuthService from '../../services/AuthService';
+import {AuthService} from '../../services/AuthService';
+import Swal from 'sweetalert2'
 
 function Login(props){
     
@@ -22,7 +23,7 @@ function Login(props){
             restore();
             history.replace(from);
         }).catch((err) => {
-            console.log(err.response);
+            Swal.fire(err.response.data.title);
         });
     }
     

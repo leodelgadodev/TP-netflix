@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {Link, useLocation, useHistory} from 'react-router-dom' 
-import AuthService from '../../services/AuthService';
+import {AuthService} from '../../services/AuthService';
+import Swal from 'sweetalert2'
 
 function Register(props) {
     
@@ -28,6 +29,8 @@ function Register(props) {
             props.auth(res.headers.authentication);
             restore();
             history.replace(from);
+        }).catch(err => {
+            Swal.fire(err.response.data.title);
         });
     }
 

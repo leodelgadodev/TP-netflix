@@ -1,17 +1,11 @@
 import React from 'react';
-import Register from '../Register';
-import ErrorAlert from '../ErrorAlert';
+import Register from '../auth/Register';
 export default function RegisterPage(props){
 
-    const error = (message) => {
-        console.log(message)
-        return <div><ErrorAlert message={message}></ErrorAlert></div>
-
-    }
 
     return (
         <div className="register-page">
-            <Register auth={props.auth} error={error}/>
+            <Register auth={props.auth} />
         </div>
     );
 }
