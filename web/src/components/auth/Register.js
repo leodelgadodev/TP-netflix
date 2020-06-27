@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {Link, useLocation, useHistory} from 'react-router-dom' 
-import api from '../Api'
+import AuthService from '../../services/AuthService';
 
-function Register(props){
+function Register(props) {
     
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
@@ -22,13 +22,12 @@ function Register(props){
         setImageLink(null);
         setPassword(null);
     }
+
     const registerOnClick = () => {
-        api.reg(name, email, password, imageLink, creditCard).then( res => {
+        AuthService.register(name, email, password, imageLink, creditCard).then( res => {
             props.auth(res.headers.authentication);
             restore();
             history.replace(from);
-        }).catch(err => {
-            props.error(err.response.data.title);
         });
     }
 

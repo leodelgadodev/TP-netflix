@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Link, useHistory, useLocation} from 'react-router-dom';
-import api from '../Api';
+import AuthService from '../../services/AuthService';
 
 function Login(props){
     
@@ -17,7 +17,7 @@ function Login(props){
     }
 
     const login = () => {
-        api.log(email, password).then((res) => {
+        AuthService.login(email, password).then((res) => {
             props.auth(res.headers.authentication);
             restore();
             history.replace(from);
