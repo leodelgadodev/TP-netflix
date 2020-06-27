@@ -14,13 +14,12 @@ function App(){
     setToken(token);
   };
 
-  
 
   return(
     <BrowserRouter>
       <Switch>
         <Route exact path="/register" render={() => <RegisterPage auth={authenticate} />}/>
-        <Route exact path="/login" render={() => <LoginPage auth={authenticate}/>}/>
+        <Route exact path="/login" render={() => <LoginPage auth={authenticate} />}/>
         <Route exact path="/search" render={() => <SearchPage token={token} />} />
         <Route exact path="/" render={() => <HomePage token={token}/>} /> 
       </Switch>

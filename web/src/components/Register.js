@@ -28,7 +28,6 @@ function Register(props){
             restore();
             history.replace(from);
         }).catch(err => {
-            console.log(err.response)
             props.error(err.response.data.title);
         });
     }
@@ -50,11 +49,12 @@ function Register(props){
         setCreditCard(event.target.value)
     }
     
+
     return(
         <div className="container" id="register-container">
             <div className= "register-form">
                 <div className="form-group"> 
-                    <input type="email" className="form-control" onChange= {updateEmail} placeholder="Email..."/>
+                    <input type="email" className="form-control"  onChange= {updateEmail} placeholder="Email..."/>
                 </div>
                 <div className="form-group"> 
                     <input type="text" className="form-control" onChange= {updateName} placeholder="Name..."/>
@@ -63,10 +63,10 @@ function Register(props){
                     <input type="password" className="form-control" onChange= {updatePassword} placeholder="Password..."/>
                 </div>
                 <div className="form-group"> 
-                    <input type="url" className="form-control" onChange= {updateImageLink} placeholder="Image Link..."/>
+                    <input type="url" className="form-control"  onChange= {updateImageLink} placeholder="Image Link..."/>
                 </div>
                 <div className="form-group"> 
-                    <input type="text" className="form-control" onChange= {updateCC} placeholder="Credit Card..."/>
+                    <input type="number" className="form-control"  onChange= {updateCC} placeholder="Credit Card..."/>
                 </div>
                 <button type="submit" className="btn btn-primary" id="register" onClick={registerOnClick}>Register</button>
             </div>

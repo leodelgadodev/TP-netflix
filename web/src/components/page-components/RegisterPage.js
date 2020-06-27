@@ -1,13 +1,12 @@
 import React from 'react';
 import Register from '../Register';
+import ErrorAlert from '../ErrorAlert';
 export default function RegisterPage(props){
 
     const error = (message) => {
-        return (
-            <div className="alert alert-danger" role="alert">
-                <h1>hola</h1>
-            </div>
-        );
+        console.log(message)
+        return <div><ErrorAlert message={message}></ErrorAlert></div>
+
     }
 
     return (
