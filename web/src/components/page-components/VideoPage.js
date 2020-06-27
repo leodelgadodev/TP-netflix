@@ -6,7 +6,7 @@ export default function VideoPage({media}){
         <div className= "video-page">
             <Header />
             <div className="video-container">
-                <iframe className="video-player" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+                <iframe className="video-player" title="a" src={media.video} frameBorder="0" allowFullScreen />
             </div>
         </div>
     );

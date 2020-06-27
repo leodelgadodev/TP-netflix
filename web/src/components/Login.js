@@ -1,49 +1,57 @@
-import React from 'react';
-import {Link} from 'react-router-dom' 
+import React, { useState } from 'react';
+import {Link, useHistory, useLocation} from 'react-router-dom';
+import api from '../Api';
 
-class Login extends React.Component{
-    constructor(props){
-        super(props);
-        this.props = props;
-        this.state = {
-            password: "",
-            user: "",
-        }
+function Login(props){
+    
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+
+    let history = useHistory();
+    let location = useLocation();
+    let { from } = location.state || { from: { pathname: "/" } };
+
+    const restore = () => {
+        setEmail(null);
+        setPassword(null);
     }
 
-    login = () => {
+    const login = () => {
+        api.log(email, password).then((res) => {
+            props.auth(res.headers.authentication);
+            restore();
+            history.replace(from);
+        }).catch((err) => {
+            console.log(err.response);
+        });
     }
     
-    updatePassword = (event) => {
-        this.setState({password: event.target.value});
+    const updatePassword = (event) => {
+        setPassword(event.target.value);
     }
-    updateUser = (event) => {
-        this.setState({user: event.target.value})
+    const updateEmail = (event) => {
+        setEmail(event.target.value);
     }
 
-    render(){
-        return (
-            <div className="container" id="login-container">
-                <img className="unqflix-logo" src= "https://pbs.twimg.com/profile_images/2241566105/Logo_Q_TWITER_400x400.jpg" alt= "Unflix logo" id="login-logo"></img>
-                <div className="login-form">
-                    <form>
-                        <div className="form-group">
-                            <label>User</label>
-                            <input type="text" className="form-control" value={this.state.user} onChange= {this.updateUser}/>
-                        </div>
-                        <div className="form-group">
-                            <label>Password</label>
-                            <input type="password" className="form-control" value={this.state.password} onChange={this.updatePassword}/>
-                        </div>
-                        <button type="submit" className="btn btn-primary" id="login" onClick={this.login}>Login</button>
-                    </form>
+    return (
+        <div className="container" id="login-container">
+            <img className="unqflix-logo" src= "logounq.jpg" alt= "Unflix logo" id="login-logo"></img>
+            <div className="login-form">
+                <div className="form-group">
+                    <label>Email</label>
+                    <input type="email" className="form-control" onChange= {updateEmail}/>
                 </div>
-                <div className="btn-register" id="open-register">
-                    <u><Link to="/register">Register </Link></u>
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password" className="form-control" onChange={updatePassword}/>
                 </div>
+                <button type="submit" className="btn btn-primary" id="login" onClick={login}>Login</button>
             </div>
-        );
-    }
+            <div className="btn-register" id="open-register">
+                <u onClick={restore}><Link to="/register">Register </Link></u>
+            </div>
+        </div>
+    );
 }
 
 export default Login;

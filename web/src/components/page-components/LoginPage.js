@@ -1,9 +1,9 @@
 import React from 'react';
 import Login from '../Login';
-export default function LoginPage(){
+export default function LoginPage(props){
     return (
         <div className="login-page">
-            <Login />
+            <Login auth={props.auth}/>
         </div>
     );
 }
