@@ -32,6 +32,9 @@ class UnqflixAPI(private val port: Int) {
             it.enableCorsForAllOrigins()
             it.accessManager(jwtAccessManager)
         }
+        app.before {
+            it.header("Access-Control-Expose-Headers", "*")
+        }
         app.start(port)
 
         app.routes {
