@@ -5,11 +5,11 @@ import Swal from 'sweetalert2'
 
 function Register(props) {
     
-    const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
-    const [name, setName] = useState(null);
-    const [imageLink, setImageLink] = useState(null);
-    const [creditCard, setCreditCard] = useState(null);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+    const [imageLink, setImageLink] = useState("");
+    const [creditCard, setCreditCard] = useState("");
 
 
     let history = useHistory();
@@ -17,11 +17,11 @@ function Register(props) {
     let { from } = location.state || { from: { pathname: "/" } };
 
     const restore = () => {
-        setCreditCard(null);
-        setEmail(null);
-        setName(null);
-        setImageLink(null);
-        setPassword(null);
+        setCreditCard("");
+        setEmail("");
+        setName("");
+        setImageLink("");
+        setPassword("");
     }
 
     const registerOnClick = () => {
@@ -30,7 +30,19 @@ function Register(props) {
             restore();
             history.replace(from);
         }).catch(err => {
-            Swal.fire(err.response.data.title);
+            if(err.response.status === 409){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: err.response.data.title,
+                })
+            } else if (err.response.status === 400) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: "Faltan parametros",
+                })
+            }
         });
     }
 
@@ -56,7 +68,7 @@ function Register(props) {
         <div className="container" id="register-container">
             <div className= "register-form">
                 <div className="form-group"> 
-                    <input type="email" className="form-control"  onChange= {updateEmail} placeholder="Email..."/>
+                    <input type="email" className="form-control" onChange= {updateEmail} placeholder="Email..."/>
                 </div>
                 <div className="form-group"> 
                     <input type="text" className="form-control" onChange= {updateName} placeholder="Name..."/>
@@ -65,10 +77,10 @@ function Register(props) {
                     <input type="password" className="form-control" onChange= {updatePassword} placeholder="Password..."/>
                 </div>
                 <div className="form-group"> 
-                    <input type="url" className="form-control"  onChange= {updateImageLink} placeholder="Image Link..."/>
+                    <input type="url" className="form-control" onChange= {updateImageLink} placeholder="Image Link..."/>
                 </div>
                 <div className="form-group"> 
-                    <input type="number" className="form-control"  onChange= {updateCC} placeholder="Credit Card..."/>
+                    <input type="number" className="form-control" onChange= {updateCC} placeholder="Credit Card..."/>
                 </div>
                 <button type="submit" className="btn btn-primary" id="register" onClick={registerOnClick}>Register</button>
             </div>

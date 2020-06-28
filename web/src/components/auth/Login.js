@@ -23,7 +23,19 @@ function Login(props){
             restore();
             history.replace(from);
         }).catch((err) => {
-            Swal.fire(err.response.data.title);
+            if(err.response.status === 404){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "Email o contraseña invalidos ",
+                })
+            } else if (err.response.status === 400) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: "Faltan parametros",
+                })
+            }
         });
     }
     
