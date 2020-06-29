@@ -48,7 +48,7 @@ function Login(props){
 
     return (
         <div className="container" id="login-container">
-            <img className="unqflix-logo" src= "logounq.jpg" alt= "Unflix logo" id="login-logo"></img>
+            <img className="unqflix-logo" src= "unqflix-logo.png" alt= "Unflix logo" id="login-logo"></img>
             <div className="login-form">
                 <div className="form-group">
                     <label>Email</label>

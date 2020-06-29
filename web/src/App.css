@@ -77,5 +77,10 @@
     width: 97%;
     height: 85%;
     position: absolute;
+}
 
+.unqflix-logo {
+    background-color: #b90e0e;
+    transform: scale(2,2);
+    padding: 0 2em;
 }

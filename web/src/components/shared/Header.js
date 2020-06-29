@@ -10,7 +10,7 @@ export default function Header() {
             <nav className="navbar" id="barra-navegacion">
                 <div className="navbar-logo" >
                     <Link to="/">
-                        <img className="logo" src="logounq.jpg" alt="unqflix logo"/>
+                        <img className="logo" src="unqflix-logo.png" alt="unqflix logo"/>
                     </Link>
                 </div>
                 <SearchBar />
