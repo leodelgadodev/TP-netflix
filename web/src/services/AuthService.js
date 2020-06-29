@@ -3,12 +3,16 @@ axios.defaults.baseURL = 'http://localhost:7000';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export const AuthService = {
-    
+
     register: (name, email, password, image, creditCard) =>  {
         return axios.post("/register", {name, email, password, image, creditCard}, {})
     },
     
     login: (email, password) => {
         return axios.post("/login", {email, password})
+    },
+
+    isAuthenticated: (token) => {
+        return token !== "" || token !== null || token !== undefined;
     }
 }

@@ -3,7 +3,7 @@ import {Link, useHistory, useLocation} from 'react-router-dom';
 import {AuthService} from '../../services/AuthService';
 import Swal from 'sweetalert2'
 
-function Login(props){
+function Login(props) {
     
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
@@ -19,6 +19,7 @@ function Login(props){
 
     const login = () => {
         AuthService.login(email, password).then((res) => {
+            {/* eslint-disable-next-line react/prop-types */}
             props.auth(res.headers.authentication);
             restore();
             history.replace(from);
@@ -27,13 +28,13 @@ function Login(props){
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: "Email o contraseña invalidos ",
+                    text: "Email o contraseña inválidos.",
                 })
             } else if (err.response.status === 400) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
-                    text: "Faltan parametros",
+                    text: "Por favor, complete todos los campos.",
                 })
             }
         });
@@ -52,7 +53,7 @@ function Login(props){
             <div className="login-form">
                 <div className="form-group">
                     <label>Email</label>
-                    <input type="email" className="form-control" onChange= {updateEmail}/>
+                    <input type="email" className="form-control" onChange={updateEmail}/>
                 </div>
                 <div className="form-group">
                     <label>Password</label>

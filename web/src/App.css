@@ -1,3 +1,9 @@
+:root {
+    --bg-grey: #242424;
+    --bg-darkgrey: #1a1a1a;
+    --bg-red: #b90e0e;
+}
+
 .container{    
     box-shadow: 2px 2px 5px 5px rgba(0.2, 0.2, 0.3, 0.3);
     background-color: snow;
@@ -8,11 +14,14 @@
     position: static;    
 }
 
-.unqflix-logo{
+.unqflix-logo {
     margin-top: 20px;
     margin-left: 120px;
     padding: 10px;
     width: 100px;
+    background-color: var(--bg-red);
+    transform: scale(2,2);
+    padding: 0 2em;
     
 }
 
@@ -77,10 +86,4 @@
     width: 97%;
     height: 85%;
     position: absolute;
-}
-
-.unqflix-logo {
-    background-color: #b90e0e;
-    transform: scale(2,2);
-    padding: 0 2em;
 }

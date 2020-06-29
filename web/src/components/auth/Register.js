@@ -3,7 +3,7 @@ import {Link, useLocation, useHistory} from 'react-router-dom'
 import {AuthService} from '../../services/AuthService';
 import Swal from 'sweetalert2'
 
-function Register(props) {
+export default function Register(props) {
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -26,6 +26,7 @@ function Register(props) {
 
     const registerOnClick = () => {
         AuthService.register(name, email, password, imageLink, creditCard).then( res => {
+            {/* eslint-disable-next-line react/prop-types */}
             props.auth(res.headers.authentication);
             restore();
             history.replace(from);
@@ -40,7 +41,7 @@ function Register(props) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
-                    text: "Faltan parametros",
+                    text: "El usuario ya existe!",
                 })
             }
         });
@@ -90,5 +91,3 @@ function Register(props) {
         </div>
     );
 }
-
-export default Register;
