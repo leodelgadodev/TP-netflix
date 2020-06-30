@@ -1,23 +1,20 @@
 import React from 'react';
-import Header from '../Header';
-import { Redirect } from 'react-router-dom';
-import { AuthService } from '../../services/AuthService';
+import Header from '../shared/Header';
+import Video from '../media/Video';
+import { useParams } from 'react-router-dom';
+import { MediaService } from '../../services/MediaService';
 
-export default function VideoPage(props){
-    if (AuthService.isAuthenticated(props.token)) {
-        console.log("no hay token :(")
+export default function VideoPage(){
+
+    const {id} = useParams();
+    MediaService.getContent(id).then(res => {
         return (
-            <Redirect to={{
-                pathname: "/login"
-            }}/>
-        );
-    }
-    return (
-        <div className= "video-page">
-            <Header />
-            <div className="video-container">
-                <iframe className="video-player" title={props.media.title} src={props.media.video} frameBorder="0" allowFullScreen />
+            <div className= "video-page">
+                <Header />
+                <Video media={res.data}/>
             </div>
-        </div>
-    );
+        );
+    }).catch(err => {
+        return(<h1> 404 NOT FOUND</h1>)
+    });
 }

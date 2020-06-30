@@ -4,6 +4,9 @@ import SearchBar from './SearchBar';
 
 export default function Header() {
 
+    const singOut = () => {
+        window.sessionStorage.accessToken = "";
+    }
 
     return (
         <div className="header-container">
@@ -15,7 +18,7 @@ export default function Header() {
                 </div>
                 <SearchBar />
                 <div className="logout-btn">
-                    <Link to="/login">
+                    <Link to="/login" onClick={singOut}>
                         <img className="logout" src="enlace-muerto.svg" alt="logout"/>
                     </Link>
                 </div>

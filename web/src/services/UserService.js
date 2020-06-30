@@ -3,18 +3,21 @@ axios.defaults.baseURL = 'http://localhost:7000';
 axios.defaults.headers.get['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
+const token = window.sessionStorage.accessToken;
+
+
 export const MediaService = {
 
     getUser: () => {
-        axios.get("/user")
+        axios.get("/user", {headers: {Authentication: token}})
     },
     
     addFavorite: (contentId) =>  {
-        return axios.post(`/user/fav/${contentId}`)
+        return axios.post(`/user/fav/${contentId}`, {headers: {Authentication: token}})
     },
 
     addLastSeen: (contentId) => {
-        return axios.post(`/user/lastSeen`, {contentId})
+        return axios.post(`/user/lastSeen`, {contentId}, {headers: {Authentication: token}})
     },
     
 
