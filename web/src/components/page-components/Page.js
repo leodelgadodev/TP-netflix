@@ -4,8 +4,9 @@ import { AuthService } from "../../services/AuthService";
 
 export default function Page(props) {
     const Component = props.component
-    const token = AuthService.token
-    if (token) {
+    const token = AuthService.token();
+    console.log(token)
+    if (!token) {
         console.log("no hay token :(")
         return (
             
