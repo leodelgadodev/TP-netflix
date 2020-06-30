@@ -12,7 +12,11 @@ export const AuthService = {
         return axios.post("/login", {email, password})
     },
 
-    isAuthenticated: (token) => {
-        return token !== "" || token !== null || token !== undefined;
+    token: () => {
+        return window.sessionStorage.accessToken;
+    },
+
+    authenticate: (responseToken) => {
+        window.sessionStorage.accessToken = responseToken;
     }
 }

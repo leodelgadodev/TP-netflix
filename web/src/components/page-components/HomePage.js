@@ -1,8 +1,8 @@
 import React from 'react';
-export default function LoginPage(token) {
+export default function HomePage(props) {
         return (
             <div className="home-page">
-                {token}
+
             </div>
         );
     

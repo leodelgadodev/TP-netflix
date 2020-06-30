@@ -3,7 +3,7 @@ import {Link, useLocation, useHistory} from 'react-router-dom'
 import {AuthService} from '../../services/AuthService';
 import Swal from 'sweetalert2'
 
-export default function Register(props) {
+export default function Register() {
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -27,7 +27,7 @@ export default function Register(props) {
     const registerOnClick = () => {
         AuthService.register(name, email, password, imageLink, creditCard).then( res => {
             {/* eslint-disable-next-line react/prop-types */}
-            props.auth(res.headers.authentication);
+            AuthService.authenticate(res.headers.authentication);
             restore();
             history.replace(from);
         }).catch(err => {

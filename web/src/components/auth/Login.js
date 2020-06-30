@@ -3,7 +3,7 @@ import {Link, useHistory, useLocation} from 'react-router-dom';
 import {AuthService} from '../../services/AuthService';
 import Swal from 'sweetalert2'
 
-function Login(props) {
+function Login() {
     
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
@@ -20,7 +20,7 @@ function Login(props) {
     const login = () => {
         AuthService.login(email, password).then((res) => {
             {/* eslint-disable-next-line react/prop-types */}
-            props.auth(res.headers.authentication);
+            AuthService.authenticate(res.headers.authentication);
             restore();
             history.replace(from);
         }).catch((err) => {
