@@ -5,5 +5,5 @@ export default function HomePage(props) {
 
             </div>
         );
-    
+    }
 }

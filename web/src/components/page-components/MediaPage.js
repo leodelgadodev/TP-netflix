@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function MediaPage(token) {
+export default function MediaPage(props) {
     return (
         <div className="home-page">
-            {token}
+            {props.token}
         </div>
     );
 }

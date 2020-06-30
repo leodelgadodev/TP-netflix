@@ -10,7 +10,6 @@ export default function SearchPage(props){
     //estaba probando si funcaba att: Nacho :D
     const query = useQuery();
     return(<div>{query.get("content")}</div>);
-
     
 }
 

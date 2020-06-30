@@ -22,6 +22,7 @@ function Login() {
             {/* eslint-disable-next-line react/prop-types */}
             AuthService.authenticate(res.headers.authentication);
             restore();
+            console.log(res.headers.authentication);
             history.replace(from);
         }).catch((err) => {
             if(err.response.status === 404){
