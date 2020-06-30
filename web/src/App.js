@@ -18,12 +18,12 @@ function App() {
   return(
     <BrowserRouter>
       <Switch>
-        {/* <Route exact path="/search" render={() => <SearchPage token={token} />} />
-        <Route exact path="/" render={() => <HomePage token={token}/>} />  */}
+        {/* <Route exact path="/search" render={() => <SearchPage token={token}/>} /> */}
+        <Route exact path="/" render={() => <HomePage token={token}/>} /> 
         <Route exact path="/register" render={() => <RegisterPage auth={authenticate}/>}/>
         <Route exact path="/login" render={() => <LoginPage auth={authenticate}/>}/>
-        <Route exact path="/search" render={() => <Page token={token} component={<SearchPage/>}/>}/>
-        <Route exact path="/" render={() => <Page token={token.toString()} component={<HomePage/>}/>}/>
+        {/* <Route exact path="/search" render={() => <Page token={token} component={<SearchPage/>}/>}/>
+        <Route exact path="/" render={() => <Page token={token.toString()} component={<HomePage/>}/>}/> */}
       </Switch>
     </BrowserRouter> 
   );
