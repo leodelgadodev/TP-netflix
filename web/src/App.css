@@ -131,3 +131,20 @@ a:hover {
     color: white !important;
     text-decoration: none;
 }
+
+/* ############ HOMEPAGE ########### */
+
+.media-poster-img {
+    width: 100px;
+    height: 150px;
+}
+
+.media-carousel {
+    margin: 1.4em 0;
+}
+
+h2 {
+    color: white;
+    margin-left: 1em;
+    font-weight: bolder;
+}

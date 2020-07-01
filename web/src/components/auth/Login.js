@@ -17,7 +17,8 @@ function Login() {
         setPassword(null);
     }
 
-    const login = () => {
+    const login = (event) => {
+        event.preventDefault();
         AuthService.login(email, password).then((res) => {
             {/* eslint-disable-next-line react/prop-types */}
             AuthService.authenticate(res.headers.authentication);
@@ -53,7 +54,7 @@ function Login() {
             <div className="modal-header">
                 <img className="unqflix-logo-modal" src= "unqflix-logo.png" alt= "Unflix logo" id="login-logo"></img>
             </div>
-            <div className="login-form">
+            <form className="login-form">
                 <div className="form-item">
                     <input type="email" className="form-control" onChange={updateEmail} placeholder="Ingrese su Email"/>
                 </div>
@@ -70,7 +71,7 @@ function Login() {
                         </span>
                     </Link>
                 </div>
-            </div>
+            </form>
         </div>
     );
 }

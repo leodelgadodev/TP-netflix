@@ -24,7 +24,8 @@ export default function Register() {
         setPassword("");
     }
 
-    const registerOnClick = () => {
+    const registerOnClick = (event) => {
+        event.preventDefault();
         AuthService.register(name, email, password, imageLink, creditCard).then( res => {
             {/* eslint-disable-next-line react/prop-types */}
             AuthService.authenticate(res.headers.authentication);
@@ -70,7 +71,7 @@ export default function Register() {
             <div className="modal-header">
                 <img className="unqflix-logo-modal" src= "unqflix-logo.png" alt= "Unflix logo" id="login-logo"></img>
             </div>
-            <div className= "register-form">
+            <form className= "register-form">
 
                 <div className="form-item"> 
                     <input type="email" className="form-control" onChange= {updateEmail} placeholder="Email..."/>
@@ -103,7 +104,7 @@ export default function Register() {
                         </span>
                     </Link>
                 </div>
-            </div>
+            </form>
         </div>
     );
 }

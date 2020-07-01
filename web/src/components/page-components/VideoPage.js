@@ -4,21 +4,12 @@ import Video from '../media/Video';
 import { useParams } from 'react-router-dom';
 import { MediaService } from '../../services/MediaService';
 
-export default function VideoPage(){
-
-    const [media, setMedia] = useState(null);
-    const {id} = useParams();
-    useEffect(() => { 
-        MediaService.getContent(id).then(res => {
-            setMedia(res.data)
-        }).catch(() => null)
-        
-    },[]);
+export default function VideoPage(props){
 
     return (
         <div className= "video-page">
             <Header />
-            <Video media={media}/>
+            <Video media={props.media}/>
         </div>
     );
 }
