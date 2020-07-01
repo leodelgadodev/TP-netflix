@@ -1,46 +1,8 @@
-.container{    
-    box-shadow: 2px 2px 5px 5px rgba(0.2, 0.2, 0.3, 0.3);
-    background-color: snow;
-    margin-top: 100px;
-    margin-left: 100px;
-    width: 370px;
-    height: 450px;
-    position: static;    
-}
-
-.unqflix-logo{
-    margin-top: 20px;
-    margin-left: 120px;
-    padding: 10px;
-    width: 100px;
-    
-}
-
-.btn-register{
-    cursor: pointer;
-    width: 20px;
-    padding-top: 30px;
-    padding-left: 12px;
-    filter: opacity(.6);
-}
-.btn-register:hover{
-    filter: none;
-}
-
-.login-form{
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.register-form{
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 40px;
-}
-
-
-.navbar-logo{
-    padding-right: 20px;
+:root {
+    --bg-grey: #242424;
+    --bg-darkgrey: #1a1a1a;
+    --bg-red: #b90e0e;
+    --bg-lightred: #dd1414;
 }
 
 .logo{
@@ -65,10 +27,6 @@
     width: 30px;
 }
 
-#barra-navegacion{
-    background-color: gray;
-}
-
 .video-container{
     padding: 20px;
 }
@@ -77,5 +35,98 @@
     width: 97%;
     height: 85%;
     position: absolute;
+}
 
+/* ############ RESPONSIVE ######### */
+@media only screen and (max-width: 600px) {
+    .header {
+        /* TODO Evitar que se rompa el Header con resoluciones más pequeñas */
+    }
+  }
+
+/* ############ HEADER ########### */
+
+.header {
+    background-color: var(--bg-red);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.unqflix-logo {
+    width: 100px;
+    background-color: var(--bg-red);
+}
+
+.unqflix-logo:hover {
+    background-color: var(--bg-lightred);
+}
+
+.btn-logout {
+    font-weight: bolder;
+    font-size: 18px;
+    margin-right: 1em;
+}
+
+
+/* ############ LOGIN / REGISTER ########### */
+
+.unqflix-logo-modal {
+    width: 100px;
+    background-color: var(--bg-red);
+}
+
+.modal-header {
+    width: 100%;
+    background-color: var(--bg-red);
+    margin-bottom: 3em;
+    border: 0;
+}
+
+.form-item {
+    margin: 1em 0;
+    display: flex;
+    justify-content: center;
+
+}
+
+.auth-container {    
+    background-color: var(--bg-grey);
+    width: 370px;
+    height: 500px;
+
+}
+
+.login-page, .register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+}
+
+.login-form, .register-form {
+    padding: 0 20px;
+}
+
+.btn-primary {
+    background-color: var(--bg-red) !important;
+    border: 0;
+}
+
+.btn-primary:hover {
+    background-color: var(--bg-lightred) !important;
+}
+
+a {
+    color: #ff1414 !important; 
+    font-weight: bolder;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+a:hover {
+    filter: none;
+    color: white !important;
+    text-decoration: none;
 }

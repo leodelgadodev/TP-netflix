@@ -1,9 +1,11 @@
+// eslint-disable-next-line react/no-deprecated
 import React from 'react';
-import Login from '../Login';
-export default function LoginPage(props){
+import Login from '../auth/Login';
+export default function LoginPage() {
     return (
         <div className="login-page">
-            <Login auth={props.auth}/>
+            {/* eslint-disable-next-line react/prop-types */}
+            <Login />
         </div>
     );
 }

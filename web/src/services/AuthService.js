@@ -2,16 +2,21 @@ import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:7000';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-function AuthService() {
+export const AuthService = {
+
+    register: (name, email, password, image, creditCard) =>  {
+        return axios.post("/register", {name, email, password, image, creditCard}, {})
+    },
     
-    const register = (name, email, password, image, creditCard) =>  {
-        axios.post("/register", {name, email, password, image, creditCard}, {})
-    }
-    
-    const login = (email, password) => {
-        axios.post("/login", {email, password})
+    login: (email, password) => {
+        return axios.post("/login", {email, password})
+    },
+
+    token: () => {
+        return window.sessionStorage.accessToken;
+    },
+
+    authenticate: (responseToken) => {
+        window.sessionStorage.accessToken = responseToken;
     }
 }
-
-
-export default AuthService;
