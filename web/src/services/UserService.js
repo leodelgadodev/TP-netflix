@@ -13,7 +13,7 @@ export const UserService = {
     },
     
     addFavorite: (contentId) =>  {
-        return axios.post(`/user/fav/${contentId}`, {headers: {Authentication: token}})
+        return axios.post(`/user/fav/${contentId}`,{}, {headers: {Authentication: token}})
     },
 
     addLastSeen: (contentId) => {
