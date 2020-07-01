@@ -19,7 +19,6 @@ function App() {
         <Route exact path="/register" render={() => <RegisterPage/>}/>
         <Route exact path="/login" render={() => <LoginPage/>}/>
         <Route exact path="/search" render={() => <Page component={SearchPage}/>}/>
-        <Route exact path="/media/:id/video" render={() => <Page component={VideoPage}/>} /> 
         <Route exact path="/media/:id" render={() => <Page component={MediaPage}/>} />
         <Route exact path="/" render={() => <Page component={HomePage}/>}/>
         <Route path="*" render={() => <h1>404 NOT FOUND</h1>}/>
