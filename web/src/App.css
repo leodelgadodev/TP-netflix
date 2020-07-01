@@ -148,3 +148,22 @@ h2 {
     margin-left: 1em;
     font-weight: bolder;
 }
+
+
+/* ############ MOVIEDISPLAY ########### */
+
+.mr-3{
+    padding: 20px;
+    width: 300px;
+
+}
+
+.mt-0{
+    padding: 20px;
+    color:white;
+}
+
+.media{
+   text-align: left;
+   padding: 20px;
+}

@@ -3,6 +3,7 @@ import MovieDisplay from '../media/MovieDisplay';
 import SerieDisplay from '../media/SerieDisplay';
 import {MediaService} from '../../services/MediaService';
 import { useParams } from 'react-router-dom';
+import Header from '../shared/Header';
 
 export default function MediaPage() {
     
@@ -16,16 +17,21 @@ export default function MediaPage() {
     },[])
 
     if(contentId.includes("mov")){
-        return (
-            <div className="media-page">
-                <MovieDisplay media={content} />
-            </div>
+        return (  
+                <div className="media-page">
+                    <Header />
+                    <MovieDisplay media={content} />
+                </div>
+            
         );
     } else {
         return (
-            <div className="media-page">
-                <SerieDisplay media={content} />
-            </div>
+                <div className="media-page">
+                    <Header />
+                    <SerieDisplay media={content} />
+                </div>
+            
+                
         );
     }
     
