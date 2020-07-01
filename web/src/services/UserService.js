@@ -6,10 +6,10 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 const token = window.sessionStorage.accessToken;
 
 
-export const MediaService = {
+export const UserService = {
 
     getUser: () => {
-        axios.get("/user", {headers: {Authentication: token}})
+        return axios.get("/user", {headers: {Authentication: token}}).then((data) => data);
     },
     
     addFavorite: (contentId) =>  {
@@ -18,7 +18,6 @@ export const MediaService = {
 
     addLastSeen: (contentId) => {
         return axios.post(`/user/lastSeen`, {contentId}, {headers: {Authentication: token}})
-    },
-    
+    }
 
 }

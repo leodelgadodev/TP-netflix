@@ -17,6 +17,16 @@ export const MediaService = {
     getContent: (id) => {
         return axios.get(`/content/${id}`, {headers: {Authentication: token}})
     },
+
+    verifyPoster: (url) => {
+        axios.get("https://image.tmdb.org/t/p/w500/fWi5OVdODBYsNXZTmVbvV1ROMhl.jpg").then((res) => {
+            if(res.data !== "<h1>File not Found</h1>") {
+                return url
+            } else {
+                return "public/notfound.jpg"
+            }
+        })
+    },
     
     search: (queryParam) =>  {
         return axios.get(`/search?text=${queryParam}`, {headers: {Authentication: token}})
