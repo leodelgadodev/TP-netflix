@@ -80,10 +80,11 @@
 
 .video-container{
     padding: 20px;
+    position: absolute;
 }
 
 .video-player{
     width: 97%;
     height: 85%;
-    position: absolute;
+    
 }
