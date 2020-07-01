@@ -14,13 +14,11 @@ class UserController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
     fun register(ctx : Context) {
         try {
             val newUser = ctx.bodyValidator<UserRegisterMapper>()
-                    .check({
-                        it.name != null
-                        it.email != null
-                        it.password != null
-                        it.image != null
-                        it.creditCard != null
-                    }, "Request inválido: Faltan parámetros.")
+                    .check({!it.email.isNullOrEmpty()}, "Request Invalido: Falta Email.")
+                    .check({!it.name.isNullOrEmpty()}, "Request Invalido: Falta Name.")
+                    .check({!it.password.isNullOrEmpty()}, "Request Invalido: Falta Password.")
+                    .check({!it.image.isNullOrEmpty()}, "Request Invalido: Falta Image.")
+                    .check({!it.creditCard.isNullOrEmpty()}, "Request Invalido: Falta Credit Card.")
                     .get()
 
             if (!emailExists(newUser.email!!)) {
@@ -28,12 +26,12 @@ class UserController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
                 val user = User(id, newUser.name!!, newUser.creditCard!!,
                         newUser.image!!, newUser.email, newUser.password!!, mutableListOf(), mutableListOf())
                 unqFlix.addUser(user)
-                print(user)
+                println(user)
                 ctx.header("Authentication", tokenJWT.generateToken(UserLoginMapper(user.id, user.email, user.password)))
                 ctx.status(201)
                 ctx.json(mapOf("result" to "ok"))
             } else {
-                throw BadRequestResponse("Ya existe un usuario con el mail = ${newUser.email}.")
+                throw ConflictResponse("Ya existe un usuario con el mail ${newUser.email}.")
             }
         } catch(e: NullPointerException) {
             throw BadRequestResponse("Request inválido: Faltan parámetros.")
@@ -48,10 +46,8 @@ class UserController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
 
     fun login(ctx: Context) {
         val loginUser = ctx.bodyValidator<UserLoginMapper>()
-                .check({
-                    it.email !== null
-                    it.password !== null
-                }, "Request inválido: Faltan parámetros.")
+                .check({!it.email.isNullOrEmpty()}, "Request Invalido: Falta Email.")
+                .check({!it.password.isNullOrEmpty()}, "Request Invalido: Falta Password.")
                 .get()
 
         val user : User? = unqFlix.users.firstOrNull { it.email == loginUser.email && it.password == loginUser.password }

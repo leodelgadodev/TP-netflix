@@ -2,7 +2,7 @@ package ui.unq.edu.ar.mappers
 
 class IdMapper (val id : String?) {}
 
-data class ContentViewMapper(val id: String, val title: String, val description : String, val state : Boolean)
+data class ContentViewMapper(val id: String, val title: String, val poster : String, val description : String, val state : Boolean)
 
 data class MovieViewMapper(
     val id: String, val title: String, val description: String, val poster: String, val video: String,
