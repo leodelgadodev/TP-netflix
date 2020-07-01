@@ -20,7 +20,6 @@ function Login() {
     const login = (event) => {
         event.preventDefault();
         AuthService.login(email, password).then((res) => {
-            {/* eslint-disable-next-line react/prop-types */}
             AuthService.authenticate(res.headers.authentication);
             restore();
             console.log(res.headers.authentication);

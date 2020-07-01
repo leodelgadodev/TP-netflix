@@ -3,15 +3,18 @@ import Header from '../shared/Header';
 import MediaCarousel from '../media/MediaCarousel';
 import { UserService } from '../../services/UserService';
 
-export default function HomePage(props) {
+export default function HomePage() {
     
     useEffect(() => {
         init();
-      });
+    });
     
     const init = () => {
-        UserService.addFavorite("ser_1");
-        // UserService.addFavorite("mov_2");
+        
+        // esto trae problemas de concurrencia 
+
+        // UserService.addFavorite("ser_1");
+        // UserService.addFavorite("mov_1");
         // UserService.addFavorite("mov_3");
         // UserService.addFavorite("mov_4");
         // UserService.addFavorite("mov_5");

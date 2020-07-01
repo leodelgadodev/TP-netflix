@@ -1,23 +1,23 @@
 import React from 'react'
 import Video from './Video'
 
-class MovieDisplay extends React.Component{
-    constructor(props){
-        super(props)
-    }
-    render(){
-        console.log(this.props);
-        return(
-            <div class="media">
-                <img src = {this.props.movie.poster} class="mr-3" alt={this.props.movie.title}/>
-                <div class="media-body">
-                <h5 class="mt-0">{this.props.movie.title}</h5>
-                    <p>{this.props.movie.description}</p>
-                    <button onClick = {Video(this.props)}>Play</button>
-                </div>
+export default function MovieDisplay(props) {
+    const media = props.media
+    console.log(media);
+
+    if(!media){
+        return <h2>404 not found</h2>
+    } 
+    
+    return(
+        <div className="media">
+            <img src = {media.poster} className="mr-3" alt={media.title}/>
+            <div className="media-body">
+                <h5 className="mt-0">{media.title}</h5>
+                <p>{media.description}</p>
+                <button >Play</button>
             </div>
-        )
-    }
+        </div>
+    )
     
 }
-export default MovieDisplay;

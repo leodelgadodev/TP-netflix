@@ -27,7 +27,6 @@ export default function Register() {
     const registerOnClick = (event) => {
         event.preventDefault();
         AuthService.register(name, email, password, imageLink, creditCard).then( res => {
-            {/* eslint-disable-next-line react/prop-types */}
             AuthService.authenticate(res.headers.authentication);
             restore();
             history.replace(from);

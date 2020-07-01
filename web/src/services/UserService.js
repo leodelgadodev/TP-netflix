@@ -9,15 +9,15 @@ const token = window.sessionStorage.accessToken;
 export const UserService = {
 
     getUser: () => {
-        return axios.get("/user", {headers: {Authentication: token}}).then((data) => data);
+        return axios.get("/user", {headers: {Authentication: token}});
     },
     
     addFavorite: (contentId) =>  {
-        return axios.post(`/user/fav/${contentId}`,{}, {headers: {Authentication: token}})
+        return axios.post(`/user/fav`,{id: contentId}, {headers: {Authentication: token}})
     },
 
     addLastSeen: (contentId) => {
-        return axios.post(`/user/lastSeen`, {contentId}, {headers: {Authentication: token}})
+        return axios.post(`/user/lastSeen`, {id: contentId}, {headers: {Authentication: token}})
     }
 
 }

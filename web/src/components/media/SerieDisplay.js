@@ -1,20 +1,19 @@
 import React from 'react'
 
+export default function SerieDisplay(props){
 
-class SerieDisplay extends React.Component{
+    const media = props.media;
 
-    render(){
-        
-        return(
-            <div>
-                <h1>{this.props.serie.title}</h1>
-                <img src = {this.props.serie.poster} alt={this.props.serie.title}/>
-                <p>{this.props.serie.description}</p>
-                <h5>Seasons</h5>
-
-                
-            </div>
-        )
-    }
+    if(!media){
+        return <h2>404 not found</h2>
+    } 
+    return(
+        <div>
+            <h1>{media.title}</h1>
+            <img src = {media.poster} alt={media.title}/>
+            <p>{media.description}</p>
+            <h5>Seasons</h5>
+        </div>
+    );
     
 }
