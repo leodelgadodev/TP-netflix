@@ -7,7 +7,6 @@ import LoginPage from './components/page-components/LoginPage';
 import SearchPage from './components/page-components/SearchPage';
 import HomePage from './components/page-components/HomePage'
 import Page from './components/page-components/Page';
-import VideoPage from './components/page-components/VideoPage';
 import MediaPage from './components/page-components/MediaPage';
 
 
