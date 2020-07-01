@@ -1,21 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MediaService } from '../../services/MediaService';
+import { Link } from 'react-router-dom';
 
 export default function MediaButton({content}){
 
-    const [poster, setPoster] = useState("");
+    const [poster, setPoster] = useState(""); 
 
-    const verifyPoster = () => {
-        setPoster(MediaService.verifyPoster(content.poster));
-        return poster;
-    }
+    useEffect( () => {
+        if(content){
+            MediaService.getContent(content.id).then(media => {
+                MediaService.verifyPoster(media.data.poster).then(res => {
+                    if(res.status == 200){
+                        setPoster(media.data.poster);
+                    } else {
+                        setPoster("notfound.jpg");
+                    }
+                });
+            });
+        } else {
+            setPoster("notfound.jpg");
+        }
+    })
 
     if(!content){
         return "notfound.jpg"
     } else {
         return (
-            <div key={content.id} className="carousel-item ">
-                <img src={ verifyPoster(content) } className="media-poster-img" alt={content.title}/>
+            <div className="prueba">
+                <Link to={`/media/${content.id}`}> 
+                    <img src={ poster } className="media-poster-img" alt={content.title}/> 
+                </Link>
             </div> 
         );
     }
