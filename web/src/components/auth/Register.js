@@ -66,27 +66,43 @@ export default function Register() {
     
 
     return(
-        <div className="container" id="register-container">
+        <div className="auth-container" id="register-container">
+            <div className="modal-header">
+                <img className="unqflix-logo-modal" src= "unqflix-logo.png" alt= "Unflix logo" id="login-logo"></img>
+            </div>
             <div className= "register-form">
-                <div className="form-group"> 
+
+                <div className="form-item"> 
                     <input type="email" className="form-control" onChange= {updateEmail} placeholder="Email..."/>
                 </div>
-                <div className="form-group"> 
-                    <input type="text" className="form-control" onChange= {updateName} placeholder="Name..."/>
+
+                <div className="form-item"> 
+                    <input type="text" className="form-control" onChange= {updateName} placeholder="Nombre..."/>
                 </div>
-                <div className="form-group"> 
-                    <input type="password" className="form-control" onChange= {updatePassword} placeholder="Password..."/>
+
+                <div className="form-item"> 
+                    <input type="password" className="form-control" onChange= {updatePassword} placeholder="Contraseña..."/>
                 </div>
-                <div className="form-group"> 
+
+                <div className="form-item"> 
                     <input type="url" className="form-control" onChange= {updateImageLink} placeholder="Image Link..."/>
                 </div>
-                <div className="form-group"> 
-                    <input type="number" className="form-control" onChange= {updateCC} placeholder="Credit Card..."/>
+
+                <div className="form-item"> 
+                    <input type="number" className="form-control" onChange= {updateCC} placeholder="Tarjeta de Crédito..."/>
                 </div>
-                <button type="submit" className="btn btn-primary" id="register" onClick={registerOnClick}>Register</button>
-            </div>
-            <div className="btn-register" id="close-register">
-                <u onClick={restore}> <Link to="/login"> back </Link> </u>
+
+                <div className="form-item">
+                    <button type="submit" className="btn btn-primary" id="register" onClick={registerOnClick}>Registrarse</button>
+                </div>
+
+                <div id="open-register" className="form-item">
+                    <Link to="/login">
+                        <span onClick={restore} className="btn-register">
+                            Volver
+                        </span>
+                    </Link>
+                </div>
             </div>
         </div>
     );
