@@ -10,8 +10,8 @@ import ui.unq.edu.ar.mappers.*
 class ContentController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
 
     fun getContent(ctx : Context){
-        val movies = unqFlix.movies.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available().javaClass) }
-        val serie = unqFlix.series.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available().javaClass) }
+        val movies = unqFlix.movies.map { ContentViewMapper(it.id,it.title,it.poster,it.description,it.state.javaClass === Available().javaClass) }
+        val serie = unqFlix.series.map { ContentViewMapper(it.id,it.title,it.poster,it.description,it.state.javaClass === Available().javaClass) }
         val content : MutableList<ContentViewMapper> = mutableListOf()
         content.addAll(movies)
         content.addAll(serie)
@@ -32,7 +32,7 @@ class ContentController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
         val serie= unqFlix.series.find { it.id == id }
         if (serie!=null){
             val categories = serie.categories.map { it.name }.toMutableList()
-            val relatedContent= serie.relatedContent.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available().javaClass) }.toMutableList()
+            val relatedContent= serie.relatedContent.map { ContentViewMapper(it.id,it.title,it.poster,it.description,it.state.javaClass === Available().javaClass) }.toMutableList()
             val season = serie.seasons.map { SeasonViewMapper(it.id,it.title,it.description,it.poster,
                     it.chapters.map{ ChapterViewMapper(it.id,it.title,it.description,it.duration,it.video,it.thumbnail) }.toMutableList())
             }
@@ -46,7 +46,7 @@ class ContentController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
         val movie = unqFlix.movies.find { it.id == id }
         if (movie != null){
             val categories = movie.categories.map { it.name }.toMutableList()
-            val relatedContent = movie.relatedContent.map { ContentViewMapper(it.id,it.title,it.description,it.state.javaClass === Available().javaClass) }
+            val relatedContent = movie.relatedContent.map { ContentViewMapper(it.id,it.title,it.poster,it.description,it.state.javaClass === Available().javaClass) }
 
             ctx.json(MovieViewMapper(movie.id,movie.title,movie.description,movie.poster,movie.video,movie.duration,movie.actors,movie.directors,categories,
                     relatedContent as MutableList<ContentViewMapper>))
@@ -57,15 +57,15 @@ class ContentController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
 
 
     fun getBanners(ctx : Context){
-        val banners = unqFlix.banners.map { ContentViewMapper(it.id, it.title, it.description, it.state.javaClass === Available().javaClass) }
+        val banners = unqFlix.banners.map { ContentViewMapper(it.id, it.title,it.poster, it.description, it.state.javaClass === Available().javaClass) }
         ctx.json(mapOf("Banners" to banners))
     }
 
     fun search(ctx : Context){
         val text : String? = ctx.queryParam("text")
         val contents : MutableList<ContentViewMapper> = mutableListOf()
-        contents.addAll(unqFlix.searchSeries(text.toString()).map{ ContentViewMapper(it.id, it.title, it.description, it.state.javaClass === Available().javaClass) })
-        contents.addAll(unqFlix.searchMovies(text.toString()).map{ ContentViewMapper(it.id, it.title, it.description, it.state.javaClass === Available().javaClass) })
+        contents.addAll(unqFlix.searchSeries(text.toString()).map{ ContentViewMapper(it.id, it.title,it.poster, it.description, it.state.javaClass === Available().javaClass) })
+        contents.addAll(unqFlix.searchMovies(text.toString()).map{ ContentViewMapper(it.id, it.title,it.poster, it.description, it.state.javaClass === Available().javaClass) })
         ctx.json(mapOf("Contents" to contents))
     }
 }
