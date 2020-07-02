@@ -138,11 +138,16 @@ a:hover {
 }
 
 
+
 /* ############ HOMEPAGE ########### */
 
 .media-poster-img {
     width: 100px;
     height: 150px;
+}
+
+.media-poster-img:hover {
+    transform: scale(1.05, 1.05);
 }
 
 .media-carousel {

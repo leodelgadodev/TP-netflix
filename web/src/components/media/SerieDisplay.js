@@ -6,7 +6,6 @@ export default function SerieDisplay(props){
 
     const media = props.media;
 
-
     const TableHeader = () => {
         const rows = media.season.map((row, index) =>{ 
             return(
@@ -22,13 +21,15 @@ export default function SerieDisplay(props){
         const rows = media.season.map((row, index) =>{
             const chapters = row.chapters.map((chap, index)=>{
                 return(
-                            <tr key={index} ><Link to={{pathname: '/video', state:{url:props.video}}}>{chap.title}</Link> </tr>
+                    <tr key={index}>
+                        <Link to={{ pathname: `/media/${media.id}/${row.id}/${chap.id}/video` }}>
+                            {chap.title}
+                        </Link>
+                    </tr>
                 )
             });
             return (
-                
                     <td key= {index}>{chapters}</td>
-                
             );
         });
         return <tbody>{rows}</tbody>

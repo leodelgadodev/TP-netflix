@@ -22,7 +22,8 @@ function App() {
         <Route exact path="/all" render={() => <Page component={AllContentsPage}/>}/>
         <Route exact path="/search" render={() => <Page component={SearchPage}/>}/>
         <Route exact path="/media/:contentId" render={() => <Page component={MediaPage}/>} />
-        <Route exact path="/video" render={() => <Page component={VideoPage}/>} />
+        <Route exact path="/media/:contentId/video" render={() => <Page component={VideoPage}/>} />
+        <Route exact path="/media/:contentId/:seasonId/:chapterId/video" render={() => <Page component={VideoPage}/>} />
         <Route exact path="/" render={() => <Page component={HomePage}/>}/>
         <Route path="*" render={() => <h1>404 NOT FOUND</h1>}/>
       </Switch>

@@ -3,6 +3,7 @@ import MovieDisplay from './MovieDisplay';
 import SerieDisplay from '../media/SerieDisplay';
 import {MediaService} from '../../services/MediaService';
 import { useParams } from 'react-router-dom';
+import { UserService } from '../../services/UserService';
 
 
 export default function MediaDisplay(){
@@ -13,7 +14,9 @@ export default function MediaDisplay(){
     useEffect(()=> {
         MediaService.getContent(contentId).then( res => {
             setContent(res.data);
-        }).catch( () => null);
+        }).then(() => {
+            UserService.addLastSeen(contentId);
+        });
     },[])
 
     if(contentId.includes("mov")){
