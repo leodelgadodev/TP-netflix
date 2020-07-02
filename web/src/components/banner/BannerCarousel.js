@@ -2,6 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import Banner from "./Banner";
 
 export default class BannerCarousel extends React.Component {
   render() {
@@ -12,27 +13,15 @@ export default class BannerCarousel extends React.Component {
       slidesToShow: 1,
       slidesToScroll: 1
     };
+    // TODO Deberia cargarle por props a los banners el src de cada imagen
     return (
       <div className="banner-carousel">
         <Slider {...settings}>
-          <div className="banner">
-            <h3>1</h3>
-          </div>
-          <div className="banner">
-            <h3>2</h3>
-          </div>
-          <div className="banner">
-            <h3>3</h3>
-          </div>
-          <div className="banner">
-            <h3>4</h3>
-          </div>
-          <div className="banner">
-            <h3>5</h3>
-          </div>
-          <div className="banner">
-            <h3>6</h3>
-          </div>
+          <Banner text="1"/>
+          <Banner text="2"/>
+          <Banner text="3"/>
+          <Banner text="4"/>
+          <Banner text="5"/>
         </Slider>
       </div>
     );
