@@ -18,7 +18,7 @@ export default function Banner(props) {
     return(
         <div className="banner">
             <div className="relative-container">
-                <img src={poster} />
+                <a href={`media/${props.contentId}`}><img src={poster} /></a>
                 <h3 className="img-text">{props.text}</h3>
             </div>
         </div>

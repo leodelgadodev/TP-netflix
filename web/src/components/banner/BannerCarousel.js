@@ -29,7 +29,7 @@ export default function BannerCarousel() {
       <div className="banner-carousel">
         <Slider dots= {true} infinite={true} speed={500} slidesToShow={1} slidesToScroll={1}>
           {banners.map( banner => (
-            <Banner key={banner.id} img={banner.poster} text={banner.title} />
+            <Banner key={banner.id} img={banner.poster} text={banner.title} contentId={banner.id}/>
           ))}
         </Slider>
       </div>
