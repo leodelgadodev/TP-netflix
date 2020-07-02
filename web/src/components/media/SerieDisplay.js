@@ -10,7 +10,7 @@ export default function SerieDisplay(props){
         const rows = media.season.map((row, index) =>{ 
             return(
                 <th  key= {index}>
-                    <td>Season {index + 1}</td>
+                    <td className="row-season">Season {index + 1}</td>
                 </th>
             )
         });
