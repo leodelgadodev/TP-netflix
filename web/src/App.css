@@ -46,7 +46,7 @@
     .header {
         /* TODO Evitar que se rompa el Header con resoluciones más pequeñas */
     }
-  }
+}
 
 /* ############ HEADER ########### */
 
@@ -228,7 +228,7 @@ section {
 }
 
 table{
-    border: 2px solid red;
+    border: 2px solid var(--bg-red);
 }
 
 .row-season{

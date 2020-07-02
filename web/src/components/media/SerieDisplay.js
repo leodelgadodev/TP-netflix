@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import MediaCarousel from './MediaCarousel';
 import { MediaService } from '../../services/MediaService';
 import notfound from '../../img/notfound.jpg'
+import { UserService } from '../../services/UserService';
 
 export default function SerieDisplay(props){
 
@@ -61,13 +62,14 @@ export default function SerieDisplay(props){
                 <div className="media-body">
                     <h1 className="mt-0">{media.title}</h1>
                     <p className="mt-0">{media.description}</p>
+                    <button className="btn btn-primary form-item" onClick={() => UserService.addFavorite(media.id)}>
+                        Añadir a favoritos
+                    </button>
                     <h5 className="mt-0">Seasons</h5>
-                    <div>
                         <table className="table table-sm table-dark media-table">
                             <TableHeader />
                             <TableBody />
                         </table>
-                    </div>
                 </div>
             </div>
             <div>

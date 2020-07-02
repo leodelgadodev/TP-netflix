@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import MediaCarousel from './MediaCarousel';
 import { MediaService } from '../../services/MediaService';
 import notfound from '../../img/notfound.jpg'
+import { UserService } from '../../services/UserService';
 
 export default function MovieDisplay(props) {
     const media = props.media
@@ -10,7 +11,6 @@ export default function MovieDisplay(props) {
     const [poster, setPoster] = useState(""); 
 
     useEffect( () => {
-        console.log(props.media);
         if(media){
             MediaService.verifyPoster(media.poster).then(res => {
                 console.log(res);
@@ -37,6 +37,9 @@ export default function MovieDisplay(props) {
                             <Link to={{ pathname: `/media/${media.id}/video` }}>
                                 Reproducir
                             </Link>
+                        </button>
+                        <button className="btn btn-primary form-item" onClick={() => UserService.addFavorite(media.id)}>
+                                Añadir a favoritos
                         </button>
                     </div>
                 </div>
