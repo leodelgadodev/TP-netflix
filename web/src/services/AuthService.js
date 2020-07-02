@@ -18,5 +18,9 @@ export const AuthService = {
 
     authenticate: (responseToken) => {
         window.sessionStorage.accessToken = responseToken;
+    },
+
+    logout: () => {
+        window.sessionStorage.accessToken = "";
     }
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {Link, useLocation, useHistory} from 'react-router-dom' 
 import {AuthService} from '../../services/AuthService';
 import Swal from 'sweetalert2'
+import unqflix from '../../img/unqflix-logo.png'
 
 export default function Register() {
     
@@ -34,13 +35,13 @@ export default function Register() {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: err.response.data.title,
+                    text: "El usuario ya existe!",
                 })
             } else if (err.response.status === 400) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
-                    text: "El usuario ya existe!",
+                    text: "Faltan parametros!",
                 })
             }
         });
@@ -67,7 +68,7 @@ export default function Register() {
     return(
         <div className="auth-container" id="register-container">
             <div className="modal-header">
-                <img className="unqflix-logo-modal" src= "unqflix-logo.png" alt= "Unflix logo" id="login-logo"></img>
+                <img className="unqflix-logo-modal" src= {unqflix} alt= "Unflix logo" id="login-logo"></img>
             </div>
             <form className= "register-form">
 

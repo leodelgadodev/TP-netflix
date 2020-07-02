@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import {Link, useHistory, useLocation} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {AuthService} from '../../services/AuthService';
 import Swal from 'sweetalert2'
+import unqflix from '../../img/unqflix-logo.png'
 
 function Login() {
     
@@ -9,8 +10,6 @@ function Login() {
     const [password, setPassword] = useState(null);
 
     let history = useHistory();
-    let location = useLocation();
-    let { from } = location.state || { from: { pathname: "/" } };
 
     const restore = () => {
         setEmail(null);
@@ -49,7 +48,7 @@ function Login() {
     return (
         <div className="auth-container" id="login-container">
             <div className="modal-header">
-                <img className="unqflix-logo-modal" src= "unqflix-logo.png" alt= "Unflix logo" id="login-logo"></img>
+                <img className="unqflix-logo-modal" src={unqflix} alt= "Unflix logo" id="login-logo"></img>
             </div>
             <form className="login-form">
                 <div className="form-item">
