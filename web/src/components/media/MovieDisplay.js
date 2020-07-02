@@ -8,9 +8,8 @@ export default function MovieDisplay(props) {
 
     if(!media){
         return <h2>404 not found</h2>
-    } 
-    
-    return(
+    } else {
+        return(
             <div className="media">
                 <img src = {media.poster} className="mr-3" alt={media.title}/>
                 <div className="media-body">
@@ -19,5 +18,8 @@ export default function MovieDisplay(props) {
                     <button className="media-button">Play</button>
                 </div>
             </div>
-    )
+        )
+    }
+    
+    
 }

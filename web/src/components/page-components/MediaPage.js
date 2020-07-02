@@ -12,27 +12,34 @@ export default function MediaPage() {
     
     useEffect(()=> {
         MediaService.getContent(contentId).then( res => {
+            console.log(res.data)
             setContent(res.data);
         }).catch( () => null);
-    },[])
+    },[]);
+
+    if(!content){
+        return (
+            <div>
+                <h2> 404 not found</h2>
+            </div>
+        );
+    } 
 
     if(contentId.includes("mov")){
-        return (  
-                <div className="media-page">
-                    <Header />
-                    <MovieDisplay media={content} />
-                </div>
-            
-        );
+        return (
+            <div className="media-page">
+                <Header />
+                <MovieDisplay media={content} />
+            </div>
+        )
+    
     } else {
         return (
-                <div className="media-page">
-                    <Header />
-                    <SerieDisplay media={content} />
-                </div>
-            
-                
-        );
+            <div className="media-page">
+                <Header />
+                <SerieDisplay media={content} />    
+            </div>
+        )
     }
     
 }
