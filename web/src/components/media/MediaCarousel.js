@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { UserService } from '../../services/UserService';
 import { MediaService } from '../../services/MediaService';
 import MediaButton from './MediaButton';
-
+import HorizontalScroller from 'react-horizontal-scroll-container';
 
 
 export default function MediaCarousel(props) {
@@ -59,26 +59,53 @@ export default function MediaCarousel(props) {
         return <h2>aun no tienes {props.flag} :(</h2>
     } else {
         return(
-            
-            <div id="carouselExampleControls" className="carousel slide media-carousel" data-ride="carousel">
-                <div className="carousel-inner">
-                    <MediaButton content={fst} className="carousel-item active" />
-                    {/* <div className="carousel-item active">
-                        <img className="media-poster-img" src={verifyPoster(fst)} alt="First slide"/>
-                    </div> */}
-                        {rest.map (content => (
-                            <MediaButton key={content.id} content={content} className="carousel-item" />
-                        ))}
-                    <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="sr-only">Previous</span>
-                    </a>
-                    <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
+            // <div id="carouselExampleControls" className="carousel slide media-carousel" data-ride="carousel">
+            //     <div className="carousel-inner">
+            //         <MediaButton content={fst} className="carousel-item active" />
+            //         {/* <div className="carousel-item active">
+            //             <img className="media-poster-img" src={verifyPoster(fst)} alt="First slide"/>
+            //         </div> */}
+            //             {rest.map (content => (
+            //                 <MediaButton key={content.id} content={content} className="carousel-item" />
+            //             ))}
+            //         <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            //             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            //             <span className="sr-only">Previous</span>
+            //         </a>
+            //         <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            //             <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            //             <span className="sr-only">Next</span>
+            //         </a>
+            //     </div>
+            // </div>
+            <div>
+        <HorizontalScroller>
+            <div className="media-scroll-elem">1</div>
+            <div className="media-scroll-elem">2</div>
+            <div className="media-scroll-elem">3</div>
+            <div className="media-scroll-elem">4</div>
+            <div className="media-scroll-elem">5</div>
+            <div className="media-scroll-elem">6</div>
+            <div className="media-scroll-elem">7</div>
+            <div className="media-scroll-elem">8</div>
+            <div className="media-scroll-elem">1</div>
+            <div className="media-scroll-elem">2</div>
+            <div className="media-scroll-elem">3</div>
+            <div className="media-scroll-elem">4</div>
+            <div className="media-scroll-elem">5</div>
+            <div className="media-scroll-elem">6</div>
+            <div className="media-scroll-elem">7</div>
+            <div className="media-scroll-elem">8</div>
+            <div className="media-scroll-elem">1</div>
+            <div className="media-scroll-elem">2</div>
+            <div className="media-scroll-elem">3</div>
+            <div className="media-scroll-elem">4</div>
+            <div className="media-scroll-elem">5</div>
+            <div className="media-scroll-elem">6</div>
+            <div className="media-scroll-elem">7</div>
+            <div className="media-scroll-elem">8</div>
+        </HorizontalScroller>
+        </div>
         );
     }
 

@@ -145,8 +145,36 @@ a:hover {
 
 h2 {
     color: white;
-    margin-left: 1em;
+    margin: 1em 0 1em 1em;
     font-weight: bolder;
+}
+
+.media-scroll-elem {
+    display: block;
+    width: 100px;
+    min-width: 100px;
+    min-height: 150px;
+    height: 150px;
+    margin: 0 1em 1em 1em;
+    background-color: #be3b3b;
+}
+
+.section-favoritos, .section-lastseen {
+    max-width: 75%;
+    margin: auto;
+}
+
+.banner-carousel {
+    margin: auto;
+    margin-top: 1em;
+    max-width: 90%;
+}
+
+.banner {
+    background-color: #be3b3b;
+    max-width: 100%;
+    height: 500px;
+    max-height: 500px;
 }
 
 
