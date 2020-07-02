@@ -22,8 +22,8 @@ export default function BannerCarousel() {
   
   
     // TODO Deberia cargarle por props a los banners el src de cada imagen
-  if(banners == []){
-      return <h2>:(</h2>
+  if(banners === []) {
+      return <h1>Banners Not Found</h1>
   } else {
     return (
       <div className="banner-carousel">
@@ -31,11 +31,6 @@ export default function BannerCarousel() {
           {banners.map( banner => (
             <Banner key={banner.id} img={banner.poster} text={banner.title} />
           ))}
-          {/* <Banner text="1"/>
-          <Banner text="2"/>
-          <Banner text="3"/>
-          <Banner text="4"/>
-          <Banner text="5"/> */}
         </Slider>
       </div>
     );

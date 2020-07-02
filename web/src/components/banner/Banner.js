@@ -17,8 +17,10 @@ export default function Banner(props) {
 
     return(
         <div className="banner">
-            <h3>{props.text}</h3>
-            <img src={poster} />
+            <div className="relative-container">
+                <img src={poster} />
+                <h3 className="img-text">{props.text}</h3>
+            </div>
         </div>
     );
 }
