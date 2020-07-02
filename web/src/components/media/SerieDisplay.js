@@ -21,7 +21,7 @@ export default function SerieDisplay(props){
         const rows = media.season.map((row, index) =>{
             const chapters = row.chapters.map((chap, index)=>{
                 return(
-                            <tr key={index} ><Link to={chap.video}>{chap.title}</Link> </tr>
+                            <tr key={index} ><Link to={{pathname: '/video', state:{url:props.video}}}>{chap.title}</Link> </tr>
                 )
             });
             return (

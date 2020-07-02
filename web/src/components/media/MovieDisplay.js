@@ -1,6 +1,5 @@
 import React from 'react'
-import Video from './Video'
-import Header from '../shared/Header';
+import { Link } from 'react-router-dom';
 
 export default function MovieDisplay(props) {
     const media = props.media
@@ -15,7 +14,7 @@ export default function MovieDisplay(props) {
                 <div className="media-body">
                     <h5 className="mt-0">{media.title}</h5>
                     <p className="mt-0">{media.description}</p>
-                    <button className="btn btn-primary form-item">Play</button>
+                    <button className="btn btn-primary form-item"><Link to={{pathname: '/video', state:{url:props.video}}}>Play</Link></button>
                 </div>
             </div>
         )
