@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function SerieDisplay(props){
 
@@ -8,7 +9,7 @@ export default function SerieDisplay(props){
     const TableHeader = () => {
         const rows = media.season.map((row, index) =>{ 
             return(
-                <th key= {index}>
+                <th  key= {index}>
                     <td>Season {index + 1}</td>
                 </th>
             )
@@ -20,7 +21,7 @@ export default function SerieDisplay(props){
         const rows = media.season.map((row, index) =>{
             const chapters = row.chapters.map((chap, index)=>{
                 return(
-                            <tr key={index}>{chap.title}</tr>
+                            <tr key={index} ><Link to={chap.video}>{chap.title}</Link> </tr>
                 )
             });
             return (
@@ -44,7 +45,7 @@ export default function SerieDisplay(props){
                 <p className="mt-0">{media.description}</p>
                 <h5 className="mt-0">Seasons</h5>
                 <div>
-                    <table className="mt-0">
+                    <table class="table table-sm table-dark">
                         <TableHeader />
                         <TableBody />
                     </table>
