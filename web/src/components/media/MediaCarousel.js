@@ -13,6 +13,7 @@ export default function MediaCarousel(props) {
         // eslint-disable-next-line react/prop-types
         switch(props.flag) {
             case "favs": {
+                
                 getUser().then((res) => {
                     // debugger; setMediaArray(res.data.favorites);
                     // res.data.favorites.forEach((content) => {
