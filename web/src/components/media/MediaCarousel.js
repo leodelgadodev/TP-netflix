@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { UserService } from '../../services/UserService';
-import { MediaService } from '../../services/MediaService';
 import MediaButton from './MediaButton';
 import HorizontalScroller from 'react-horizontal-scroll-container';
 
