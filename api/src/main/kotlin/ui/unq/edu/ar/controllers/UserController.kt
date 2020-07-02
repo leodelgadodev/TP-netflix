@@ -26,7 +26,6 @@ class UserController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
                 val user = User(id, newUser.name!!, newUser.creditCard!!,
                         newUser.image!!, newUser.email, newUser.password!!, mutableListOf(), mutableListOf())
                 unqFlix.addUser(user)
-                println(user)
                 ctx.header("Authentication", tokenJWT.generateToken(UserLoginMapper(user.id, user.email, user.password)))
                 ctx.status(201)
                 ctx.json(mapOf("result" to "ok"))
@@ -76,6 +75,7 @@ class UserController(val tokenJWT: TokenJWT, val unqFlix: UNQFlix) {
         val contentId = ctx.bodyValidator<IdMapper>().check({it.id !== null}).get()
         try {
             unqFlix.addOrDeleteFav(idUser, contentId.id!!)
+            print(getUser(ctx))
             ctx.json(mapOf("result" to "ok"))
         } catch (e : NotFoundException){
             throw NotFoundResponse(e.message!!)
