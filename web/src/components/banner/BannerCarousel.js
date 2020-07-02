@@ -20,8 +20,6 @@ export default function BannerCarousel() {
     })
   }, [])
   
-  
-    // TODO Deberia cargarle por props a los banners el src de cada imagen
   if(banners === []) {
       return <h1>Banners Not Found</h1>
   } else {

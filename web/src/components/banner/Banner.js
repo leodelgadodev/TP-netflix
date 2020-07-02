@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MediaService } from "../../services/MediaService";
+import notfound from '../../img/notfound.jpg'
 
 export default function Banner(props) {
 
@@ -10,10 +11,10 @@ export default function Banner(props) {
             if(res.status == 200){
                 setPoster(props.img);
             } else {
-                setPoster("notfound.jpg");
+                setPoster(notfound);
             }
         })
-    })
+    },[])
 
     return(
         <div className="banner">

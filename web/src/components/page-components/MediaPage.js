@@ -4,9 +4,11 @@ import MediaDisplay from '../media/MediaDisplay';
 
 export default function MediaPage() {
     
-    return (<div>
-        <Header />
-        <MediaDisplay />
-        </div>); 
+    return (
+        <div className="media-page">
+            <Header />
+            <MediaDisplay />
+        </div>
+    ); 
 }
 

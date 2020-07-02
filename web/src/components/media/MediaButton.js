@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MediaService } from '../../services/MediaService';
-import { Link } from 'react-router-dom';
+import notfound from '../../img/notfound.jpg'
 
 export default function MediaButton({content}){
 
@@ -13,25 +13,20 @@ export default function MediaButton({content}){
                     if(res.status == 200){
                         setPoster(media.data.poster);
                     } else {
-                        setPoster("notfound.jpg");
+                        setPoster(notfound);
                     }
                 });
             });
         } else {
-            setPoster("notfound.jpg");
+            setPoster(notfound);
         }
-    })
+    },[]);
 
-    if(!content){
-        return "notfound.jpg"
-    } else {
-        return (
-            <div className="media-button grid-item">
-                <a href={`/media/${content.id}`}> 
-                    <img src={ poster } className="media-poster-img" alt={content.title}/> 
-                </a>
-            </div> 
-        );
-    }
-    
+    return (
+        <div className="media-button grid-item">
+            <a href={`/media/${content.id}`}> 
+                <img src={ poster } className="media-poster-img" alt={content.title}/> 
+            </a>
+        </div> 
+    );
 }

@@ -14,23 +14,22 @@ export default function MediaDisplay(){
     useEffect(()=> {
         MediaService.getContent(contentId).then( res => {
             setContent(res.data);
-        }).then(() => {
             UserService.addLastSeen(contentId);
         });
     },[])
 
     if(contentId.includes("mov")){
         return (  
-                <div className="media-page">
-                    <MovieDisplay media={content} />
-                </div>
+            <div className="media-page">
+                <MovieDisplay media={content} />
+            </div>
             
         );
     } else {
         return (
-                <div className="media-page">
-                    <SerieDisplay media={content} />
-                </div>
+            <div className="media-page">
+                <SerieDisplay media={content} />
+            </div>
         );
     }
 

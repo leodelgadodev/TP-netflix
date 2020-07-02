@@ -22,13 +22,12 @@ export default function MediaCarousel(props) {
                 })
             } break;
             case "relatedContent":{
-                setMediaArray(props.relatedContent)
+                setMediaArray(props.relatedContent);
             } break; 
         }
     }, []);
 
     const getUser = () => {
-        //del User saco los Last Seen y los Favs
         return UserService.getUser();
     }
     
