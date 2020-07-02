@@ -11,14 +11,12 @@ export default function VideoPage(props){
     const {contentId, seasonId, chapterId} = useParams();
 
     useEffect(() => {
-        // TODO getContentById, sacar el video y pasarselo al Video
         MediaService.getContent(contentId).then((res) => {
             console.log(res.data.video);
             if(res.data.id.includes("mov")) {
                 setUrl(res.data.video);
             } else {
                 console.log(res.data);
-                // Ir sacando el video del chapter del season (que deberian haber llegado por props)
                 setUrl(
                 res.data.season
                 .find((season) => season.id == seasonId)
