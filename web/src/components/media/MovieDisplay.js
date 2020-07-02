@@ -15,7 +15,7 @@ export default function MovieDisplay(props) {
                 <div className="media-body">
                     <h5 className="mt-0">{media.title}</h5>
                     <p className="mt-0">{media.description}</p>
-                    <button className="media-button">Play</button>
+                    <button className="btn btn-primary form-item">Play</button>
                 </div>
             </div>
         )

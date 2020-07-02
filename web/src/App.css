@@ -132,6 +132,12 @@ a:hover {
     text-decoration: none;
 }
 
+/* ############ GRID ########### */
+.grid-item {
+    margin: 0.3em;
+}
+
+
 /* ############ HOMEPAGE ########### */
 
 .media-poster-img {
@@ -159,7 +165,7 @@ h2 {
     background-color: #be3b3b;
 }
 
-.section-favoritos, .section-lastseen {
+section {
     max-width: 75%;
     margin: auto;
 }
@@ -194,4 +200,8 @@ h2 {
 .media{
    text-align: left;
    padding: 20px;
+}
+
+table, td, th{
+    border: 3px solid red;
 }

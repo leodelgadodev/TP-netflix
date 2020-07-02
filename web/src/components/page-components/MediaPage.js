@@ -1,45 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import MovieDisplay from '../media/MovieDisplay';
-import SerieDisplay from '../media/SerieDisplay';
-import {MediaService} from '../../services/MediaService';
-import { useParams } from 'react-router-dom';
+import React  from 'react';
 import Header from '../shared/Header';
+import MediaDisplay from '../media/MediaDisplay';
 
 export default function MediaPage() {
     
-    const [content, setContent] = useState(null);
-    const {contentId} = useParams();
-    
-    useEffect(()=> {
-        MediaService.getContent(contentId).then( res => {
-            console.log(res.data)
-            setContent(res.data);
-        }).catch( () => null);
-    },[]);
-
-    if(!content){
-        return (
-            <div>
-                <h2> 404 not found</h2>
-            </div>
-        );
-    } 
-
-    if(contentId.includes("mov")){
-        return (
-            <div className="media-page">
-                <Header />
-                <MovieDisplay media={content} />
-            </div>
-        )
-    
-    } else {
-        return (
-            <div className="media-page">
-                <Header />
-                <SerieDisplay media={content} />    
-            </div>
-        )
-    }
-    
+    return (<div>
+        <Header />
+        <MediaDisplay />
+        </div>); 
 }
+
