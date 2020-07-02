@@ -6,15 +6,16 @@ import { useParams } from 'react-router-dom';
 
 export default function VideoPage(props){
 
-    const {url, setUrl} = useState("");
+    const [url, setUrl] = useState("");
 
     const {contentId, seasonId, chapterId} = useParams();
 
     useEffect(() => {
         // TODO getContentById, sacar el video y pasarselo al Video
         MediaService.getContent(contentId).then((res) => {
+            console.log(res.data.video);
             if(res.data.id.includes("mov")) {
-                this.setUrl(res.data.video);
+                setUrl(res.data.video);
             } else {
                 // Ir sacando el video del chapter del season (que deberian haber llegado por props)
                 setUrl(
