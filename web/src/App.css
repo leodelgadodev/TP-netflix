@@ -30,6 +30,8 @@
 .video-container{
     padding: 20px;
     position: absolute;
+    width: 100%;
+    height:100%;
 }
 
 .video-player{
@@ -37,6 +39,7 @@
     height: 85%;
     position: absolute;
 }
+
 
 /* ############ RESPONSIVE ######### */
 @media only screen and (max-width: 600px) {

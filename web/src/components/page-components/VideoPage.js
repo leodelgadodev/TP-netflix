@@ -17,11 +17,12 @@ export default function VideoPage(props){
             if(res.data.id.includes("mov")) {
                 setUrl(res.data.video);
             } else {
+                console.log(res.data);
                 // Ir sacando el video del chapter del season (que deberian haber llegado por props)
                 setUrl(
-                res.data.id.season
-                .find((season) => season === seasonId)
-                .chapter.find((chapter) => chapter === chapterId).video
+                res.data.season
+                .find((season) => season.id == seasonId)
+                .chapters.find((chapter) => chapter.id === chapterId).video
                 );
             }
         });
