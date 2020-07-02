@@ -27,9 +27,9 @@ export default function MediaButton({content}){
     } else {
         return (
             <div className="media-button grid-item">
-                <Link to={`/media/${content.id}`}> 
+                <a href={`/media/${content.id}`}> 
                     <img src={ poster } className="media-poster-img" alt={content.title}/> 
-                </Link>
+                </a>
             </div> 
         );
     }
