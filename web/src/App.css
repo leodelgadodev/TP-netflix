@@ -195,3 +195,7 @@ h2 {
    text-align: left;
    padding: 20px;
 }
+
+table, td, th{
+    border: 3px solid red;
+}

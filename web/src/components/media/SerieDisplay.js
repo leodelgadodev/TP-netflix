@@ -45,7 +45,7 @@ export default function SerieDisplay(props){
                 <p className="mt-0">{media.description}</p>
                 <h5 className="mt-0">Seasons</h5>
                 <div>
-                    <table class="table table-sm table-dark">
+                    <table class="table table-sm table-dark media-table">
                         <TableHeader />
                         <TableBody />
                     </table>
