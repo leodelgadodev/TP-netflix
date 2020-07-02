@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {useLocation} from 'react-router-dom'
+import { MediaService } from '../../services/MediaService';
+import Header from '../shared/Header';
+import MediaGrid from '../media/MediaGrid';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
-export default function SearchPage(props){
+export default function SearchPage(){
 
-    //estaba probando si funcaba att: Nacho :D
+    const [content, setContent] = useState([]);
+
     const query = useQuery();
-    return(<div>{query.get("content")}</div>);
+    useEffect( () => {
+        MediaService.search(query.get("content")).then(res => {
+            console.log(res.data.Contents)
+            setContent(res.data.Contents);
+        })
+    }, []);
+    return(
+        <div className="search-page">
+            <Header />
+            <MediaGrid contents= {content} />
+        </div>
+    );
     
 }
 
