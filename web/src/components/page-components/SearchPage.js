@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useLocation} from 'react-router-dom'
+import {useLocation} from 'react-router-dom';
 import { MediaService } from '../../services/MediaService';
 import Header from '../shared/Header';
 import MediaGrid from '../media/MediaGrid';
@@ -22,6 +22,9 @@ export default function SearchPage(){
     return(
         <div className="search-page">
             <Header />
+            <h2>
+                Resultado de la Búsqueda
+            </h2>
             <MediaGrid contents= {content} />
         </div>
     );

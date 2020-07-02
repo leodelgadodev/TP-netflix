@@ -8,6 +8,7 @@ import SearchPage from './components/page-components/SearchPage';
 import HomePage from './components/page-components/HomePage'
 import Page from './components/page-components/Page';
 import MediaPage from './components/page-components/MediaPage';
+import AllContentsPage from './components/page-components/AllContentsPage';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Switch>
         <Route exact path="/register" render={() => <RegisterPage/>}/>
         <Route exact path="/login" render={() => <LoginPage/>}/>
+        <Route exact path="/all" render={() => <Page component={AllContentsPage}/>}/>
         <Route exact path="/search" render={() => <Page component={SearchPage}/>}/>
         <Route exact path="/media/:contentId" render={() => <Page component={MediaPage}/>} />
         <Route exact path="/" render={() => <Page component={HomePage}/>}/>

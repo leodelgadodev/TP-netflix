@@ -26,7 +26,7 @@ export default function MediaButton({content}){
         return "notfound.jpg"
     } else {
         return (
-            <div className="media-button">
+            <div className="media-button grid-item">
                 <Link to={`/media/${content.id}`}> 
                     <img src={ poster } className="media-poster-img" alt={content.title}/> 
                 </Link>
