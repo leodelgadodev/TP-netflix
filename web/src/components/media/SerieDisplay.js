@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import MediaCarousel from './MediaCarousel';
+import { MediaService } from '../../services/MediaService';
+import notfound from '../../img/notfound.jpg'
 
 export default function SerieDisplay(props){
 
     const media = props.media;
+    const [poster, setPoster] = useState("");
 
+    useEffect( () => {
+        if(media){
+            MediaService.verifyPoster(media.poster).then(res => {
+                console.log(res);
+                if(res.status == 200){
+                    setPoster(media.poster);
+                } else {
+                    setPoster(notfound);
+                }
+            })
+        }
+    });
     const TableHeader = () => {
         const rows = media.season.map((row, index) =>{ 
             return(
@@ -42,13 +57,13 @@ export default function SerieDisplay(props){
     return(
         <div>
             <div className="media">
-                <img src = {media.poster} className="mr-3" alt={media.title}/>
+                <img src = {poster} className="mr-3" alt={media.title}/>
                 <div className="media-body">
                     <h1 className="mt-0">{media.title}</h1>
                     <p className="mt-0">{media.description}</p>
                     <h5 className="mt-0">Seasons</h5>
                     <div>
-                        <table class="table table-sm table-dark media-table">
+                        <table className="table table-sm table-dark media-table">
                             <TableHeader />
                             <TableBody />
                         </table>

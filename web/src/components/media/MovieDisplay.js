@@ -21,7 +21,7 @@ export default function MovieDisplay(props) {
                 }
             })
         }
-    },[])
+    });
 
     if(!media){
         return <h2>404 not found</h2>
@@ -34,7 +34,7 @@ export default function MovieDisplay(props) {
                         <h5 className="mt-0">{media.title}</h5>
                         <p className="mt-0">{media.description}</p>
                         <button className="btn btn-primary form-item">
-                            <Link to={{ pathname: `/media/${props.media.id}/video` }}>
+                            <Link to={{ pathname: `/media/${media.id}/video` }}>
                                 Reproducir
                             </Link>
                         </button>
