@@ -28,8 +28,7 @@ export default function Register() {
         event.preventDefault();
         AuthService.register(name, email, password, imageLink, creditCard).then( res => {
             AuthService.authenticate(res.headers.authentication);
-            restore();
-            history.replace(from);
+            history.push("/");
         }).catch(err => {
             if(err.response.status === 409){
                 Swal.fire({

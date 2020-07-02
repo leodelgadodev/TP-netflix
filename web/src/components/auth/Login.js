@@ -21,9 +21,7 @@ function Login() {
         event.preventDefault();
         AuthService.login(email, password).then((res) => {
             AuthService.authenticate(res.headers.authentication);
-            restore();
-            console.log(res.headers.authentication);
-            history.replace(from);
+            history.push("/");
         }).catch((err) => {
             if(err.response.status === 404){
                 Swal.fire({

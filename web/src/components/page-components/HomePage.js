@@ -2,16 +2,9 @@ import React, { useEffect } from 'react';
 import Header from '../shared/Header';
 import MediaCarousel from '../media/MediaCarousel';
 import BannerCarousel from '../banner/BannerCarousel';
-import { UserService } from '../../services/UserService';
 import { Link } from 'react-router-dom';
 
 export default function HomePage() {
-
-    useEffect(() => {
-        UserService.addFavorite("mov_1");
-        UserService.addFavorite("mov_2");
-        UserService.addFavorite("mov_3");
-    })
 
     return (
         <div className="home-page">

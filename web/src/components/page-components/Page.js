@@ -8,14 +8,13 @@ export default function Page(props) {
     if (!token) {
         console.log("no hay token :(")
         return (
-            
             <Redirect to={{
                 pathname: "/login",
             }}/>
         );
     } else {
         return (
-            <Component token={token} />
+            <Component />
         );
     }
 }
