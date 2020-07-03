@@ -8,7 +8,7 @@ export default function Banner(props) {
 
     useEffect( () => {
         MediaService.verifyPoster(props.img).then(res => {
-            if(res.status == 200){
+            if(res.status === 200){
                 setPoster(props.img);
             } else {
                 setPoster(notfound);

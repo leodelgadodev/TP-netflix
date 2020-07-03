@@ -19,7 +19,7 @@ export default function VideoPage(props){
                 console.log(res.data);
                 setUrl(
                 res.data.season
-                .find((season) => season.id == seasonId)
+                .find((season) => season.id === seasonId)
                 .chapters.find((chapter) => chapter.id === chapterId).video
                 );
             }

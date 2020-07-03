@@ -13,8 +13,7 @@ export default function MovieDisplay(props) {
     useEffect( () => {
         if(media){
             MediaService.verifyPoster(media.poster).then(res => {
-                console.log(res);
-                if(res.status == 200){
+                if(res.status === 200){
                     setPoster(media.poster);
                 } else {
                     setPoster(notfound);

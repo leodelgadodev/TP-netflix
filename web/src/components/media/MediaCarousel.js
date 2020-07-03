@@ -31,7 +31,7 @@ export default function MediaCarousel(props) {
         return UserService.getUser();
     }
     
-    if(mediaArray == []){
+    if(mediaArray === []){
         return <h2>aun no tienes {props.flag} :(</h2>
     } else {
         return(

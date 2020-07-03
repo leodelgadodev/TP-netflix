@@ -7,19 +7,28 @@ export default function FavButton(props) {
 
     useEffect(() => {
         UserService.getUser().then((res) => {
-            debugger; if (res.data.favorites.some(content => content.id == props.mediaId
+            if (res.data.favorites.some(content => content.id === props.mediaId
             )) {
                 console.log("No esta en Favs");
-                debugger; setFavMsg("Quitar de favoritos");
+                setFavMsg("Quitar de favoritos");
             } else {
                 console.log("Esta en Favs");
-                debugger; setFavMsg("Agregar a favoritos");
+                setFavMsg("Agregar a favoritos");
             }
         });
     }, [])
 
+    const toggleFavorite = () => {
+        UserService.addFavorite(props.mediaId);
+        if (favMsg === "Quitar de favoritos") {
+            setFavMsg("Agregar a favoritos");
+        } else {
+            setFavMsg("Quitar de favoritos");
+        }
+    }
+
     return(
-        <button className="btn btn-primary form-item" onClick={() => UserService.addFavorite(props.mediaId)}>
+        <button className="btn btn-primary form-item" onClick={() => toggleFavorite()}>
             {favMsg}
         </button>
     );

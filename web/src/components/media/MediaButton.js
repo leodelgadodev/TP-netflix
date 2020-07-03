@@ -10,7 +10,7 @@ export default function MediaButton({content}){
         if(content){
             MediaService.getContent(content.id).then(media => {
                 MediaService.verifyPoster(media.data.poster).then(res => {
-                    if(res.status == 200){
+                    if(res.status === 200){
                         setPoster(media.data.poster);
                     } else {
                         setPoster(notfound);
