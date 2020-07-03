@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import MediaCarousel from './MediaCarousel';
 import { MediaService } from '../../services/MediaService';
 import notfound from '../../img/notfound.jpg'
-import { UserService } from '../../services/UserService';
+import FavButton from './FavButton';
 
 export default function SerieDisplay(props){
 
@@ -62,17 +62,19 @@ export default function SerieDisplay(props){
                 <div className="media-body">
                     <h1 className="mt-0">{media.title}</h1>
                     <p className="mt-0">{media.description}</p>
-                    <button className="btn btn-primary form-item" onClick={() => UserService.addFavorite(media.id)}>
-                        Añadir a favoritos
-                    </button>
-                    <h5 className="mt-0">Seasons</h5>
-                        <table className="table table-sm table-dark media-table">
-                            <TableHeader />
-                            <TableBody />
-                        </table>
+
+                    <FavButton mediaId={media.id} />
+
+                    <h5 className="mt-0">Temporadas</h5>
+
+                    <table className="table table-sm table-dark media-table">
+                        <TableHeader />
+                        <TableBody />
+                    </table>
                 </div>
             </div>
             <div>
+                <h2>Contenido Relacionado</h2>
                 <MediaCarousel flag="relatedContent" relatedContent={media.relatedContent}/>
             </div>
         </div>

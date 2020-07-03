@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import MediaCarousel from './MediaCarousel';
 import { MediaService } from '../../services/MediaService';
 import notfound from '../../img/notfound.jpg'
-import { UserService } from '../../services/UserService';
+import FavButton from './FavButton';
 
 export default function MovieDisplay(props) {
     const media = props.media
@@ -38,12 +38,12 @@ export default function MovieDisplay(props) {
                                 Reproducir
                             </Link>
                         </button>
-                        <button className="btn btn-primary form-item" onClick={() => UserService.addFavorite(media.id)}>
-                                Añadir a favoritos
-                        </button>
+
+                        <FavButton mediaId={media.id} />
                     </div>
                 </div>
                 <div>
+                    <h2>Contenido Relacionado</h2>
                     <MediaCarousel flag="relatedContent" relatedContent={media.relatedContent}/>
                 </div>
             </div>
