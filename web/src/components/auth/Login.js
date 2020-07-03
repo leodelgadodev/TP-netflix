@@ -30,7 +30,7 @@ function Login() {
                 })
             } else if (err.response.status === 400) {
                 Swal.fire({
-                    icon: 'warning',
+                    icon: 'error',
                     title: 'Oops...',
                     text: "Por favor, complete todos los campos.",
                 })

@@ -12,11 +12,9 @@ export default function VideoPage(props){
 
     useEffect(() => {
         MediaService.getContent(contentId).then((res) => {
-            console.log(res.data.video);
             if(res.data.id.includes("mov")) {
                 setUrl(res.data.video);
             } else {
-                console.log(res.data);
                 setUrl(
                 res.data.season
                 .find((season) => season.id === seasonId)

@@ -9,10 +9,8 @@ export default function FavButton(props) {
         UserService.getUser().then((res) => {
             if (res.data.favorites.some(content => content.id === props.mediaId
             )) {
-                console.log("No esta en Favs");
                 setFavMsg("Quitar de favoritos");
             } else {
-                console.log("Esta en Favs");
                 setFavMsg("Agregar a favoritos");
             }
         });

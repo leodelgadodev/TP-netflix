@@ -39,9 +39,9 @@ export default function Register() {
                 })
             } else if (err.response.status === 400) {
                 Swal.fire({
-                    icon: 'warning',
+                    icon: 'error',
                     title: 'Oops...',
-                    text: "Faltan parametros!",
+                    text: "Por favor, complete todos los campos.",
                 })
             }
         });

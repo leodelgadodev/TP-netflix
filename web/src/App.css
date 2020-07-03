@@ -40,14 +40,6 @@
     position: absolute;
 }
 
-
-/* ############ RESPONSIVE ######### */
-@media only screen and (max-width: 600px) {
-    .header {
-        /* TODO Evitar que se rompa el Header con resoluciones más pequeñas */
-    }
-}
-
 /* ############ HEADER ########### */
 
 .header {

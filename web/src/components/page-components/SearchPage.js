@@ -15,7 +15,6 @@ export default function SearchPage(){
     const query = useQuery();
     useEffect( () => {
         MediaService.search(query.get("content")).then(res => {
-            console.log(res.data.Contents)
             setContent(res.data.Contents);
         })
     }, []);
