@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MediaCarousel from './MediaCarousel';
 import { MediaService } from '../../services/MediaService';
@@ -21,35 +21,77 @@ export default function SerieDisplay(props){
             })
         }
     });
-    const TableHeader = () => {
-        const rows = media.season.map((row, index) =>{ 
-            return(
-                <th  key= {index}>
-                    <td className="row-season">Season {index + 1}</td>
-                </th>
-            )
-        });
-        return <thead>{rows}</thead>
-    }
 
-    const TableBody = () => {
-        const rows = media.season.map((row, index) =>{
+    // const TableHeader = () => {
+    //     const rows = media.season.map((row, index) =>{ 
+    //         return(
+    //             <th  key= {index}>
+    //                 <td className="row-season">Season {index + 1}</td>
+    //             </th>
+    //         )
+    //     });
+    //     return <thead>{rows}</thead>
+    // }
+
+    // const TableBody = () => {
+    //     const rows = media.season.map((row, index) =>{
+    //         const chapters = row.chapters.map((chap, index)=>{
+    //             return(
+    //                 <tr key={index}>
+    //                     <Link to={{ pathname: `/media/${media.id}/${row.id}/${chap.id}/video` }}>
+    //                         {chap.title}
+    //                     </Link>
+    //                 </tr>
+    //             )
+    //         });
+    //         return (
+    //                 <td key= {index}>{chapters}</td>
+    //         );
+    //     });
+    //     return <tbody>{rows}</tbody>
+    // }
+
+    const SeasonTab = () => {
+        const rows = [];
+        rows.push(media.season.map((row, index) =>{
             const chapters = row.chapters.map((chap, index)=>{
                 return(
-                    <tr key={index}>
+                    <span key={index}>
                         <Link to={{ pathname: `/media/${media.id}/${row.id}/${chap.id}/video` }}>
                             {chap.title}
                         </Link>
-                    </tr>
+                    </span>
                 )
             });
             return (
-                    <td key= {index}>{chapters}</td>
+                // poner {index} adentro de " " no funciona y se renderiza como nav-tab-{index} D:
+                <div key={index} className="tab-pane fade" id="nav-tab-{index}" role="tabpanel" aria-labelledby="nav-tab-{index}">{chapters}</div>
             );
-        });
-        return <tbody>{rows}</tbody>
+        }));
+        return(
+            <div className="tab-content" id="nav-tabContent">
+                {rows}
+            </div>
+        );
     }
 
+    const SeasonTabHeader = () => {
+        const rows = media.season.map((row, index) => { 
+            return(
+                // poner {index} adentro de " " no funciona y se renderiza como nav-tab-{index} D:
+                <a key={index} className="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-tab-{index}" role="tab" aria-controls="nav-tab-{index}" aria-selected="false">
+                    Season {index + 1}
+                </a>
+            )
+        });
+        return (
+            <nav>
+                <div className="nav nav-tabs" id="nav-tab" role="tablist">
+                    {rows}
+                </div>
+            </nav>
+        );
+    }
 
     if(!media){
         return <h2>404 not found</h2>
@@ -66,10 +108,25 @@ export default function SerieDisplay(props){
 
                     <h5 className="mt-0">Temporadas</h5>
 
-                    <table className="table table-sm table-dark media-table">
-                        <TableHeader />
-                        <TableBody />
-                    </table>
+                    {/* <Tabs>
+                        <TabList>
+                        <Tab>Title 1</Tab>
+                        <Tab>Title 2</Tab>
+                        </TabList>
+
+                        <TabPanel>
+                        <h2>Any content 1</h2>
+                        </TabPanel>
+                        <TabPanel>
+                        <h2>Any content 2</h2>
+                        </TabPanel>
+                    </Tabs> */}
+                    {/* <table className="table table-sm table-dark media-table"> */}
+                        {/* <TableHeader />
+                        <TableBody /> */}
+                        <SeasonTabHeader/>
+                        <SeasonTab/>
+                    {/* </table> */}
                 </div>
             </div>
             <div>
