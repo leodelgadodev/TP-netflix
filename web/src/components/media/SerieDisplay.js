@@ -63,9 +63,10 @@ export default function SerieDisplay(props){
                     </span>
                 )
             });
+            const id = "nav-tab-" + index
             return (
                 // poner {index} adentro de " " no funciona y se renderiza como nav-tab-{index} D:
-                <div key={index} className="tab-pane fade" id="nav-tab-{index}" role="tabpanel" aria-labelledby="nav-tab-{index}">{chapters}</div>
+                <div key={index} className="tab-pane fade" id={id} role="tabpanel" aria-labelledby={id}>{chapters}</div>
             );
         }));
         return(
@@ -77,10 +78,11 @@ export default function SerieDisplay(props){
 
     const SeasonTabHeader = () => {
         const rows = media.season.map((row, index) => { 
+            const href = "#nav-tab-" + index
             return(
                 // poner {index} adentro de " " no funciona y se renderiza como nav-tab-{index} D:
-                <a key={index} className="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-tab-{index}" role="tab" aria-controls="nav-tab-{index}" aria-selected="false">
-                    Season {index + 1}
+                <a key={index} className="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href={href} role="tab" aria-controls={href} aria-selected="false">
+                    {row.title}
                 </a>
             )
         });
