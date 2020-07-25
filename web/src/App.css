@@ -226,3 +226,12 @@ table{
 .row-season{
     color: red;
 }
+
+.tab-header:hover {
+    background-color: var(--bg-grey);
+    color: var(--bg-lightred) !important;
+}
+
+.tab-header:active {
+    background-color: white;
+}
